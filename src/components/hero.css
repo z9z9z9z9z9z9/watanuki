@@ -1,0 +1,89 @@
+#slider {
+  background: none;
+  overflow: hidden;
+  z-index: 1;
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+#slider .swiper-slide {
+  position: relative;
+  overflow: hidden;
+  background: #050505;
+}
+.deslide-item {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+#slider .deslide-cover {
+  position: absolute;
+  top: 0;
+  left: 30%;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  background-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #050505 10%,
+    #050505 10%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #050505 10%,
+    #050505 10%,
+    transparent
+  );
+}
+#slider .swiper-slide .deslide-cover-img img {
+  position: absolute;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  filter: blur(1px);
+}
+#slider .deslide-item-content {
+  max-width: 800px;
+  position: absolute;
+  bottom: 40px;
+}
+.deslide-item .desi-sub-text {
+  font-size: 18px;
+  line-height: 1.3em;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: #ffbade;
+}
+.deslide-item .desi-head-title {
+  font-size: 3em;
+  line-height: 1.3em;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+#slider .sc-detail {
+  font-size: 1em;
+  font-weight: 300;
+  margin-bottom: 0.75rem;
+}
+.deslide-item .desi-description {
+  font-size: 0.95em;
+  line-height: 1.6;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

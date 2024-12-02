@@ -3,19 +3,135 @@
 @tailwind utilities;
 
 :root {
-  font-family: "Roboto", sans-serif;
+  font-family: "Nunito", sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #201f31;
-
+  background-color: #050505;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 img {
   height: auto;
   width: 500px;
+}
+input {
+  outline: none;
+  border: none;
+}
+input:focus {
+  outline: none;
+  border: none;
+}
+.input {
+  border-radius: 15px 0 0 15px;
+}
+.btn {
+  border-radius: 0 15px 15px 0;
+}
+.loader {
+  height: calc(100dvh - 200px);
+}
+
+.opacity-layer {
+  mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #050505 30%,
+      #050505 70%,
+      transparent
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0,
+      #050505 30%,
+      #050505 70%,
+      transparent
+    );
+
+  mask-composite: intersect; /* Combines the masks (for non-WebKit browsers) */
+
+  mask-size: 100% 100%, 100% 100%; /* Set size for both masks */
+  mask-repeat: no-repeat, no-repeat; /* Avoid repeating */
+
+  -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #050505 30%,
+      #050505 70%,
+      transparent
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0,
+      #050505 30%,
+      #050505 70%,
+      transparent
+    );
+
+  -webkit-mask-size: 100% 100%, 100% 100%;
+  -webkit-mask-repeat: no-repeat, no-repeat;
+}
+.synopsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.swiper-pagination {
+  display: flex;
+  gap: 7px;
+  flex-direction: row;
+  align-items: end;
+  justify-content: center;
+  padding-right: 20px;
+  height: 100%;
+  width: 100%;
+}
+.swiper-pagination-bullet {
+  opacity: 1;
+  background-color: #ccc;
+  height: 12px;
+  width: 12px;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #ffc107;
+  margin: 0;
+}
+.item {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  gap: 4px;
+}
+.title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2; /* Number of lines to display */
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 1299px) {
+  .synopsis {
+    -webkit-line-clamp: 2;
+  }
+}
+@media screen and (max-width: 768px) {
+  .synopsis {
+    display: none;
+  }
+  .swiper-pagination {
+    flex-direction: column;
+  }
+  .swiper-pagination-bullet {
+    height: 8px;
+    width: 8px;
+  }
 }
