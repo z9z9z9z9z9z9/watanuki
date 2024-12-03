@@ -6,7 +6,7 @@ export default {
       colors: {
         primary: "#5a2e98",
         secondary: "#a885da",
-        backGround: "#050505",
+        backGround: "#1c1c1c",
         lightBg: "#1c1c1c",
       },
     },

@@ -29,7 +29,7 @@ const Root = () => {
         >
           <div className="box-content relative">
             <div className="flex justify-center items-center">
-              <img className=" h-8 md:h-10 w-auto" src={logo} alt="logo" />
+              <img className="h-8 md:h-10 w-auto" src={logo} alt="logo" />
             </div>
             <div className="searchBox mt-5">
               <form
@@ -52,7 +52,7 @@ const Root = () => {
                 </button>
               </form>
               <div className="banner flex justify-center items-center">
-                <img src={banner} alt="" />
+                <img className="banner-img" src={banner} alt="banner" />
               </div>
               <div className="explore w-full flex justify-center items-center mt-5 ">
                 <Link

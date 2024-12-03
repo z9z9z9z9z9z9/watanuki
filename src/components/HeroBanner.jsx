@@ -1,4 +1,3 @@
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import {
   FaAngleRight,
   FaCalendarDay,
@@ -9,10 +8,13 @@ import {
 } from "react-icons/fa6";
 
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 import "swiper/css/autoplay";
+
 import "./hero.css";
 
 const HeroBanner = ({ slides }) => {
@@ -22,17 +24,18 @@ const HeroBanner = ({ slides }) => {
       modules={[Navigation, Pagination, Autoplay]}
       slidesPerView={1}
       loop={true}
-      autoplay={{ delay: 2500 }}
+      autoplay={{ delay: 3000 }}
       pagination={{ clickable: true }}
-      className="slider h-[40vh]  md:h-[70vh] xl:h-[calc(100vh-100px)]"
+      navigation={true}
+      className="slider h-[50vh]  md:h-[90vh] xl:h-[calc(100vh-100px)]"
     >
       {slides.map((item) => (
         <SwiperSlide
           key={item.id}
-          className="relative h-full overflow-hidden bg-lightBg"
+          className="relative z-20 h-full overflow-hidden bg-lightBg"
         >
           <div className=" content w-full h-full absolute">
-            <div className="opacity-layer opacity-[.7] absolute left-0 md:left-[30%] top-0 right-0 bottom-0 overflow-hidden">
+            <div className="opacity-layer absolute left-0 md:left-[15%] xl:left-[30%] top-0 right-0 bottom-0 overflow-hidden">
               <img
                 className="absolute bg-cover object-cover w-full h-full"
                 loading="lazy"

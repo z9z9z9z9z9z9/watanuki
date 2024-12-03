@@ -8,14 +8,14 @@
   font-weight: 400;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #050505;
+  background-color: #1c1c1c;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
 }
-img {
+.banner-img {
   height: auto;
   width: 500px;
 }
@@ -52,12 +52,9 @@ input:focus {
       #050505 70%,
       transparent
     );
-
   mask-composite: intersect; /* Combines the masks (for non-WebKit browsers) */
-
   mask-size: 100% 100%, 100% 100%; /* Set size for both masks */
   mask-repeat: no-repeat, no-repeat; /* Avoid repeating */
-
   -webkit-mask-image: linear-gradient(
       to right,
       transparent 0,
@@ -72,32 +69,25 @@ input:focus {
       #050505 70%,
       transparent
     );
-
   -webkit-mask-size: 100% 100%, 100% 100%;
   -webkit-mask-repeat: no-repeat, no-repeat;
 }
 .synopsis {
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .swiper-pagination {
-  display: flex;
   gap: 7px;
-  flex-direction: row;
-  align-items: end;
-  justify-content: center;
-  padding-right: 20px;
-  height: 100%;
-  width: 100%;
 }
 .swiper-pagination-bullet {
   opacity: 1;
   background-color: #ccc;
-  height: 12px;
-  width: 12px;
+  height: 10px;
+  width: 10px;
 }
 .swiper-pagination-bullet-active {
   opacity: 1;
@@ -115,23 +105,34 @@ input:focus {
   -webkit-box-orient: vertical;
   overflow: hidden;
   -webkit-line-clamp: 2; /* Number of lines to display */
+  line-clamp: 2;
   text-overflow: ellipsis;
+}
+.swiper-button-prev,
+.swiper-button-next {
+  color: #ccc;
 }
 
 @media screen and (max-width: 1299px) {
   .synopsis {
     -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 }
 @media screen and (max-width: 768px) {
   .synopsis {
     display: none;
   }
-  .swiper-pagination {
-    flex-direction: column;
-  }
-  .swiper-pagination-bullet {
-    height: 8px;
-    width: 8px;
+}
+@media screen and (max-width: 575px) {
+  .number {
+    bottom: auto;
+    top: 0;
+    right: auto;
+    width: 40px;
+    left: 0;
+    height: 30px;
+    background: #fff;
+    z-index: 9;
   }
 }

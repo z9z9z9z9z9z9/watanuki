@@ -3,6 +3,7 @@ import Loader from "../components/Loader";
 import { useApi } from "../services/useApi";
 import HeroBanner from "../components/HeroBanner";
 import notify from "../utils/Toast";
+import TrendingLayout from "../layouts/TrendingLayout";
 
 const Home = () => {
   const { data, isLoading, error, isError } = useApi("/home");
@@ -16,6 +17,7 @@ const Home = () => {
       ) : (
         <>
           <HeroBanner slides={data?.data?.spotlight} />
+          <TrendingLayout data={data?.data?.trending} />
         </>
       )}
     </div>
