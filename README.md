@@ -1,5 +1,7 @@
 # Watanuki
 
+# this project is till in building progress 
+
 **Watanuki** is a modern, sleek anime streaming web application built with **React** and styled using **Tailwind CSS**. The app is designed to provide anime enthusiasts with a seamless and enjoyable streaming experience.
 
 ---
