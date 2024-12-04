@@ -17,7 +17,7 @@
 
 ## Demo
 
-Check out a live demo here: [Watanuki Live Demo](#) (Add the link to your deployed app)
+Check out a live demo here: [Watanuki Live Demo](watanuki.vercel.app) (Add the link to your deployed app)
 
 ---
 
@@ -34,4 +34,4 @@ Check out a live demo here: [Watanuki Live Demo](#) (Add the link to your deploy
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/watanuki.git
+   git clone https://github.com/yahyamomin/watanuki.git
