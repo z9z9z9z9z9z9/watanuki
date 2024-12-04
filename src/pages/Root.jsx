@@ -21,10 +21,10 @@ const Root = () => {
   };
   return (
     <ContentWrapper>
-      <div className="pt-2">
+      <div className="pt-2 bg-black">
         <Navbar />
         <div
-          className="box relative py-3 px-2 md:p-5 mt-4 bg-lightBg rounded-lg bg-cover bg-center"
+          className="box relative py-3 px-2 md:p-5 mt-4 bg-black rounded-lg bg-cover bg-center"
           style={{ backgroundImage: `url(${background})` }}
         >
           <div className="box-content relative">
@@ -52,7 +52,11 @@ const Root = () => {
                 </button>
               </form>
               <div className="banner flex justify-center items-center">
-                <img className="banner-img" src={banner} alt="banner" />
+                <img
+                  className="banner-img h-auto w-[400px]"
+                  src={banner}
+                  alt="banner"
+                />
               </div>
               <div className="explore w-full flex justify-center items-center mt-5 ">
                 <Link

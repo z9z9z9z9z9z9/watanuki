@@ -6,8 +6,11 @@ export default {
       colors: {
         primary: "#5a2e98",
         secondary: "#a885da",
-        backGround: "#1c1c1c",
+        backGround: "#050505",
         lightBg: "#1c1c1c",
+        green: "#b0e3af",
+        blue: "#b9e7ff",
+        gray: "#3e3e46",
       },
     },
   },

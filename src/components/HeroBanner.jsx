@@ -16,6 +16,7 @@ import "swiper/css/navigation";
 import "swiper/css/autoplay";
 
 import "./hero.css";
+import SoundsInfo from "./SoundsInfo";
 
 const HeroBanner = ({ slides }) => {
   return (
@@ -27,23 +28,23 @@ const HeroBanner = ({ slides }) => {
       autoplay={{ delay: 3000 }}
       pagination={{ clickable: true }}
       navigation={true}
-      className="slider h-[50vh]  md:h-[90vh] xl:h-[calc(100vh-100px)]"
+      className="slider h-[50vh] sm:h-[50vh]  md:h-[80vh] xl:h-[calc(100vh-100px)]"
     >
       {slides.map((item) => (
         <SwiperSlide
           key={item.id}
-          className="relative z-20 h-full overflow-hidden bg-lightBg"
+          className="relative h-full overflow-hidden bg-backGround"
         >
-          <div className=" content w-full h-full absolute">
+          <div className="content w-full h-full">
             <div className="opacity-layer absolute left-0 md:left-[15%] xl:left-[30%] top-0 right-0 bottom-0 overflow-hidden">
               <img
-                className="absolute bg-cover object-cover w-full h-full"
+                className="h-full w-full object-cover object-center"
                 loading="lazy"
                 alt={item.title}
                 src={item.poster}
               />
             </div>
-            <div className="info ml-2 md:ml-12 min-w-32  md:max-w-2xl absolute bottom-10">
+            <div className=" z-10 ml-2 md:ml-12 min-w-32  md:max-w-2xl absolute bottom-0">
               <div className="text-secondary text-base font-semibold mb-2">
                 #{item.rank} Spotlight
               </div>
@@ -70,21 +71,7 @@ const HeroBanner = ({ slides }) => {
                   <span className="">{item.quality}</span>
                 </div>
                 <div className="item">
-                  <div className="flex gap-1">
-                    <div className="item bg-[#b0e3af] font-bold text-sm px-1 text-black rounded-sm rounded-tr-none rounded-br-none">
-                      <FaClosedCaptioning />
-                      <span>{item.episodes.sub}</span>
-                    </div>
-
-                    <div className="item bg-[#b9e7ff] px-1 text-sm font-bold text-black">
-                      <FaMicrophone />
-                      <span>{item.episodes.dub}</span>
-                    </div>
-
-                    <div className="item px-1 rounded-sm rounded-tl-none rounded-bl-none font-bold text-sm bg-[#3e3e46]">
-                      {item.episodes.eps}
-                    </div>
-                  </div>
+                  <SoundsInfo episodes={item.episodes} />
                 </div>
               </div>
               <div className="synopsis">{item.synopsis}</div>
@@ -98,7 +85,7 @@ const HeroBanner = ({ slides }) => {
                 </a>
                 <a
                   href={`/${item.id}`}
-                  className="bg-[#3e3e46] rounded-3xl  px-4 py-1 flex justify-center items-center gap-2"
+                  className="bg-[#28282f69] rounded-3xl  px-4 py-1 flex justify-center items-center gap-2"
                 >
                   <span>Detail</span>
                   <FaAngleRight />

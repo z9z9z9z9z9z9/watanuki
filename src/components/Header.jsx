@@ -35,7 +35,7 @@ const Header = () => {
               <img className="h-8 md:h-10 w-auto" src={logo} alt="" />
             </Link>
           </div>
-          <div className="right justify-end basis-[70%] flex gap-2 md:gap-5 items-center">
+          <div className="right justify-end basis-[70%] lg:basis-[40%] flex gap-2 md:gap-5 items-center">
             <form
               action={`/search?keyword=${value}`}
               onSubmit={handleSubmit}
@@ -48,8 +48,8 @@ const Header = () => {
                 type="text"
                 className="header-search w-full px-1 bg-[#FBF8EF]  text-black py-1 rounded-sm"
               />
-              <button type="submit" className="absolute right-3 text-black">
-                <FaSearch />
+              <button type="submit" className="absolute right-3">
+                <FaSearch color="black" className="text-black" />
               </button>
             </form>
             <button
@@ -58,7 +58,7 @@ const Header = () => {
             >
               {showSearchBar ? <FaXmark /> : <FaSearch />}
             </button>
-            <button type="submit" className="bg-primary px-5 py-1 rounded-md">
+            <button type="submit" className="bg-primary px-5 py-1 rounded-sm">
               login
             </button>
           </div>
@@ -66,7 +66,7 @@ const Header = () => {
         <form
           action={`/search?keyword=${value}`}
           onSubmit={handleSubmit}
-          className={`search mt-5 relative items-center w-full ${
+          className={`search mt-2 relative items-center w-full ${
             showSearchBar ? "flex" : "hidden"
           }`}
         >
