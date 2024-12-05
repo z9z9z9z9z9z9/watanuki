@@ -34,7 +34,7 @@ const DynamicLayout = ({ dataType, data }) => {
               </Link>
               <div className="item">
                 <SoundsInfo episodes={item.episodes} />
-                <span className="block mx-1 h-1 w-1 bg-yellow-200 rounded-full"></span>
+                <span className="block mx-1 h-1 w-1 bg-primary rounded-full"></span>
                 <h2 className="text-[12px] text-[#ccc]">{item.type}</h2>
               </div>
             </div>
