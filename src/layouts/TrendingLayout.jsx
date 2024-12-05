@@ -4,13 +4,13 @@ import { Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
+import { Link } from "react-router-dom";
+import Heading from "../components/Heading";
 
 const TrendingLayout = ({ data }) => {
   return (
-    <div className="trending mt-10">
-      <h1 className="text-xl font-bold mb-5 ml-5 tracking-widest  text-secondary my-2">
-        TRENDING
-      </h1>
+    <div className="trending mt-5">
+      <Heading className="mb-2">Trending</Heading>
       <Swiper
         modules={[Navigation]}
         navigation
@@ -23,8 +23,8 @@ const TrendingLayout = ({ data }) => {
         {data.map((item) => (
           <SwiperSlide key={item.id}>
             <div className="item flex flex-col items-center overflow-hidden px-1 md:px-2">
-              <a
-                href={`/${item.id}`}
+              <Link
+                to={`/${item.id}`}
                 className="poster w-full h-0 pb-[150%] bg-gray-200 relative overflow-hidden"
               >
                 <img
@@ -36,7 +36,7 @@ const TrendingLayout = ({ data }) => {
                 <div className="rank p-1 text-sm md:text-base md:p-2 font-extrabold absolute top-0 bg-white text-center text-black">
                   0{item.rank}
                 </div>
-              </a>
+              </Link>
               <h2
                 title={item.title}
                 className="title cursor-default bg-white text-black text-sm font-semibold text-center  truncate w-full"

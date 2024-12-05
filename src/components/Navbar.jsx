@@ -16,7 +16,7 @@ const Navbar = () => {
       <div className="nav hidden md:flex justify-center items-center">
         <ul className="flex gap-10">
           {navLinks.map((item) => (
-            <li className="hover:text-secondary font-bold" key={item.id}>
+            <li className="hover:text-primary font-bold" key={item.id}>
               <a className="" href={item.id}>
                 {item.name}
               </a>

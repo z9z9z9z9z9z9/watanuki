@@ -58,7 +58,10 @@ const Header = () => {
             >
               {showSearchBar ? <FaXmark /> : <FaSearch />}
             </button>
-            <button type="submit" className="bg-primary px-5 py-1 rounded-sm">
+            <button
+              type="submit"
+              className="bg-primary text-black px-5 py-1 rounded-sm"
+            >
               login
             </button>
           </div>

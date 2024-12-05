@@ -3,12 +3,13 @@
 @tailwind utilities;
 
 :root {
+  --bg-color: #222831;
   font-family: "Nunito", sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #050505;
+  color: #eeeeee;
+  background-color: var(--bg-color);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -39,5 +40,46 @@ input:focus {
   border-radius: 0 15px 15px 0;
 }
 .loader {
-  height: calc(100dvh - 200px);
+  height: calc(100dvh);
+}
+.flw-item {
+  width: calc(16.66% - 1rem);
+  margin: 0.7rem 0;
+  position: relative;
+}
+.film-poster::after {
+  content: "";
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background: var(--bg-color);
+  background: -moz-linear-gradient(
+    0deg,
+    var(--bg-color) 0,
+    rgba(41, 40, 42, 0) 40%
+  );
+  background: -webkit-linear-gradient(
+    0deg,
+    var(--bg-color) 0,
+    rgba(25, 25, 26, 0) 40%
+  );
+  background: linear-gradient(0deg, var(--bg-color) 0, rgba(28, 28, 30, 0) 40%);
+}
+@media screen and (max-width: 1023px) {
+  .flw-item {
+    width: calc(25% - 0.5rem) !important;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .flw-item {
+    width: calc(25% - 0.5rem);
+  }
+}
+@media screen and (max-width: 479px) {
+  .flw-item {
+    width: calc(50% - 0.5rem) !important;
+  }
 }

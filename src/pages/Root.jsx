@@ -46,7 +46,7 @@ const Root = () => {
                 />
                 <button
                   type="submit"
-                  className="px-3 bg-primary btn w-11  h-full"
+                  className="px-3 bg-primary text-black btn w-11  h-full"
                 >
                   <FaSearch />
                 </button>
@@ -63,7 +63,7 @@ const Root = () => {
                   to="/home"
                   className="font-bold bg-primary px-4 py-2 rounded-xl w-full md:w-1/2"
                 >
-                  <h1 className="flex justify-center items-center gap-2 text-base">
+                  <h1 className="flex text-black font-extrabold justify-center items-center gap-2 text-base">
                     <p> Explore Animes</p>
                     <FaArrowCircleRight />
                   </h1>

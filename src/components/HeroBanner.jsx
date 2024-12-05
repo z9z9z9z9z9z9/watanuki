@@ -17,6 +17,7 @@ import "swiper/css/autoplay";
 
 import "./hero.css";
 import SoundsInfo from "./SoundsInfo";
+import { Link } from "react-router-dom";
 
 const HeroBanner = ({ slides }) => {
   return (
@@ -44,8 +45,8 @@ const HeroBanner = ({ slides }) => {
                 src={item.poster}
               />
             </div>
-            <div className=" z-10 ml-2 md:ml-12 min-w-32  md:max-w-2xl absolute bottom-0">
-              <div className="text-secondary text-base font-semibold mb-2">
+            <div className=" z-10 ml-2 md:ml-12 min-w-32  md:max-w-2xl absolute bottom-0 sm:bottom-[30px]">
+              <div className="text-primary text-base font-semibold mb-2">
                 #{item.rank} Spotlight
               </div>
               <div
@@ -75,21 +76,21 @@ const HeroBanner = ({ slides }) => {
                 </div>
               </div>
               <div className="synopsis">{item.synopsis}</div>
-              <div className="desi-buttons text-sm md:text-base mt-5 flex gap-2">
-                <a
-                  href={`/watch/${item.id}`}
-                  className="bg-primary rounded-3xl px-4 py-1 flex justify-center items-center gap-2"
+              <div className="desi-buttons z-50 text-sm md:text-base mt-5 flex gap-2">
+                <Link
+                  to={`/watch/${item.id}`}
+                  className="bg-primary rounded-3xl px-4 py-1 text-black flex justify-center items-center gap-2"
                 >
                   <FaCirclePlay />
                   <span>Watch Now</span>
-                </a>
-                <a
-                  href={`/${item.id}`}
+                </Link>
+                <Link
+                  to={`/${item.id}`}
                   className="bg-[#28282f69] rounded-3xl  px-4 py-1 flex justify-center items-center gap-2"
                 >
                   <span>Detail</span>
                   <FaAngleRight />
-                </a>
+                </Link>
               </div>
             </div>
           </div>
