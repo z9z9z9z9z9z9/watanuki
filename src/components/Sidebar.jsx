@@ -1,6 +1,7 @@
 import React from "react";
 import useSidebarStore from "../store/sidebarStore";
 import { Link } from "react-router-dom";
+import Genres from "./Genres";
 
 const Sidebar = () => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
@@ -19,14 +20,15 @@ const Sidebar = () => {
     { name: "ONAs", link: "/ona" },
     { name: "Specials", link: "/special" },
   ];
+
   return (
     <div
-      className={`sidebar fixed overflow-auto rounded-md scroll h-full z-[100] inset-0 sm:w-80 w-full bg-[#b0b1b430] ${
+      className={`sidebar transition-all fixed overflow-scroll rounded-md h-full z-[100] inset-0 w-64 md:w-80  bg-[rgba(255,255,255,.1);] ${
         isSidebarOpen ? "translate-x-0" : "translate-x-[-100%]"
       }`}
     >
       <button
-        className="w-full mx-auto mt-2 hover:bg-backGround text-xl"
+        className="w-full mx-auto hover:bg-backGround text-xl"
         onClick={sidebarHandler}
       >
         close
@@ -35,11 +37,13 @@ const Sidebar = () => {
         {list.map((item) => (
           <li
             key={item.link}
-            className="py-5 hover:text-primary  text-lg ml-5 border-b border-gray-500 w-full "
+            className=" py-4 pl-2 hover:text-primary  text-base md:text-lg border-b border-[rgba(255,255,255,.05)] w-full"
           >
             <Link to={item.link}>{item.name}</Link>
           </li>
         ))}
+        <li className=" py-4 pl-2 text-base md:text-lg w-full">genres</li>
+        <Genres />
       </ul>
     </div>
   );

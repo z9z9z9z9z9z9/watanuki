@@ -8,10 +8,19 @@ import DynamicLayout from "../layouts/DynamicLayout";
 import MainLayout from "../layouts/MainLayout";
 import GenresLayout from "../layouts/GenresLayout";
 import Top10Layout from "../layouts/Top10Layout";
-import Sidebar from "../components/Sidebar";
+import useGenresStore from "../store/genresStore";
+import { useEffect } from "react";
 
 const Home = () => {
   const { data, isLoading, error, isError } = useApi("/home");
+
+  const setGenres = useGenresStore((state) => state.setGenres);
+
+  useEffect(() => {
+    if (data?.data?.genres) {
+      setGenres(data.data.genres);
+    }
+  }, [data, setGenres]);
 
   if (isError) notify("error", error.message);
   return (
