@@ -1,18 +1,19 @@
 import { useState } from "react";
-import logo from "../assets/logo.png";
-import { FaAlignJustify, FaSearch } from "react-icons/fa";
+import { FaBars, FaSearch } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
-import Loader from "./Loader";
+
+import Logo from "./Logo";
+import useSidebarStore from "../store/sidebarStore";
 
 const Header = () => {
+  const sidebarHandler = useSidebarStore((state) => state.toggleSidebar);
+
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [value, setValue] = useState("");
   const navigate = useNavigate();
-  console.log(value);
 
   const changeInput = (e) => {
-    console.log(e.target.value);
     setValue(e.target.value);
   };
   const handleSubmit = (e) => {
@@ -26,16 +27,16 @@ const Header = () => {
       <div className="absolute w-full px-4 py-1">
         <div className="flex gap-2 md:gap-5 justify-between items-center">
           <div className="left flex gap-2 md:gap-5 items-center">
-            <div className="menu">
+            <div className="menu" onClick={sidebarHandler}>
               <h1 className="cursor-pointer">
-                <FaAlignJustify size={25} />
+                <FaBars size={20} />
               </h1>
             </div>
-            <Link to="/" className="logo cursor-pointer">
-              <img className="h-8 md:h-10 w-auto" src={logo} alt="" />
+            <Link to="/" className="logo  cursor-pointer">
+              <Logo />
             </Link>
           </div>
-          <div className="right justify-end basis-[70%] lg:basis-[40%] flex gap-2 md:gap-5 items-center">
+          <div className="right justify-end basis-[60%] lg:basis-[40%] flex gap-2 md:gap-5 items-center">
             <form
               action={`/search?keyword=${value}`}
               onSubmit={handleSubmit}

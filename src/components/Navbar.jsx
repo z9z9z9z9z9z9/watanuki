@@ -26,7 +26,7 @@ const Navbar = () => {
       </div>
       <div className="block md:hidden relative w-full">
         <button onClick={() => setShow(!show)}>
-          <h1 className="flex justify-center items-center gap-1">
+          <h1 className="flex pt-5 pl-5 justify-center items-center gap-1">
             <FaAlignJustify />
             Menu
           </h1>

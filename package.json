@@ -18,7 +18,8 @@
     "react-loader-spinner": "^6.1.6",
     "react-router-dom": "^6.27.0",
     "react-toastify": "^10.0.6",
-    "swiper": "^11.1.15"
+    "swiper": "^11.1.15",
+    "zustand": "^5.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

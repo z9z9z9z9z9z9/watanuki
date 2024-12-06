@@ -24,7 +24,13 @@
   margin: 0;
   padding: 0;
 }
-
+.active {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  inset: 0;
+}
 input {
   outline: none;
   border: none;
@@ -67,6 +73,29 @@ input:focus {
     rgba(25, 25, 26, 0) 40%
   );
   background: linear-gradient(0deg, var(--bg-color) 0, rgba(28, 28, 30, 0) 40%);
+}
+.gradient-text {
+  font-weight: 800;
+  background: linear-gradient(90deg, #fff, #00adb5); /* Gradient colors */
+  -webkit-background-clip: text; /* Clips the gradient to the text */
+  background-clip: text;
+  -webkit-text-fill-color: transparent; /* Makes the text transparent */
+  text-align: center;
+}
+.active {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(10px);
+  background-color: #222831b4;
+  z-index: 5000;
+}
+.bg-active {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+.sidebar {
+  scrollbar-width: none;
 }
 @media screen and (max-width: 1023px) {
   .flw-item {

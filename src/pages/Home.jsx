@@ -8,14 +8,14 @@ import DynamicLayout from "../layouts/DynamicLayout";
 import MainLayout from "../layouts/MainLayout";
 import GenresLayout from "../layouts/GenresLayout";
 import Top10Layout from "../layouts/Top10Layout";
+import Sidebar from "../components/Sidebar";
 
 const Home = () => {
   const { data, isLoading, error, isError } = useApi("/home");
 
   if (isError) notify("error", error.message);
   return (
-    <div>
-      <Header />
+    <div className="relative">
       {isLoading ? (
         <Loader className={"loader"} />
       ) : (
