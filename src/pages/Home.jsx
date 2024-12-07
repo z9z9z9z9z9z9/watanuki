@@ -11,6 +11,7 @@ import Top10Layout from "../layouts/Top10Layout";
 import useGenresStore from "../store/genresStore";
 import { useEffect } from "react";
 import useTopTenStore from "../store/toptenStore";
+import Footer from "../components/Footer";
 
 const Home = () => {
   const { data, isLoading, error, isError } = useApi("/home");
@@ -66,6 +67,7 @@ const Home = () => {
               <Top10Layout />
             </div>
           </div>
+          <Footer />
         </>
       )}
     </div>

@@ -36,7 +36,7 @@ const Header = () => {
               <Logo />
             </Link>
           </div>
-          <div className="right justify-end basis-[60%] lg:basis-[40%] flex gap-2 md:gap-5 items-center">
+          <div className="right justify-end lg:basis-[40%] flex gap-2 md:gap-5 items-center">
             <form
               action={`/search?keyword=${value}`}
               onSubmit={handleSubmit}

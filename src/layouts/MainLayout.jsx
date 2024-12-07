@@ -11,7 +11,7 @@ const MainLayout = ({ dataType, data }) => {
       <div className="header flex justify-between">
         <Heading>{dataType}</Heading>
         <Link to={`/${link}`}>
-          <h6 className="text-sm hover:text-primary flex items-center gap-1 text-neutral-400">
+          <h6 className="text-sm hover:text-primary flex mr-4 items-center gap-1 text-neutral-400">
             <span>View more</span>
             <FaAngleRight />
           </h6>

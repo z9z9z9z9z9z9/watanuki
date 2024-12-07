@@ -10,7 +10,7 @@ const MiniPoster = ({ item }) => {
       className="flex border-b border-lightBg pb-3 items-center gap-4"
     >
       <Link className="" to={`/${item.id}`}>
-        <div className="poster rounded-md flex-shrink-0 relative overflow-hidden w-16 pb-[90px]">
+        <div className="poster rounded-md flex-shrink-0 relative overflow-hidden w-16 pb-[85px]">
           <img
             className="h-full absolute w-full object-cover object-center"
             src={item.poster}

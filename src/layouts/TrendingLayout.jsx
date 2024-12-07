@@ -22,7 +22,7 @@ const TrendingLayout = ({ data }) => {
       >
         {data.map((item) => (
           <SwiperSlide key={item.id}>
-            <div className="item flex flex-col items-center overflow-hidden px-1 md:px-2">
+            <div className="item flex flex-col items-center overflow-hidden px-[1.5px] md:px-2">
               <Link
                 to={`/${item.id}`}
                 className="poster w-full h-0 pb-[150%] bg-gray-200 relative overflow-hidden"
@@ -39,7 +39,7 @@ const TrendingLayout = ({ data }) => {
               </Link>
               <h2
                 title={item.title}
-                className="title cursor-default bg-white text-black text-sm font-semibold text-center  truncate w-full"
+                className="title cursor-default text-sm font-semibold text-center  truncate w-full"
               >
                 {item.title}
               </h2>
