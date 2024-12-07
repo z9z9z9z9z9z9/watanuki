@@ -6,7 +6,7 @@ export default {
       colors: {
         primary: "#00ADB5",
         backGround: "#222831",
-        lightBg: "#393E46",
+        lightBg: "#49505c81",
         yellow: "#F9ED69",
         purple: "#B1B2FF",
         pink: "#F2BED1",

@@ -7,7 +7,7 @@ import { FaAngleRight } from "react-icons/fa";
 const MainLayout = ({ dataType, data }) => {
   const link = dataType.toLowerCase().replace(/\s+/g, "-");
   return (
-    <div className="my-10">
+    <div className="pb-5">
       <div className="header flex justify-between">
         <Heading>{dataType}</Heading>
         <Link to={`/${link}`}>

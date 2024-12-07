@@ -7,6 +7,7 @@ import useSidebarStore from "./store/sidebarStore";
 
 const App = () => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
+  const togglesidebar = useSidebarStore((state) => state.toggleSidebar);
   const location = useLocation();
   const path = location.pathname === "/";
 
@@ -15,7 +16,10 @@ const App = () => {
       {!path && <Sidebar />}
 
       <main className={`${isSidebarOpen ? "bg-active" : ""}`}>
-        <div className={`${isSidebarOpen ? "active" : ""}`}></div>
+        <div
+          onClick={togglesidebar}
+          className={`${isSidebarOpen ? "active" : ""}`}
+        ></div>
         {!path && <Header />}
         <Routes>
           <Route path="/" element={<Root />} />

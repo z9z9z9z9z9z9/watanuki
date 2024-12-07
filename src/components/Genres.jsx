@@ -1,11 +1,10 @@
+import { Link } from "react-router-dom";
 import useGenresStore from "../store/genresStore";
 
-const Genres = () => {
+const Genres = ({ event, className }) => {
   const genres = useGenresStore((state) => state.genres);
 
   const colors = [
-    "#ECB159",
-    "#92C7CF",
     "#d0e6a5",
     "#ffbade",
     "#fc887b",
@@ -16,14 +15,17 @@ const Genres = () => {
   ];
 
   return (
-    <ul className="flex flex-wrap">
+    <ul className={`flex flex-wrap `}>
       {genres.map((genre, index) => (
         <li
           style={{ color: colors[index % colors.length] }}
-          className={`w-1/2 my-2 pl-2 `}
+          className={`${className} `}
           key={genre}
+          title={genre}
         >
-          {genre}
+          <Link onClick={event} to={`/genre/${genre}`}>
+            {genre}
+          </Link>
         </li>
       ))}
     </ul>

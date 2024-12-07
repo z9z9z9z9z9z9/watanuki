@@ -10,17 +10,20 @@ import GenresLayout from "../layouts/GenresLayout";
 import Top10Layout from "../layouts/Top10Layout";
 import useGenresStore from "../store/genresStore";
 import { useEffect } from "react";
+import useTopTenStore from "../store/toptenStore";
 
 const Home = () => {
   const { data, isLoading, error, isError } = useApi("/home");
 
   const setGenres = useGenresStore((state) => state.setGenres);
+  const setTopTen = useTopTenStore((state) => state.setTopTen);
 
   useEffect(() => {
-    if (data?.data?.genres) {
+    if (data?.data) {
       setGenres(data.data.genres);
+      setTopTen(data.data.top10);
     }
-  }, [data, setGenres]);
+  }, [data]);
 
   if (isError) notify("error", error.message);
   return (
@@ -46,7 +49,7 @@ const Home = () => {
               data={data?.data?.latestCompleted}
             />
           </div>
-          <div className="row grid justify-center items-center grid-cols-12 mx-2">
+          <div className="row grid my-10 gap-2 justify-center grid-cols-12 sm:mx-2">
             <div className="left col-span-12 xl:col-span-9">
               <MainLayout
                 dataType="Latest Episode"
