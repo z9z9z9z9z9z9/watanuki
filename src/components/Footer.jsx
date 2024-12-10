@@ -14,9 +14,10 @@ const Footer = () => {
     { title: "D", link: "/az-list/D" },
     { title: "E", link: "/az-list/E" },
     { title: "F", link: "/az-list/F" },
-    { title: "J", link: "/az-list/J" },
+    { title: "G", link: "/az-list/G" },
     { title: "H", link: "/az-list/H" },
     { title: "I", link: "/az-list/I" },
+    { title: "J", link: "/az-list/J" },
     { title: "K", link: "/az-list/K" },
     { title: "L", link: "/az-list/L" },
     { title: "M", link: "/az-list/M" },
@@ -24,14 +25,20 @@ const Footer = () => {
     { title: "O", link: "/az-list/O" },
     { title: "P", link: "/az-list/P" },
     { title: "Q", link: "/az-list/Q" },
+    { title: "R", link: "/az-list/R" },
+    { title: "S", link: "/az-list/S" },
+    { title: "T", link: "/az-list/T" },
+    { title: "U", link: "/az-list/U" },
+    { title: "V", link: "/az-list/V" },
     { title: "W", link: "/az-list/W" },
     { title: "X", link: "/az-list/X" },
     { title: "Y", link: "/az-list/Y" },
     { title: "Z", link: "/az-list/Z" },
   ];
+
   return (
     <div className="row mx-2">
-      <Link to="/">
+      <Link className="flex justify-center" to="/">
         <Logo />
       </Link>
       <div className="my-2 h-1 border-b border-b-neutral-700 "></div>

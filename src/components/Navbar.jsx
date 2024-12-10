@@ -6,8 +6,8 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", id: "/home" },
-    { name: "Movies", id: "/movies" },
-    { name: "TV Series", id: "/tv-series" },
+    { name: "Movies", id: "/movie" },
+    { name: "TV Series", id: "/tv" },
     { name: "Most Popular", id: "/most-popular" },
     { name: "Top Airing", id: "/top-airing" },
   ];
@@ -34,7 +34,7 @@ const Navbar = () => {
         <ul
           className={`${
             show ? "flex" : "hidden"
-          } absolute flex-col justify-center items-center z-10 bg-backGround w-full rounded-md py-5 gap-3 md:gap-10`}
+          } w-11/12 mx-3 absolute flex-col justify-center items-center z-10 bg-backGround  rounded-md py-5 gap-3 md:gap-10`}
         >
           {navLinks.map((item) => (
             <li

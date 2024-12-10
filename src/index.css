@@ -46,7 +46,7 @@ input:focus {
   border-radius: 0 15px 15px 0;
 }
 .loader {
-  height: calc(100dvh);
+  height: 100dvh;
 }
 .flw-item {
   width: calc(16.66% - 0.5rem);
@@ -97,6 +97,47 @@ input:focus {
 .sidebar {
   scrollbar-width: none;
 }
+.cover-wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  filter: grayscale(1);
+}
+.cover {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(20px);
+  transform: scale(1.2);
+  opacity: 0.35;
+}
+/* Make sure the parent h1 container is positioned properly and hides overflow */
+.logo h1 {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap; /* Ensures text doesn't break into multiple lines */
+}
+
+/* The animation */
+.loader-animation {
+  animation: move-across 2s linear infinite; /* Adjust timing as needed */
+}
+
+/* Keyframes to move the image across the text */
+@keyframes move-across {
+  0% {
+    left: -20px; /* Start slightly off the left */
+  }
+  50% {
+    left: 50%; /* Centered */
+  }
+  100% {
+    left: 100%; /* Moves to the right end */
+  }
+}
+
 @media screen and (max-width: 1023px) {
   .flw-item {
     width: calc(25% - 0.5rem) !important;
@@ -116,4 +157,24 @@ input:focus {
   .flw-item {
     width: calc(50% - 0.5rem) !important;
   }
+}
+/* chatGPT */
+
+.text-primary {
+  color: #e63946; /* Red accent */
+}
+
+.btn {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cover {
+  background-size: cover;
+  border-radius: 10px;
+}
+
+.rating span {
+  font-size: 0.875rem;
+  font-weight: bold;
 }

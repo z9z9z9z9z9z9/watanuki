@@ -16,5 +16,7 @@ export const useApi = (endpoint) => {
   return useQuery({
     queryKey: [endpoint],
     queryFn: () => fetchData(endpoint),
+    retry: 2,
+    refetchOnWindowFocus: false,
   });
 };

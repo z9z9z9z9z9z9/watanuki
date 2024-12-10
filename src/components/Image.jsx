@@ -7,7 +7,7 @@ const Image = ({ data }) => {
   return (
     <div>
       <Link to={`/${data.id}`}>
-        <div className="film-poster md:hover:blur-[4px] rounded-sm w-full h-full pb-[140%] mb-2 relative overflow-hidden bg-white block">
+        <div className="film-poster md:hover:opacity-35 transition-all rounded-md w-full h-full pb-[140%] mb-2 relative overflow-hidden bg-white block">
           <div className="z-50 opacity-[.9] absolute bottom-4 left-2">
             <SoundsInfo episodes={data.episodes} />
           </div>

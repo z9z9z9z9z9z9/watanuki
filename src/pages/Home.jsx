@@ -14,6 +14,8 @@ import useTopTenStore from "../store/toptenStore";
 import Footer from "../components/Footer";
 
 const Home = () => {
+  document.title =
+    "Watch Anime Online, Free Anime Streaming Online on watanuki Anime Website";
   const { data, isLoading, error, isError } = useApi("/home");
 
   const setGenres = useGenresStore((state) => state.setGenres);
@@ -26,11 +28,14 @@ const Home = () => {
     }
   }, [data]);
 
-  if (isError) notify("error", error.message);
+  if (isError) {
+    notify("error", error.message);
+    return;
+  }
   return (
     <div className="relative">
       {isLoading ? (
-        <Loader className={"loader"} />
+        <Loader className="loader" />
       ) : (
         <>
           <HeroBanner slides={data?.data?.spotlight} />

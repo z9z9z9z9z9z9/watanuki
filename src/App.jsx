@@ -4,6 +4,7 @@ import Root from "./pages/Root";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import useSidebarStore from "./store/sidebarStore";
+import Dynamic from "./pages/Dynamic";
 
 const App = () => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
@@ -23,7 +24,8 @@ const App = () => {
         {!path && <Header />}
         <Routes>
           <Route path="/" element={<Root />} />
-          <Route path="/:home" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/:category/:query?" element={<Dynamic />} />
         </Routes>
       </main>
     </>
