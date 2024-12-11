@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import config from "../config/config";
 
-const API_BASE_URL = config.localUrl;
+const API_BASE_URL = config.serverUrl;
 
 const fetchData = async (url) => {
   try {
