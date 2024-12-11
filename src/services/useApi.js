@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import config from "../config/config";
 
-const API_BASE_URL = "https://hianime-api-production.up.railway.app/api/v1";
+const API_BASE_URL = config.localUrl;
 
 const fetchData = async (url) => {
   try {

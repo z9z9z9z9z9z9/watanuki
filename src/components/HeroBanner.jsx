@@ -3,8 +3,6 @@ import {
   FaCalendarDay,
   FaCirclePlay,
   FaClock,
-  FaClosedCaptioning,
-  FaMicrophone,
 } from "react-icons/fa6";
 
 import { Swiper, SwiperSlide } from "swiper/react";
