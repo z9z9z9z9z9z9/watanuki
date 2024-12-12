@@ -1,5 +1,4 @@
 import { FaArrowCircleRight, FaSearch } from "react-icons/fa";
-import logo from "../assets/logo.png";
 import banner from "../assets/homeBanner.png";
 import background from "../assets/background.jpg";
 import Navbar from "../components/Navbar";

@@ -32,7 +32,7 @@ const Header = () => {
                 <FaBars size={20} />
               </h1>
             </div>
-            <Link to="/" className="logo  cursor-pointer">
+            <Link to="/home" className="logo  cursor-pointer">
               <Logo />
             </Link>
           </div>
@@ -58,12 +58,6 @@ const Header = () => {
               onClick={() => setShowSearchBar(!showSearchBar)}
             >
               {showSearchBar ? <FaXmark /> : <FaSearch />}
-            </button>
-            <button
-              type="submit"
-              className="bg-primary text-black px-5 py-1 rounded-sm"
-            >
-              login
             </button>
           </div>
         </div>

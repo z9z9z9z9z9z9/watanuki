@@ -41,29 +41,42 @@ const Home = () => {
           <HeroBanner slides={data?.data?.spotlight} />
           <TrendingLayout data={data?.data?.trending} />
           <div className="grid mx-5 grid-cols-12 gap-4 my-5">
-            <DynamicLayout dataType="Top Airing" data={data?.data?.topAiring} />
             <DynamicLayout
-              dataType="Most Popular"
+              title="Top Airing"
+              endpoint="top-airing"
+              data={data?.data?.topAiring}
+            />
+            <DynamicLayout
+              title="Most Popular"
+              endpoint="most-popular"
               data={data?.data?.mostPopular}
             />
             <DynamicLayout
-              dataType="Most Favorite"
+              title="Most Favorite"
+              endpoint="most-favorite"
               data={data?.data?.mostFavorite}
             />
             <DynamicLayout
-              dataType="Latest Completed"
+              title="Latest Completed"
+              endpoint="completed"
               data={data?.data?.latestCompleted}
             />
           </div>
           <div className="row grid my-10 gap-2 justify-center grid-cols-12 sm:mx-2">
             <div className="left col-span-12 xl:col-span-9">
               <MainLayout
-                dataType="Latest Episode"
+                title="Latest Episode"
+                endpoint="recently-updated"
                 data={data?.data?.latestEpisode}
               />
-              <MainLayout dataType="New Added" data={data?.data?.newAdded} />
               <MainLayout
-                dataType="Top Upcoming"
+                title="New Added"
+                endpoint="recently-added"
+                data={data?.data?.newAdded}
+              />
+              <MainLayout
+                title="Top Upcoming"
+                endpoint="top-upcoming"
                 data={data?.data?.topUpcoming}
               />
             </div>

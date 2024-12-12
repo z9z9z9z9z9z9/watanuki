@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 const HeroBanner = ({ slides }) => {
   return (
     <Swiper
+      speed={100}
       grabCursor={true}
       modules={[Navigation, Pagination, Autoplay]}
       slidesPerView={1}
@@ -83,7 +84,7 @@ const HeroBanner = ({ slides }) => {
                   <span>Watch Now</span>
                 </Link>
                 <Link
-                  to={`/${item.id}`}
+                  to={`/anime/${item.id}`}
                   className="bg-[#28282f69] rounded-3xl  px-4 py-1 flex justify-center items-center gap-2"
                 >
                   <span>Detail</span>

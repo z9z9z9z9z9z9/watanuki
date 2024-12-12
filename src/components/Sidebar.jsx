@@ -18,16 +18,16 @@ const Sidebar = () => {
 
   const list = [
     { name: "Home", link: "/home" },
-    { name: "Subbed Anime", link: "/subbed-anime" },
-    { name: "Dubbed Anime", link: "/dubbed-anime" },
-    { name: "Most Popular", link: "/most-popular" },
-    { name: "Top Airing", link: "/top-airing" },
-    { name: "Latest Completed", link: "/latest-completed" },
-    { name: "A-Z List", link: "/az-list" },
-    { name: "Movies", link: "/movie" },
-    { name: "OVAs", link: "/ova" },
-    { name: "ONAs", link: "/ona" },
-    { name: "Specials", link: "/special" },
+    { name: "Subbed Anime", link: "/animes/subbed-anime" },
+    { name: "Dubbed Anime", link: "/animes/dubbed-anime" },
+    { name: "Most Popular", link: "/animes/most-popular" },
+    { name: "Top Airing", link: "/animes/top-airing" },
+    { name: "Latest Completed", link: "/animes/latest-completed" },
+    { name: "A-Z List", link: "/animes/az-list" },
+    { name: "Movies", link: "/animes/movie" },
+    { name: "OVAs", link: "/animes/ova" },
+    { name: "ONAs", link: "/animes/ona" },
+    { name: "Specials", link: "/animes/special" },
   ];
 
   return (

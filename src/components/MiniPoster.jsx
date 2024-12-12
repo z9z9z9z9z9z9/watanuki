@@ -9,7 +9,7 @@ const MiniPoster = ({ item }) => {
       key={item.id}
       className="flex border-b border-lightBg pb-3 items-center gap-4"
     >
-      <Link className="" to={`/${item.id}`}>
+      <Link className="" to={`/anime/${item.id}`}>
         <div className="poster rounded-md flex-shrink-0 relative overflow-hidden w-16 pb-[85px]">
           <img
             className="h-full absolute w-full object-cover object-center"
@@ -19,7 +19,7 @@ const MiniPoster = ({ item }) => {
         </div>
       </Link>
       <div className="text">
-        <Link to={`/${item.id}`}>
+        <Link to={`/anime/${item.id}`}>
           <h2 className="title hover:text-primary mb-2 font-bold">
             {item.title}
           </h2>

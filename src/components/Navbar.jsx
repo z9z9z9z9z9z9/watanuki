@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { FaAlignJustify } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
 
   const navLinks = [
     { name: "Home", id: "/home" },
-    { name: "Movies", id: "/movie" },
-    { name: "TV Series", id: "/tv" },
-    { name: "Most Popular", id: "/most-popular" },
-    { name: "Top Airing", id: "/top-airing" },
+    { name: "Movies", id: "/animes/movie" },
+    { name: "TV Series", id: "/animes/tv" },
+    { name: "Most Popular", id: "/animes/most-popular" },
+    { name: "Top Airing", id: "/animes/top-airing" },
   ];
   return (
     <nav>
@@ -41,9 +42,9 @@ const Navbar = () => {
               className="hover:text-primary hover:bg-lightBg w-full text-center py-2"
               key={item.id}
             >
-              <a className="" href={item.id}>
+              <Link className="" to={item.id}>
                 {item.name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

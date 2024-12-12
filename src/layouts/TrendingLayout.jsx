@@ -24,7 +24,7 @@ const TrendingLayout = ({ data }) => {
           <SwiperSlide key={item.id}>
             <div className="item flex flex-col items-center overflow-hidden px-[1.5px] md:px-2">
               <Link
-                to={`/${item.id}`}
+                to={`/anime/${item.id}`}
                 className="poster w-full h-0 pb-[150%] bg-gray-200 relative overflow-hidden"
               >
                 <img

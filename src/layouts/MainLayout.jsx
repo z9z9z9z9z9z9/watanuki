@@ -4,13 +4,12 @@ import Heading from "../components/Heading";
 import Image from "../components/Image";
 import { FaAngleRight } from "react-icons/fa";
 
-const MainLayout = ({ dataType, data }) => {
-  const link = dataType.toLowerCase().replace(/\s+/g, "-");
+const MainLayout = ({ title, data, endpoint }) => {
   return (
     <div className="pb-5">
       <div className="header flex justify-between">
-        <Heading>{dataType}</Heading>
-        <Link to={`/${link}`}>
+        <Heading>{title}</Heading>
+        <Link to={`/animes/${endpoint}`}>
           <h6 className="text-sm hover:text-primary flex mr-4 items-center gap-1 text-neutral-400">
             <span>View more</span>
             <FaAngleRight />

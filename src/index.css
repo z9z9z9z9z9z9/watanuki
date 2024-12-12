@@ -120,24 +120,6 @@ input:focus {
   white-space: nowrap; /* Ensures text doesn't break into multiple lines */
 }
 
-/* The animation */
-.loader-animation {
-  animation: move-across 2s linear infinite; /* Adjust timing as needed */
-}
-
-/* Keyframes to move the image across the text */
-@keyframes move-across {
-  0% {
-    left: -20px; /* Start slightly off the left */
-  }
-  50% {
-    left: 50%; /* Centered */
-  }
-  100% {
-    left: 100%; /* Moves to the right end */
-  }
-}
-
 @media screen and (max-width: 1023px) {
   .flw-item {
     width: calc(25% - 0.5rem) !important;
@@ -152,12 +134,22 @@ input:focus {
   .flw-item {
     width: calc(33.33% - 0.5rem) !important;
   }
+  .swiper-button-prev {
+    display: none;
+  }
+  .swiper-button-next {
+    display: none;
+  }
 }
 @media screen and (max-width: 479px) {
   .flw-item {
     width: calc(50% - 0.5rem) !important;
   }
+  .posterImg {
+    width: 100%;
+  }
 }
+
 .opacity-overlay {
   height: 250px;
   width: 100%;
@@ -168,4 +160,18 @@ input:focus {
   );
   position: absolute;
   bottom: 0;
+}
+.rounded-child > p:first-child {
+  border-radius: 2px 0 0 2px;
+}
+.rounded-child > p:last-child {
+  border-radius: 0 2px 2px 0;
+}
+.lightBorder {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 10px 0;
+}
+.gray {
+  color: #fff;
+  opacity: 0.5;
 }

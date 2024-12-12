@@ -23,7 +23,7 @@ const Genres = ({ event, className }) => {
           key={genre}
           title={genre}
         >
-          <Link onClick={event} to={`/genre/${genre}`}>
+          <Link onClick={event} to={`/animes/genre/${genre}`}>
             {genre}
           </Link>
         </li>
