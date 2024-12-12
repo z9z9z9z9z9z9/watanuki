@@ -11,7 +11,7 @@ const DetailPage = () => {
   const { id } = useParams();
 
   return (
-    <div className="DetailPage mx-5 my-10">
+    <div className="DetailPage">
       <InfoLayout id={id} />
       <div className="row grid items-start gap-3 grid-cols-12">
         <div className="recomendation col-span-12 xl:col-span-9">
