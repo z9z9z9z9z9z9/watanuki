@@ -1,30 +1,15 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import SoundsInfo from "../components/SoundsInfo";
 import { Link } from "react-router-dom";
 import { FaCirclePlay } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa";
-import { useApi } from "../services/useApi";
-import PageNotFound from "../pages/PageNotFound";
 import Loader from "../components/Loader";
 
-const InfoLayout = ({ id }) => {
+const InfoLayout = ({ data }) => {
   const [showFull, setShowFull] = useState(false);
 
   // Regular expression to check if the string ends with a number
-  const endsWithNumber = /\d$/;
-
-  const result = endsWithNumber.test(id);
-
-  if (!result) {
-    return <PageNotFound />;
-  }
-
-  const { data: response, isError, error, isLoading } = useApi(`/anime/${id}`);
-
-  const data = response?.data;
-  if (isError) {
-    return <PageNotFound />;
-  }
 
   const colors = [
     "#d0e6a5",
@@ -37,65 +22,65 @@ const InfoLayout = ({ id }) => {
   ];
   return (
     <>
-      {data && !isLoading ? (
-        <div className="banner min-h-[700px] relative w-full bg-[#262525] pt-10 md:pt-20">
-          <div className="backdrop-img bg-backGround w-full h-full absolute top-0 left-0 overflow-hidden opacity-[.1]">
-            <img
-              src={data.poster}
-              alt={data.title}
-              className="object-cover object-center h-full w-full"
-            />
-          </div>
-          <div className="opacity-overlay"></div>
-          <div className="content max-w-[1200px] mx-auto flex flex-col items-start md:flex-row gap-10 mb-2 relative px-2">
-            <div className="left w-full flex justify-center">
-              <div className="posterImg px-5 sm:w-1/2 md:w-60 xl:w-80">
-                <img
-                  src={data.poster}
-                  alt={data.title}
-                  className="rounded-md h-full w-full"
-                />
-              </div>
+      <div className="banner min-h-[700px] relative w-full bg-[#262525] pt-10 md:pt-20">
+        <div className="backdrop-img bg-backGround w-full h-full absolute top-0 left-0 overflow-hidden opacity-[.1]">
+          <img
+            src={data.poster}
+            alt={data.title}
+            className="object-cover object-center h-full w-full"
+          />
+        </div>
+        <div className="opacity-overlay"></div>
+        <div className="content max-w-[1200px] w-full mx-auto flex flex-col items-start md:flex-row gap-2 mb-2 relative px-2">
+          <div className="left w-full md:w-60 xl:w-80 flex justify-center">
+            <div className="posterImg px-5 w-1/2 md:w-full">
+              <img
+                src={data.poster}
+                alt={data.title}
+                className="rounded-md h-full w-full"
+              />
             </div>
-            <div className="right flex flex-col gap-2">
-              <h1 className="title text-lg md:text-4xl font-extrabold">
-                {data.title}
-              </h1>
-              <div className="alternative gray text-lg font-bold">
-                {data.alternativeTitle}
-              </div>
-              <div className="alternative gray text-lg font-bold">
-                {data.japanese}
-              </div>
-              <div className="sounds flex items-center gap-2 my-2">
-                <SoundsInfo
-                  episodes={{
-                    MAL_score: data.MAL_score,
-                    rating: data.rating,
-                    ...data.episodes,
-                  }}
-                />
-                <span className="h-1 w-1 rounded-full bg-primary"></span>
-                <span className="type text-[#ccc] text-sm font-bold">
-                  {data.type}
-                </span>
-                <span className="h-1 w-1 rounded-full bg-primary"></span>
-                <span className="duration text-[#ccc] text-sm font-bold">
-                  {data.duration}
-                </span>
-              </div>
-              <div className="genres rounded-child flex flex-wrap">
-                {data.genres.map((genre, index) => (
-                  <Link to={`/genre/${genre.toLowerCase()}`} key={genre}>
-                    <p
-                      style={{ background: colors[index % colors.length] }}
-                      className="px-2 border border-black text-black py-0.5 rounded-none "
-                    >
-                      {genre}
-                    </p>
-                  </Link>
-                ))}
-              </div>
+          </div>
+          <div className="right w-full flex flex-col gap-2">
+            <h1 className="title text-lg md:text-4xl font-extrabold">
+              {data.title}
+            </h1>
+            <div className="alternative gray text-lg font-bold">
+              {data.alternativeTitle}
+            </div>
+            <div className="alternative gray text-lg font-bold">
+              {data.japanese}
+            </div>
+            <div className="sounds flex items-center gap-2 my-2">
+              <SoundsInfo
+                episodes={{
+                  MAL_score: data.MAL_score,
+                  rating: data.rating,
+                  ...data.episodes,
+                }}
+              />
+              <span className="h-1 w-1 rounded-full bg-primary"></span>
+              <span className="type text-[#ccc] text-sm font-bold">
+                {data.type}
+              </span>
+              <span className="h-1 w-1 rounded-full bg-primary"></span>
+              <span className="duration text-[#ccc] text-sm font-bold">
+                {data.duration}
+              </span>
+            </div>
+            <div className="genres rounded-child flex flex-wrap">
+              {data.genres.map((genre, index) => (
+                <Link to={`/genre/${genre.toLowerCase()}`} key={genre}>
+                  <p
+                    style={{ background: colors[index % colors.length] }}
+                    className="px-2 border border-black text-black py-0.5 rounded-none "
+                  >
+                    {genre}
+                  </p>
+                </Link>
+              ))}
+            </div>
+            {data.id && (
               <div className="watch-btn my-4">
                 <Link to={`/watch/${data.id}`}>
                   <button className=" flex justify-center items-center gap-2 py-1 rounded-3xl text-lg text-black bg-primary w-1/2 ">
@@ -104,7 +89,9 @@ const InfoLayout = ({ id }) => {
                   </button>
                 </Link>
               </div>
+            )}
 
+            {data.synopsis && (
               <div className="overview">
                 <p
                   className={`${
@@ -120,65 +107,61 @@ const InfoLayout = ({ id }) => {
                   {showFull ? " - LESS" : " - MORE"}
                 </span>
               </div>
-              <div className="lightBorder"></div>
+            )}
+            <div className="lightBorder"></div>
 
-              <div className="infor flex-col sm:flex-row flex gap-5">
-                <div className="flex gap-1 status">
-                  <p className="font-extrabold">status : </p>
-                  <span className="gray">{data.status}</span>
+            <div className="infor flex-col sm:flex-row flex gap-5">
+              <div className="flex gap-1 status">
+                <p className="font-extrabold">status : </p>
+                <span className="gray">{data.status}</span>
+              </div>
+              <div className="flex gap-1 aired">
+                <p className="font-extrabold">Aired : </p>
+                <div className="gray flex  items-center gap-2">
+                  <span>{data.aired.from}</span>
+                  {data.aired.to && (
+                    <>
+                      <span>
+                        <FaArrowRight />
+                      </span>
+                      <span>{data.aired.to}</span>
+                    </>
+                  )}
                 </div>
-                <div className="flex gap-1 aired">
-                  <p className="font-extrabold">Aired : </p>
-                  <div className="gray flex  items-center gap-2">
-                    <span>{data.aired.from}</span>
-                    {data.aired.to && (
-                      <>
-                        <span>
-                          <FaArrowRight />
-                        </span>
-                        <span>{data.aired.to}</span>
-                      </>
-                    )}
-                  </div>
-                </div>
               </div>
-              <div className="lightBorder"></div>
-              <div className="studio">
-                <span>Studio : </span>
-                <Link
-                  to={`/producer/${data.studios
-                    .toLowerCase()
-                    .replace(" ", "-")}`}
-                >
-                  <span className="text-primary">{data.studios}</span>
-                </Link>
-              </div>
-              <div className="lightBorder"></div>
-              <div className="studio">
-                <h4 className="text-center mb-2">Producers</h4>
-                {data.producers && (
-                  <ul className="flex flex-wrap gap-2">
-                    {data.producers.map((producer, index) => (
-                      <Link
-                        to={`/producer/${producer}`}
-                        key={producer}
-                        className="hover:opacity-[0.7]"
-                      >
-                        <li style={{ color: colors[index % colors.length] }}>
-                          {producer}
-                        </li>
-                      </Link>
-                    ))}
-                  </ul>
-                )}
-              </div>
-              <div className="lightBorder"></div>
             </div>
+            <div className="lightBorder"></div>
+            <div className="studio">
+              <span>Studio : </span>
+              <Link
+                to={`/producer/${data.studios.toLowerCase().replace(" ", "-")}`}
+              >
+                <span className="text-primary">{data.studios}</span>
+              </Link>
+            </div>
+            <div className="lightBorder"></div>
+            <div className="studio">
+              <h4 className="text-center mb-2">Producers</h4>
+              {data.producers && (
+                <ul className="flex flex-wrap gap-2">
+                  {data.producers.map((producer, index) => (
+                    <Link
+                      to={`/producer/${producer}`}
+                      key={producer}
+                      className="hover:opacity-[0.7]"
+                    >
+                      <li style={{ color: colors[index % colors.length] }}>
+                        {producer}
+                      </li>
+                    </Link>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div className="lightBorder"></div>
           </div>
         </div>
-      ) : (
-        <Loader />
-      )}
+      </div>
     </>
   );
 };

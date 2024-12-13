@@ -10,7 +10,7 @@ const DynamicLayout = ({ title, data, endpoint }) => {
   return (
     <div className=" col-span-12 md:col-span-6 mt-5 xl:col-span-3">
       <Heading className="mb-5">{title}</Heading>
-      <div className="items h-auto w-full flex flex-col gap-3">
+      <div className="items bg-lightBg px-2 py-2 h-auto w-full flex flex-col gap-3">
         {data.map((item) => (
           <MiniPoster key={item.id} item={item} />
         ))}
