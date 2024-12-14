@@ -38,9 +38,9 @@ const Footer = () => {
 
   return (
     <div className="row mx-2">
-      <Link className="flex justify-center" to="/home">
+      <div className="logo w-full flex justify-center items-center">
         <Logo />
-      </Link>
+      </div>
       <div className="my-2 h-1 border-b border-b-neutral-700 "></div>
       <div className="az-list flex justify-center items-center">
         <h1 className="text-primary font-bold text-lg mb-2 mr-3">AZ-LIST </h1>

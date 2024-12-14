@@ -40,7 +40,7 @@ const Home = () => {
         <>
           <HeroBanner slides={data?.data?.spotlight} />
           <TrendingLayout data={data?.data?.trending} />
-          <div className="grid mx-5 grid-cols-12 gap-4 my-5">
+          <div className="grid mx-2 grid-cols-12 gap-4 my-5">
             <DynamicLayout
               title="Top Airing"
               endpoint="top-airing"

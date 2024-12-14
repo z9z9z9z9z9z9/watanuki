@@ -131,15 +131,21 @@ const InfoLayout = ({ data }) => {
               </div>
             </div>
             <div className="lightBorder"></div>
-            <div className="studio">
-              <span>Studio : </span>
-              <Link
-                to={`/producer/${data.studios.toLowerCase().replace(" ", "-")}`}
-              >
-                <span className="text-primary">{data.studios}</span>
-              </Link>
-            </div>
-            <div className="lightBorder"></div>
+            {data.studios && (
+              <>
+                <div className="studio">
+                  <span>Studio : </span>
+                  <Link
+                    to={`/producer/${data.studios
+                      .toLowerCase()
+                      .replace(" ", "-")}`}
+                  >
+                    <span className="text-primary">{data.studios}</span>
+                  </Link>
+                </div>
+                <div className="lightBorder"></div>
+              </>
+            )}
             <div className="studio">
               <h4 className="text-center mb-2">Producers</h4>
               {data.producers && (

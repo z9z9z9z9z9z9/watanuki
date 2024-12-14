@@ -8,6 +8,7 @@ import Recommended from "../layouts/Recommended";
 import MostPopular from "../layouts/MostPopular";
 import MoreSeasons from "../layouts/MoreSeasons";
 import Related from "../layouts/Related";
+import Footer from "../components/Footer";
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -36,24 +37,31 @@ const DetailPage = () => {
               {data.moreSeasons.length !== 0 && (
                 <MoreSeasons data={data.moreSeasons} />
               )}
-              <div className="recomendation">
-                <Recommended id={id} />
-              </div>
+              {data.recommended && (
+                <div className="recomendation">
+                  <Recommended data={data.recommended} />
+                </div>
+              )}
             </div>
 
             <div className="right  col-span-12 mt-2 xl:col-span-3">
-              <div className="related">
-                <Related id={id} />
-              </div>
-              <div className="most-popular col-span-12 mt-2 xl:col-span-3">
-                <MostPopular />
-              </div>
+              {data.related.length !== 0 && (
+                <div className="related">
+                  <Related data={data.related} />
+                </div>
+              )}
+              {data.mostPopular && (
+                <div className="most-popular col-span-12 mt-2 xl:col-span-3">
+                  <MostPopular data={data.mostPopular} />
+                </div>
+              )}
             </div>
           </div>
         </div>
       ) : (
         <Loader />
       )}
+      <Footer />
     </>
   );
 };

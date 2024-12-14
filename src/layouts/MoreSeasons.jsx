@@ -12,10 +12,12 @@ const MoreSeasons = ({ data }) => {
         >
           <div
             className={` ${
-              item.isActive ? "text-primary border border-primary" : ""
+              item.isActive
+                ? "text-primary border border-primary"
+                : "text-white border-none"
             } relative overflow-hidden px-1 rounded-md w-full h-full  flex justify-center items-center`}
           >
-            <h1 className="z-20 text-inherit text-center relative line-clamp-2 text-[12px] text-white font-extrabold">
+            <h1 className="z-20 text-inherit text-center relative line-clamp-2 text-[12px] font-extrabold">
               {item.title}
             </h1>
             <div

@@ -32,9 +32,7 @@ const Header = () => {
                 <FaBars size={20} />
               </h1>
             </div>
-            <Link to="/home" className="logo  cursor-pointer">
-              <Logo />
-            </Link>
+            <Logo />
           </div>
           <div className="right justify-end lg:basis-[40%] flex gap-2 md:gap-5 items-center">
             <form

@@ -1,4 +1,9 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useLocation,
+  ScrollRestoration,
+} from "react-router-dom";
 import Home from "./pages/Home";
 import Root from "./pages/Root";
 import Header from "./components/Header";
@@ -6,6 +11,7 @@ import Sidebar from "./components/Sidebar";
 import useSidebarStore from "./store/sidebarStore";
 import ListPage from "./pages/ListPage";
 import DetailPage from "./pages/DetailPage";
+import ScrollToTop from "./utils/ScrollToTop";
 
 const App = () => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
@@ -23,6 +29,7 @@ const App = () => {
           className={`${isSidebarOpen ? "active" : ""}`}
         ></div>
         {!path && <Header />}
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Root />} />
           <Route path="/home" element={<Home />} />
