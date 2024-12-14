@@ -5,9 +5,10 @@ import Loader from "../components/Loader";
 import PageNotFound from "./PageNotFound";
 import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Image from "../components/Image";
+import Heading from "../components/Heading";
 
 const ListPage = () => {
-  const [page, setPage] = useState(1);
   const validateQueries = [
     "top-airing",
     "most-popular",
@@ -36,47 +37,48 @@ const ListPage = () => {
     return <PageNotFound />;
   }
 
-  const endpoint = `/animes/${category}${
-    query ? `/${query}` : ""
-  }?page=${page}`;
-  const { data, isError, error, isLoading } = useApi(endpoint);
+  const endpoint = `/animes/${category}${query ? `/${query}` : ""}?page=`;
+  const { data, isError, error, isLoading, hasNextPage, fetchNextPage } =
+    useInfiniteApi(endpoint);
 
   if (isError) {
     return <PageNotFound />;
   }
+  const pages = data?.pages;
 
   return (
-    <>
-      {isLoading ? (
-        <Loader className="h-[100dvh]" />
-      ) : (
+    <div className="list-page pt-20">
+      {pages && !isLoading ? (
         <InfiniteScroll
-          dataLength={items.length} //This is important field to render the next data
-          next={fetchData}
-          hasMore={true}
-          loader={<h4>Loading...</h4>}
+          dataLength={data?.pages.flat().length || 0} //This is important field to render the next data
+          next={fetchNextPage}
+          hasMore={hasNextPage}
+          loader={<Loader />}
           endMessage={
             <p style={{ textAlign: "center" }}>
               <b>Yay! You have seen it all</b>
             </p>
           }
-          // below props only if you need pull down functionality
-          refreshFunction={this.refresh}
-          pullDownToRefresh
-          pullDownToRefreshThreshold={50}
-          pullDownToRefreshContent={
-            <h3 style={{ textAlign: "center" }}>
-              &#8595; Pull down to refresh
-            </h3>
-          }
-          releaseToRefreshContent={
-            <h3 style={{ textAlign: "center" }}>&#8593; Release to refresh</h3>
-          }
         >
-          {items}
+          <Heading>
+            {query ? "" : category} {query} Anime
+          </Heading>
+          <div className="flex flex-wrap mx-2 md:mx-5 justify-between items-center">
+            {pages?.map((page) => (
+              <>
+                {page.data.response.map((item) => (
+                  <div key={item.id} className="flw-item">
+                    <Image data={item} />
+                  </div>
+                ))}
+              </>
+            ))}
+          </div>
         </InfiniteScroll>
+      ) : (
+        <Loader className="h-[100dvh]" />
       )}
-    </>
+    </div>
   );
 };
 

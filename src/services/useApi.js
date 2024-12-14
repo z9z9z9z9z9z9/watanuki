@@ -21,3 +21,26 @@ export const useApi = (endpoint) => {
     refetchOnWindowFocus: false,
   });
 };
+
+const fetchInfiniteData = async ({ queryKey, pageParam }) => {
+  try {
+    const { data } = await axios.get(API_BASE_URL + queryKey + pageParam);
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+export const useInfiniteApi = (endpoint) => {
+  return useInfiniteQuery({
+    queryKey: [endpoint],
+    queryFn: fetchInfiniteData,
+    initialPageParam: 6,
+    getNextPageParam: (lastpage) => {
+      if (lastpage.data.pageInfo.hasNextPage) {
+        return lastpage.data.pageInfo.currentPage + 1;
+      } else {
+        return undefined;
+      }
+    },
+  });
+};
