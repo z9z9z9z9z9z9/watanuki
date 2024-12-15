@@ -2,19 +2,19 @@
 import React from "react";
 import SoundsInfo from "../components/SoundsInfo";
 import { Link } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Image = ({ data }) => {
   return (
     <div>
       <Link to={`/anime/${data.id}`}>
         <div className="film-poster md:hover:opacity-[.7] transition-all rounded-sm w-full h-full pb-[140%] mb-2 relative overflow-hidden bg-white block">
-          <div className="z-50 opacity-[.9] absolute bottom-4 left-2">
+          <div className="z-50 opacity-[.9] absolute bottom-0 left-0">
             <SoundsInfo episodes={data.episodes} />
           </div>
-          <img
+          <LazyLoadImage
             className="absolute h-full w-full inset-0 object-cover object-center"
             src={data.poster}
-            loading="lazy"
             alt={data.title}
           />
         </div>

@@ -34,7 +34,7 @@ export const useInfiniteApi = (endpoint) => {
   return useInfiniteQuery({
     queryKey: [endpoint],
     queryFn: fetchInfiniteData,
-    initialPageParam: 6,
+    initialPageParam: 1,
     getNextPageParam: (lastpage) => {
       if (lastpage.data.pageInfo.hasNextPage) {
         return lastpage.data.pageInfo.currentPage + 1;

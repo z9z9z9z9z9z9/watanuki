@@ -59,7 +59,7 @@ const DetailPage = () => {
           </div>
         </div>
       ) : (
-        <Loader />
+        <Loader className="h-[100dvh]" />
       )}
       <Footer />
     </>

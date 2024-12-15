@@ -14,7 +14,7 @@ const DynamicLayout = ({ title, data, endpoint }) => {
         {data.map((item) => (
           <MiniPoster key={item.id} item={item} />
         ))}
-        <div className="more">
+        <div className="more my-3">
           <Link
             className="flex hover:text-primary items-center gap-2"
             to={`/animes/${endpoint}`}

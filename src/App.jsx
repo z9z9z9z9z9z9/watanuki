@@ -12,6 +12,7 @@ import useSidebarStore from "./store/sidebarStore";
 import ListPage from "./pages/ListPage";
 import DetailPage from "./pages/DetailPage";
 import ScrollToTop from "./utils/ScrollToTop";
+import SearchResult from "./pages/SearchResult";
 
 const App = () => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
@@ -34,7 +35,8 @@ const App = () => {
           <Route path="/" element={<Root />} />
           <Route path="/home" element={<Home />} />
           <Route path="/anime/:id" element={<DetailPage />} />
-          <Route path="animes/:category/:query?" element={<ListPage />} />
+          <Route path="/animes/:category/:query?" element={<ListPage />} />
+          <Route path="/search" element={<SearchResult />} />
         </Routes>
       </main>
     </>

@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SoundsInfo from "./SoundsInfo";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const MiniPoster = ({ item }) => {
   return (
@@ -11,11 +12,10 @@ const MiniPoster = ({ item }) => {
     >
       <Link className="" to={`/anime/${item.id}`}>
         <div className="poster bg-white rounded-md flex-shrink-0 relative overflow-hidden w-16 pb-[85px]">
-          <img
+          <LazyLoadImage
             className="h-full absolute w-full object-cover object-center"
             src={item.poster}
             alt={item.title}
-            loading="lazy"
           />
         </div>
       </Link>

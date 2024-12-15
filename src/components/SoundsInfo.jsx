@@ -4,10 +4,10 @@ import { FaClosedCaptioning, FaMicrophone } from "react-icons/fa";
 
 const SoundsInfo = ({ episodes }) => {
   return (
-    <div className=" rounded-child flex flex-wrap  font-extrabold">
+    <div className=" rounded-child flex flex-wrap font-extrabold">
       {episodes.rating && (
-        <p className="item bg-white text-sm px-1 text-black">
-          <span className="text-sm font-bold">{episodes.rating}</span>
+        <p className="item bg-white text-sm px-2  text-black">
+          <span className="text-sm font-extrabold">{episodes.rating}</span>
         </p>
       )}
       <p className="item bg-yellow text-sm px-1 text-black">

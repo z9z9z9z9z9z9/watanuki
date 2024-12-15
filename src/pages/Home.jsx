@@ -35,7 +35,7 @@ const Home = () => {
   return (
     <div className="relative">
       {isLoading ? (
-        <Loader className="loader" />
+        <Loader className="h-[100dvh]" />
       ) : (
         <>
           <HeroBanner slides={data?.data?.spotlight} />

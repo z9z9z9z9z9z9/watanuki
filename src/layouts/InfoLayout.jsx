@@ -41,7 +41,18 @@ const InfoLayout = ({ data }) => {
               />
             </div>
           </div>
-          <div className="right w-full flex flex-col gap-2">
+          <div className="right mt-3 w-full flex flex-col gap-2">
+            <div className="path hidden md:flex items-center gap-2 text-base ">
+              <Link className="" to="/home">
+                <h4 className="">home</h4>
+              </Link>
+              <span className="h-1 w-1 rounded-full bg-primary"></span>
+              <Link to={`/animes/${data.type.toLowerCase()}`}>
+                <h4 className="hover:text-primary">{data.type}</h4>
+              </Link>
+              <span className="h-1 w-1  rounded-full bg-primary"></span>
+              <h4 className="gray">{data.title}</h4>
+            </div>
             <h1 className="title text-lg md:text-4xl font-extrabold">
               {data.title}
             </h1>
@@ -70,7 +81,7 @@ const InfoLayout = ({ data }) => {
             </div>
             <div className="genres rounded-child flex flex-wrap">
               {data.genres.map((genre, index) => (
-                <Link to={`/genre/${genre.toLowerCase()}`} key={genre}>
+                <Link to={`/animes/genre/${genre.toLowerCase()}`} key={genre}>
                   <p
                     style={{ background: colors[index % colors.length] }}
                     className="px-2 border border-black text-black py-0.5 rounded-none "

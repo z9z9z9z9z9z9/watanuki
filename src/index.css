@@ -46,15 +46,13 @@ input:focus {
 .btn {
   border-radius: 0 15px 15px 0;
 }
-.loader {
-  height: 100dvh;
-}
+
 .flw-item {
   width: calc(16.66% - 0.5rem);
   margin: 0.7rem 0;
   position: relative;
 }
-.film-poster::after {
+/* .film-poster::after {
   content: "";
   position: absolute;
   top: 40%;
@@ -74,7 +72,7 @@ input:focus {
     rgba(25, 25, 26, 0) 40%
   );
   background: linear-gradient(0deg, var(--bg-color) 0, rgba(28, 28, 30, 0) 40%);
-}
+} */
 .gradient-text {
   font-weight: 800;
   background: linear-gradient(90deg, #fff, #00adb5); /* Gradient colors */

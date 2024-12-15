@@ -1,5 +1,3 @@
-import React from "react";
-import { ThreeCircles } from "react-loader-spinner";
 import loader from "../assets/loader.gif";
 
 const Loader = ({ className }) => {
