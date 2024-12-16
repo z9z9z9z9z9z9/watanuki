@@ -26,7 +26,7 @@ const Related = ({ data }) => {
           ))}
           {hasMore && (
             <button
-              className="w-full bg-white text-black py-2 font-bold rounded-md"
+              className="w-full bg-[#505a5a] text-white py-2 font-bold rounded-md"
               onClick={() => setShowAll((prev) => !prev)}
             >
               {showAll ? "show less" : "show more"}

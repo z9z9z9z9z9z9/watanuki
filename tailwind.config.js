@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#00ADB5",
-        backGround: "#222831",
-        lightBg: "#49505c81",
+        primary: "#ff640a",
+        backGround: "#1A1A1D",
+        lightBg: "#23252b",
         yellow: "#F9ED69",
         purple: "#B1B2FF",
         pink: "#F2BED1",

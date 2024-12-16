@@ -30,7 +30,7 @@ const DetailPage = () => {
   return (
     <>
       {data && !isLoading ? (
-        <div className="DetailPage">
+        <div className="DetailPage pt-10">
           <InfoLayout data={data} />
           <div className="row grid items-start gap-3 px-2 grid-cols-12">
             <div className="left col-span-12 xl:col-span-9">

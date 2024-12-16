@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 const HeroBanner = ({ slides }) => {
   return (
     <Swiper
-      speed={100}
+      speed={20}
       grabCursor={true}
       modules={[Navigation, Pagination, Autoplay]}
       slidesPerView={1}
@@ -28,7 +28,7 @@ const HeroBanner = ({ slides }) => {
       autoplay={{ delay: 3000 }}
       pagination={{ clickable: true }}
       navigation={true}
-      className="slider h-[50vh] sm:h-[50vh]  md:h-[80vh] xl:h-[calc(100vh-100px)]"
+      className="slider h-[50vh] md:h-[80vh] xl:h-[calc(100vh-100px)]"
     >
       {slides.map((item) => (
         <SwiperSlide

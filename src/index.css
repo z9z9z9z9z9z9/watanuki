@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --bg-color: #222831;
+  --bg-color: #1a1a1d;
   font-family: "Nunito", sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -75,7 +75,7 @@ input:focus {
 } */
 .gradient-text {
   font-weight: 800;
-  background: linear-gradient(90deg, #fff, #00adb5); /* Gradient colors */
+  background: linear-gradient(90deg, #fff, #e3651d); /* Gradient colors */
   -webkit-background-clip: text; /* Clips the gradient to the text */
   background-clip: text;
   -webkit-text-fill-color: transparent; /* Makes the text transparent */
