@@ -61,7 +61,7 @@ const ListPage = () => {
           <Heading>
             {query ? "" : category} {query} Anime
           </Heading>
-          <div className="flex flex-wrap mx-2 md:mx-5 justify-between items-center">
+          <div className="flex flex-wrap justify-around items-center">
             {pages?.map((page, pageIndex) => (
               <React.Fragment key={pageIndex}>
                 {page.data.response.map((item, index) => (

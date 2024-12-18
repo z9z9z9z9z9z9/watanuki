@@ -18,7 +18,7 @@ const MoreSeasons = ({ data }) => {
             } relative overflow-hidden px-1 rounded-md w-full h-full  flex justify-center items-center`}
           >
             <h1 className="z-20 text-inherit text-center relative line-clamp-2 text-[12px] font-extrabold">
-              {item.title}
+              {item.alternativeTitle}
             </h1>
             <div
               className="absolute opacity-[.3] blur-[2px] z-10 -inset-3 bg-cover bg-center bg-no-repeat"
