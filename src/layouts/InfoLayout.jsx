@@ -33,7 +33,7 @@ const InfoLayout = ({ data }) => {
         <div className="opacity-overlay"></div>
         <div className="content max-w-[1200px] w-full mx-auto flex flex-col items-start md:flex-row gap-2 mb-2 relative px-2">
           <div className="left w-full md:w-60 xl:w-80 flex justify-center">
-            <div className="posterImg px-5 w-1/2 md:w-full">
+            <div className="posterImg px-5 md:w-full">
               <img
                 src={data.poster}
                 alt={data.title}

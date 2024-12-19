@@ -145,7 +145,7 @@ input:focus {
     width: calc(50% - 0.5rem) !important;
   }
   .posterImg {
-    width: 100%;
+    width: 60%;
   }
 }
 

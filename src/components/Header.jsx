@@ -27,7 +27,7 @@ const Header = () => {
 
     timeoutRef.current = setTimeout(() => {
       setDebouncedValue(newValue); // Set debounced value after 1 second
-    }, 1000);
+    }, 500);
   };
 
   // React Query hook with `useApi`
@@ -49,6 +49,13 @@ const Header = () => {
     setValue("");
     setDebouncedValue("");
     setShowSearchBar(false);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  };
+  const emptyInput = () => {
+    setValue("");
+    setDebouncedValue("");
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -88,42 +95,62 @@ const Header = () => {
             type="text"
             className="header-search w-full bg-[#FBF8EF] px-2 text-lg text-black py-2 rounded-md"
           />
-          <button type="submit" className="absolute right-8 text-black">
-            <FaSearch />
-          </button>
+          <div className="btns absolute right-8 flex justify-center items-center gap-3">
+            {value.length > 1 && (
+              <button onClick={emptyInput} type="reset" className="text-black">
+                <FaXmark />
+              </button>
+            )}
+            <button type="submit" className="text-black">
+              <FaSearch />
+            </button>
+          </div>
         </form>
         <div className={`${showSearchBar ? "flex flex-col mt-4" : "hidden"}`}>
           {isLoading ? (
             <Loader />
-          ) : isError ? (
-            <p className="text-red-500">{error.message}</p>
-          ) : (
-            data?.data?.map((item) => (
-              <div
-                onClick={() => navigateToAnimePage(item.id)}
-                className="flex w-full hover:bg-lightBg px-3 py-5 gap-4"
-                key={item.id}
-              >
-                <div className="poster flex-nowrap pb-14 relative w-12">
-                  <img
-                    className="h-full w-full inset-0 absolute object-cover object-center"
-                    src={item.poster}
-                    alt={item.title}
-                  />
-                </div>
-                <div className="info">
-                  <h4 className="title">{item.title}</h4>
-                  <h6 className="gray text-sm">{item.alternativeTitle}</h6>
-                  <div className="flex items-center gap-2 text-sm gray">
-                    <h6>{item.aired}</h6>
-                    <span className="h-1 w-1 rounded-full bg-primary"></span>
-                    <h6>{item.type}</h6>
-                    <span className="h-1 w-1 rounded-full bg-primary"></span>
-                    <h6>{item.duration}</h6>
+          ) : data && data?.data.length ? (
+            <>
+              {data?.data?.map((item) => (
+                <div
+                  onClick={() => navigateToAnimePage(item.id)}
+                  className="flex w-full justify-start items-start hover:bg-lightBg px-3 py-5 gap-4"
+                  key={item.id}
+                >
+                  <div className="poster shrink-0 pb-14 relative w-10">
+                    <img
+                      className="h-full w-full inset-0 absolute object-cover object-center"
+                      src={item.poster}
+                      alt={item.title}
+                    />
+                  </div>
+                  <div className="info">
+                    <h4 className="title line-clamp-2">{item.title}</h4>
+                    <h6 className="gray text-sm line-clamp-1">
+                      {item.alternativeTitle}
+                    </h6>
+                    <div className="flex items-center gap-2 text-sm gray">
+                      <h6>{item.aired}</h6>
+                      <span className="h-1 w-1 rounded-full bg-primary"></span>
+                      <h6>{item.type}</h6>
+                      <span className="h-1 w-1 rounded-full bg-primary"></span>
+                      <h6>{item.duration}</h6>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              ))}
+              <button className="py-2 bg-lightBg mt-2" onClick={handleSubmit}>
+                view More
+              </button>
+            </>
+          ) : (
+            <>
+              {value.length > 2 && (
+                <h1 className="text-center text-lg text-primary">
+                  anime not found :(
+                </h1>
+              )}
+            </>
           )}
         </div>
       </div>

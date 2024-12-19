@@ -18,12 +18,13 @@ const SearchResult = () => {
     return <PageNotFound />;
   }
   const pages = data?.pages;
+  console.log(data?.pages.length);
 
   return (
     <div className="list-page pt-20">
       {pages && !isLoading ? (
         <InfiniteScroll
-          dataLength={data?.pages.flat().length || 0} //This is important field to render the next data
+          dataLength={data?.pages.flat().length || 0}
           next={fetchNextPage}
           hasMore={hasNextPage}
           loader={<Loader className="h-fit" />}
