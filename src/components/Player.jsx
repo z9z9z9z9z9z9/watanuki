@@ -6,6 +6,7 @@ const Player = ({ video }) => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
 
+  const videoSrc = video.sources.dubbed[0];
   useEffect(() => {
     if (videoRef.current) {
       const videoElement = videoRef.current;
@@ -13,7 +14,7 @@ const Player = ({ video }) => {
       // Use hls.js for playback if the browser doesn't natively support HLS
       if (Hls.isSupported()) {
         const hls = new Hls();
-        hls.loadSource(src);
+        hls.loadSource(videoSrc.url);
         hls.attachMedia(videoElement);
 
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
@@ -36,15 +37,14 @@ const Player = ({ video }) => {
         playerRef.current = null;
       }
     };
-  }, [src]);
+  }, [videoSrc]);
 
   return (
-    <div>
+    <div className="flex justify-center items-center">
       <video
         ref={videoRef}
-        className="video-js vjs-default-skin"
+        className="video-js vjs-default-skin h-full w-full  md:h-[calc(100vh-200px)]"
         controls
-        style={{ width: "100%", height: "100%" }}
       />
     </div>
   );

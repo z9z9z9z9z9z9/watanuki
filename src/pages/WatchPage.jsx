@@ -24,7 +24,11 @@ const WatchPage = () => {
     return <div>Error loading episode. Please try again later.</div>;
   }
 
-  return <div className="pt-4">watch anime</div>;
+  return (
+    <div className="pt-4">
+      {data?.data ? <Player video={data?.data} /> : <Loader />}
+    </div>
+  );
 };
 
 export default WatchPage;
