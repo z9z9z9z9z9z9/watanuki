@@ -37,7 +37,7 @@ const Sidebar = () => {
       }`}
     >
       <button
-        className="w-full pt-2 pl-2 flex items-center gap-2 hover:text-primary text-base md:text-xl"
+        className="w-full pt-4 pl-2 flex items-center gap-2 hover:text-primary text-base md:text-xl"
         onClick={sidebarHandler}
       >
         <FaAngleLeft />
