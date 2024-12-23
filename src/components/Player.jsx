@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useRef, useState } from "react";
-import videojs from "video.js";
-import "video.js/dist/video-js.css";
+import "plyr/dist/plyr.css";
+import Hls from "hls.js";
 import "./player.css";
+import Plyr from "plyr";
 import { useApi } from "../services/useApi";
 
 const Player = ({ episodeId }) => {
@@ -18,70 +19,100 @@ const Player = ({ episodeId }) => {
       setSelectedServer(servers?.data?.sub[0].serverName);
     }
   }, [servers]);
-  const { data: episode } = useApi(
-    `/sources?server=${selectedServer}&category=${category}&episodeId=${episodeId}`
-  );
 
-  useEffect(() => {
-    if (servers) {
-      setSelectedServer(servers?.data?.sub[0].serverName);
-    }
-  }, [servers]);
+  const { data: episode } =
+    selectedServer && category && episodeId
+      ? useApi(
+          `/sources?server=${selectedServer}&category=${category}&episodeId=${episodeId}`
+        )
+      : useApi(null);
+
   const videoSource = episode?.data?.sources[0]?.url;
 
   useEffect(() => {
-    const videoNode = videoRef.current;
-
+    const video = videoRef.current;
     if (episode && videoSource) {
-      // Initialize Video.js Player
-      const player = videojs(videoNode, {
-        controls: true,
-        autoplay: false,
-        preload: "auto",
-        fluid: true, // Responsive
-        playbackRates: [0.5, 1, 1.5, 2], // Playback speed options
-        plugins: {},
-      });
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(videoSource);
+        hls.attachMedia(video);
 
-      // Set HLS source
-      player.src({
-        src: videoSource,
-        type: "application/vnd.apple.mpegurl", // HLS stream
-      });
-
-      // Add captions
-      if (episode?.data?.tracks) {
-        episode.data.tracks
-          .filter((track) => track.kind === "captions")
-          .forEach((track) => {
-            player.addRemoteTextTrack(
-              {
-                kind: track.kind,
-                src: track.file,
-                label: track.label,
-                language: track.label.split(" - ")[0].toLowerCase(), // Extract language code from label
-                default: track.default || false,
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          const availableQualities = hls.levels.map((l) => l.height);
+          const player = new Plyr(video, {
+            controls: [
+              "play-large",
+              "play",
+              "current-time",
+              "progress",
+              "duration",
+              "captions",
+              "settings",
+              "fullscreen",
+            ],
+            autoplay: false,
+            captions: {
+              active: true,
+              update: true,
+            },
+            quality: {
+              default: availableQualities[0],
+              options: availableQualities,
+              forced: true,
+              onChange: (quality) => {
+                hls.levels.forEach((level, index) => {
+                  if (level.height === quality) {
+                    hls.currentLevel = index;
+                  }
+                });
               },
-              false
-            );
+            },
           });
+
+          // Add captions to the Plyr instance
+          if (episode?.data?.tracks) {
+            episode.data.tracks
+              .filter((track) => track.kind === "captions")
+              .forEach((track) => {
+                const trackElement = document.createElement("track");
+                trackElement.kind = track.kind;
+                trackElement.label = track.label;
+                trackElement.srclang = track.label
+                  .split(" - ")[0]
+                  .toLowerCase(); // Extract language code
+                trackElement.src = track.file;
+                if (track.default) {
+                  trackElement.default = true;
+                }
+                video.appendChild(trackElement);
+              });
+          }
+
+          playerRef.current = player;
+        });
+
+        return () => {
+          if (playerRef.current) {
+            playerRef.current.destroy();
+            playerRef.current = null;
+          }
+          hls.destroy();
+        };
+      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = videoSource;
       }
-
-      // Save player instance
-      playerRef.current = player;
-
-      // Cleanup on component unmount
-      return () => {
-        if (playerRef.current) {
-          playerRef.current.dispose();
-          playerRef.current = null;
-        }
-      };
     }
+
+    return () => {
+      if (playerRef.current) {
+        playerRef.current.destroy();
+        playerRef.current = null;
+      }
+    };
   }, [episode, videoSource]);
 
   const changeServer = (newServer, newCategory) => {
-    if (selectedServer != newServer || category != newCategory) {
+    if (selectedServer !== newServer || category !== newCategory) {
       setSelectedServer(newServer);
       setCategory(newCategory);
     }
@@ -92,12 +123,13 @@ const Player = ({ episodeId }) => {
       <video
         ref={videoRef}
         id="player"
-        className="video-js vjs-default-skin h-full md:h-[50vh] w-full"
+        className="player video-js vjs-default-skin h-full md:h-[50vh] w-full"
+        controls
       ></video>
       <div className="servers mt-3 bg-black py-3 flex flex-col gap-5">
         <div className="sub flex justify-around ">
-          <h1>sub</h1>
-          <div className="flex  gap-4">
+          <h1>Sub</h1>
+          <div className="flex gap-4">
             {servers?.data?.sub.map((s) => (
               <button
                 onClick={() => changeServer(s.serverName, "sub")}
@@ -106,7 +138,7 @@ const Player = ({ episodeId }) => {
                     ? "bg-primary text-black"
                     : "bg-lightBg text-white"
                 } px-2 py-1`}
-                key={s.servername}
+                key={s.serverName}
               >
                 {s.serverName}
               </button>
@@ -114,8 +146,8 @@ const Player = ({ episodeId }) => {
           </div>
         </div>
         <div className="dub flex justify-around ">
-          <h1>dub</h1>
-          <div className="flex  gap-4">
+          <h1>Dub</h1>
+          <div className="flex gap-4">
             {servers?.data?.dub.map((s) => (
               <button
                 onClick={() => changeServer(s.serverName, "dub")}
@@ -124,7 +156,7 @@ const Player = ({ episodeId }) => {
                     ? "bg-primary text-black"
                     : "bg-lightBg text-white"
                 } px-2 py-1`}
-                key={s.servername}
+                key={s.serverName}
               >
                 {s.serverName}
               </button>
