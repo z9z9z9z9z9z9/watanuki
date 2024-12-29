@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { FaCirclePlay } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa";
 import Loader from "../components/Loader";
+import CircleRatting from "../components/CircleRatting";
 
 const InfoLayout = ({ data }) => {
   const [showFull, setShowFull] = useState(false);
@@ -78,6 +79,9 @@ const InfoLayout = ({ data }) => {
               <span className="duration text-[#ccc] text-sm font-bold">
                 {data.duration}
               </span>
+            </div>
+            <div className="cercle h-14 w-14">
+              <CircleRatting rating={data.MAL_score} />
             </div>
             <div className="genres rounded-child flex flex-wrap">
               {data.genres.map((genre, index) => (

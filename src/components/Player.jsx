@@ -12,7 +12,11 @@ const Player = ({ episodeId }) => {
   const [selectedServer, setSelectedServer] = useState(null);
   const [category, setCategory] = useState("sub");
 
-  const { data: servers } = useApi(`/servers?episodeId=${episodeId}`);
+  console.log(Boolean(episodeId != null));
+
+  const { data: servers } = episodeId
+    ? useApi(`/servers?episodeId=${episodeId}`)
+    : useApi(null);
 
   useEffect(() => {
     if (servers) {

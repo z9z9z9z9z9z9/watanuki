@@ -4,6 +4,7 @@ import config from "../config/config";
 
 const API_BASE_URL =
   process.env.NODE_ENV === "production" ? config.serverUrl : config.localUrl;
+// const API_BASE_URL = config.serverUrl;
 const fetchData = async (url) => {
   try {
     const { data } = await axios.get(API_BASE_URL + url);
