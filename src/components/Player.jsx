@@ -4,7 +4,7 @@ import "plyr/dist/plyr.css";
 import Hls from "hls.js";
 import "./player.css";
 import Plyr from "plyr";
-import { useApi } from "../services/useApi";
+import { useApi2 } from "../services/useApi2";
 
 const Player = ({ episodeId }) => {
   const videoRef = useRef(null);
@@ -15,8 +15,8 @@ const Player = ({ episodeId }) => {
   console.log(Boolean(episodeId != null));
 
   const { data: servers } = episodeId
-    ? useApi(`/servers?episodeId=${episodeId}`)
-    : useApi(null);
+    ? useApi2(`/servers?episodeId=${episodeId}`)
+    : useApi2(null);
 
   useEffect(() => {
     if (servers) {
@@ -26,10 +26,10 @@ const Player = ({ episodeId }) => {
 
   const { data: episode } =
     selectedServer && category && episodeId
-      ? useApi(
+      ? useApi2(
           `/sources?server=${selectedServer}&category=${category}&episodeId=${episodeId}`
         )
-      : useApi(null);
+      : useApi2(null);
 
   const videoSource = episode?.data?.sources[0]?.url;
 
@@ -123,13 +123,8 @@ const Player = ({ episodeId }) => {
   };
 
   return (
-    <div className="player">
-      <video
-        ref={videoRef}
-        id="player"
-        className="player video-js vjs-default-skin h-full md:h-[50vh] w-full"
-        controls
-      ></video>
+    <div className="player shrink-0">
+      <video ref={videoRef} id="player" className="" controls></video>
       <div className="servers mt-3 bg-black py-3 flex flex-col gap-5">
         <div className="sub flex justify-around ">
           <h1>Sub</h1>

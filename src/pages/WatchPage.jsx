@@ -4,6 +4,7 @@ import { useApi } from "../services/useApi";
 import Loader from "../components/Loader";
 import Player from "../components/Player";
 import Episodes from "../layouts/Episodes";
+import { useApi2 } from "../services/useApi2";
 
 const WatchPage = () => {
   const { id } = useParams();
@@ -11,9 +12,9 @@ const WatchPage = () => {
   const ep = searchParams.get("ep");
   const navigate = useNavigate();
 
-  const { data, isError, error, isLoading } = useApi(`/episodes/${id}`);
+  const { data, isError, error, isLoading } = useApi2(`/episodes/${id}`);
 
-  const episodes = data?.data?.episodes;
+  const episodes = data?.episodes?.episodes;
 
   useEffect(() => {
     if (!ep && episodes?.length > 0) {
@@ -25,16 +26,18 @@ const WatchPage = () => {
   }
 
   return (
-    <div className="bg-backGround pt-10">
-      {data?.data ? (
-        <>
+    <div className="bg-backGround max-w-[1200px] mx-auto pt-10">
+      {data?.episodes ? (
+        <div className="flex flex-col md:flex-row">
           <Player id={id} episodeId={`${id}?ep=${ep}`} />
-          {episodes?.map((episode, index) => (
-            <div className="flex bg-backGround" key={episode.episodeId}>
-              <Episodes episode={episode} />
-            </div>
-          ))}
-        </>
+          <div className="episodes h-[50vh] md:h-screen overflow-scroll flex flex-col">
+            {episodes?.map((episode, index) => (
+              <div className="mt-2" key={episode.episodeId}>
+                <Episodes episode={episode} />
+              </div>
+            ))}
+          </div>
+        </div>
       ) : (
         <Loader className="h-screen" />
       )}
