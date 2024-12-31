@@ -12,12 +12,12 @@ const Episodes = ({ episode }) => {
   return (
     <ul
       className={`px-2 py-2 w-full ${
-        isCurrent ? "bg-primary" : " hover:bg-lightBg"
+        isCurrent ? "bg-primary" : " hover:bg-backGround"
       }`}
       key={episode.id}
     >
       <Link to={`/watch/${episode.episodeId}`}>
-        <div className="flex gap-3">
+        <div className="flex gap-3 items-center">
           <li
             className={`text-lg font-bold  ${
               isCurrent ? "text-black " : "text-primary"
@@ -25,7 +25,12 @@ const Episodes = ({ episode }) => {
           >
             {episode.number}
           </li>
-          <li className={`${isCurrent ? "text-black" : "text-white"}`}>
+          <li
+            title={episode.title}
+            className={`${
+              isCurrent ? "text-black" : "text-white"
+            } text-sm line-clamp-1`}
+          >
             {episode.title}
           </li>
         </div>

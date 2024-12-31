@@ -13,6 +13,9 @@ import Footer from "../components/Footer";
 const DetailPage = () => {
   const { id } = useParams();
 
+  const titleId = id.split("-").slice(0, -1).join().replace(",", " ");
+
+  document.title = `${titleId}`;
   const endsWithNumber = /\d$/;
   const result = endsWithNumber.test(id);
 
