@@ -16,8 +16,6 @@ import SearchResult from "./pages/SearchResult";
 import WatchPage from "./pages/WatchPage";
 
 const App = () => {
-  document.cookie = "__vercel_live_token=value; SameSite=None; Secure; path=/";
-
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const togglesidebar = useSidebarStore((state) => state.toggleSidebar);
   const location = useLocation();

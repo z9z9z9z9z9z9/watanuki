@@ -2,6 +2,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import "video.js/dist/video-js.css"; // Import video.js CSS
 import videojs from "video.js";
+import Plyr from "plyr";
+import "plyr/dist/plyr.css";
 import Hls from "hls.js";
 import "./player.css";
 import { useApi2 } from "../services/useApi2";
@@ -11,6 +13,7 @@ const Player = ({ episodeId }) => {
   const playerRef = useRef(null); // Use useRef to store the player instance
   const [selectedServer, setSelectedServer] = useState(null);
   const [category, setCategory] = useState("sub");
+  const [selectedTrack, setSelectedTrack] = useState(null);
 
   const { data: servers } = episodeId
     ? useApi2(`/servers?episodeId=${episodeId}`)
@@ -38,6 +41,8 @@ const Player = ({ episodeId }) => {
     episode?.data?.tracks &&
     episode?.data?.tracks.filter((track) => track.kind === "thumbnails");
 
+  console.log(poster);
+
   const initializePlayer = () => {
     if (videoRef.current && videoSource) {
       if (Hls.isSupported()) {
@@ -48,27 +53,35 @@ const Player = ({ episodeId }) => {
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
           const availableQualities = hls.levels.map((l) => l.height);
 
-          const player = videojs(videoRef.current, {
-            poster: poster.file,
-            controls: true,
-            preload: "auto",
+          const player = new Plyr(videoRef.current, {
+            controls: [
+              "play-large",
+              "play",
+              "current-time",
+              "progress",
+              "duration",
+              "captions",
+              "settings",
+              "fullscreen",
+            ],
             autoplay: true,
-            fluid: true, // Make player fluid to fit container
-            controlBar: {
-              pictureInPictureToggle: true,
-              playbackRateMenuButton: true,
-              qualityMenu: {
-                options: availableQualities,
-                default: availableQualities[0],
-                onChange: (quality) => {
-                  hls.levels.forEach((level, index) => {
-                    if (level.height === quality) {
-                      hls.currentLevel = index;
-                    }
-                  });
-                },
+            captions: {
+              active: true,
+              update: true,
+            },
+            quality: {
+              default: availableQualities[0],
+              options: availableQualities,
+              forced: true,
+              onChange: (quality) => {
+                hls.levels.forEach((level, index) => {
+                  if (level.height === quality) {
+                    hls.currentLevel = index;
+                  }
+                });
               },
             },
+            previewThumbnails: poster[0]?.file || "",
           });
 
           playerRef.current = player; // Store player instance in ref
@@ -77,13 +90,6 @@ const Player = ({ episodeId }) => {
         videoRef.current.canPlayType("application/vnd.apple.mpegurl")
       ) {
         videoRef.current.src = videoSource;
-
-        const player = videojs(videoRef.current, {
-          controls: true,
-          autoplay: true,
-          preload: "auto",
-        });
-        playerRef.current = player; // Store player instance in ref
       }
     }
   };
@@ -98,6 +104,16 @@ const Player = ({ episodeId }) => {
       initializePlayer();
     }
   };
+  useEffect(() => {
+    if (selectedTrack === null && tracks && tracks.length > 0) {
+      setSelectedTrack(tracks.find((track) => track.label === "English"));
+    }
+  }, [tracks]);
+  const changeTrack = (newtrack) => {
+    if (newtrack.label !== selectedTrack.label) {
+      setSelectedTrack(newtrack);
+    }
+  };
 
   return (
     <>
@@ -106,23 +122,41 @@ const Player = ({ episodeId }) => {
           <video
             ref={videoRef} // Use ref for the video DOM node
             id="my-player"
+            poster={poster?.file}
             className="video-js my-video vjs-default-skin h-full w-full"
             controls
           >
-            {tracks &&
-              tracks.length > 0 &&
-              tracks?.map((track) => (
-                <track
-                  key={track.label}
-                  src={track.file}
-                  kind={track.kind}
-                  srcLang={track.label}
-                  label={track.label}
-                  default={track.default}
-                />
-              ))}
+            {selectedTrack && (
+              <track
+                key={selectedTrack.label}
+                src={selectedTrack.file}
+                kind={selectedTrack.kind}
+                srcLang={selectedTrack.label}
+                label={selectedTrack.label}
+              />
+            )}
           </video>
         </div>
+        {tracks && tracks.length > 0 && (
+          <div className="captions">
+            <h1 className="text-sm font-bold text-center mt-2">Tracks</h1>
+            <div className="flex mt-2  flex-wrap gap-2">
+              {tracks.map((track) => (
+                <button
+                  onClick={() => changeTrack(track)}
+                  key={track.label}
+                  className={`px-2 py-1 bg-backGround ${
+                    selectedTrack && selectedTrack.label === track.label
+                      ? "bg-primary text-black"
+                      : "bg-backGround text-white"
+                  }`}
+                >
+                  {track.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
         <div className="servers mt-3 bg-black py-3 flex flex-col gap-5">
           {servers?.data?.sub && (
             <div className="sub flex justify-around items-center ">
