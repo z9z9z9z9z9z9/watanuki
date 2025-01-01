@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
-import React from "react";
-import SoundsInfo from "../components/SoundsInfo";
-import { Link } from "react-router-dom";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import SoundsInfo from '../components/SoundsInfo'
+import { Link } from 'react-router-dom'
 
 const Image = ({ data }) => {
   return (
@@ -20,10 +18,7 @@ const Image = ({ data }) => {
         </div>
       </Link>
       <Link to={`/anime/${data.id}`}>
-        <div
-          title={data.title}
-          className="title line-clamp-1 text-sm md:text-base hover:text-primary"
-        >
+        <div title={data.title} className="title line-clamp-1 text-sm md:text-base hover:text-primary">
           <h1>{data.title}</h1>
         </div>
       </Link>
@@ -35,7 +30,7 @@ const Image = ({ data }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Image;
+export default Image

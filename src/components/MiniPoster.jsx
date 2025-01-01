@@ -1,15 +1,10 @@
 /* eslint-disable react/prop-types */
-import React from "react";
-import { Link } from "react-router-dom";
-import SoundsInfo from "./SoundsInfo";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Link } from 'react-router-dom'
+import SoundsInfo from './SoundsInfo'
 
 const MiniPoster = ({ item }) => {
   return (
-    <div
-      key={item.id}
-      className="flex border-b border-lightBg pb-3 items-center gap-4"
-    >
+    <div key={item.id} className="flex border-b border-lightBg pb-3 items-center gap-4">
       <Link className="" to={`/anime/${item.id}`}>
         <div className="poster bg-white rounded-md flex-shrink-0 relative overflow-hidden w-16 pb-[85px]">
           <LazyLoadImage
@@ -21,9 +16,7 @@ const MiniPoster = ({ item }) => {
       </Link>
       <div className="text">
         <Link to={`/anime/${item.id}`}>
-          <h2 className="title hover:text-primary mb-2 font-bold">
-            {item.title}
-          </h2>
+          <h2 className="title hover:text-primary mb-2 font-bold">{item.title}</h2>
         </Link>
         <div className="item">
           <SoundsInfo episodes={item.episodes} />
@@ -36,7 +29,7 @@ const MiniPoster = ({ item }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MiniPoster;
+export default MiniPoster
