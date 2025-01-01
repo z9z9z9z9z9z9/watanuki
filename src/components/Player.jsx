@@ -1,68 +1,57 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useRef, useState } from "react";
-import "video.js/dist/video-js.css"; // Import video.js CSS
-import videojs from "video.js";
-import Plyr from "plyr";
-import "plyr/dist/plyr.css";
-import Hls from "hls.js";
-import "./player.css";
-import { useApi2 } from "../services/useApi2";
+import { useEffect, useRef, useState } from 'react'
+import Plyr from 'plyr'
+import 'plyr/dist/plyr.css'
+import Hls from 'hls.js'
+import './player.css'
+import { useApi2 } from '../services/useApi2'
 
 const Player = ({ episodeId }) => {
-  const videoRef = useRef(null); // Use useRef to store the video DOM node
-  const playerRef = useRef(null); // Use useRef to store the player instance
-  const [selectedServer, setSelectedServer] = useState(null);
-  const [category, setCategory] = useState("sub");
-  const [selectedTrack, setSelectedTrack] = useState(null);
+  const videoRef = useRef(null) // Use useRef to store the video DOM node
+  const playerRef = useRef(null) // Use useRef to store the player instance
+  const [selectedServer, setSelectedServer] = useState(null)
+  const [category, setCategory] = useState('sub')
+  const [selectedTrack, setSelectedTrack] = useState(null)
 
-  const { data: servers } = episodeId
-    ? useApi2(`/servers?episodeId=${episodeId}`)
-    : useApi2(null);
+  const { data: servers } = useApi2(episodeId ? `/servers?episodeId=${episodeId}` : null)
 
   useEffect(() => {
     if (servers) {
-      setSelectedServer(servers?.data?.sub[0]?.serverName);
+      setSelectedServer(servers?.data?.sub[0]?.serverName)
     }
-  }, [servers, episodeId]);
+  }, [servers, episodeId])
 
-  const { data: episode } =
+  const { data: episode } = useApi2(
     selectedServer && category && episodeId
-      ? useApi2(
-          `/sources?server=${selectedServer}&category=${category}&episodeId=${episodeId}`
-        )
-      : useApi2(null);
+      ? `/sources?server=${selectedServer}&category=${category}&episodeId=${episodeId}`
+      : null
+  )
 
-  const videoSource = episode?.data?.sources[0]?.url;
-  const tracks =
-    episode?.data?.tracks &&
-    episode?.data?.tracks.filter((track) => track.kind !== "thumbnails");
+  const videoSource = episode?.data?.sources[0]?.url
+  const tracks = episode?.data?.tracks && episode?.data?.tracks.filter((track) => track.kind !== 'thumbnails')
 
-  const poster =
-    episode?.data?.tracks &&
-    episode?.data?.tracks.filter((track) => track.kind === "thumbnails");
-
-  console.log(poster);
+  const poster = episode?.data?.tracks && episode?.data?.tracks.filter((track) => track.kind === 'thumbnails')
 
   const initializePlayer = () => {
     if (videoRef.current && videoSource) {
       if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(videoSource);
-        hls.attachMedia(videoRef.current);
+        const hls = new Hls()
+        hls.loadSource(videoSource)
+        hls.attachMedia(videoRef.current)
 
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          const availableQualities = hls.levels.map((l) => l.height);
+          const availableQualities = hls.levels.map((l) => l.height)
 
           const player = new Plyr(videoRef.current, {
             controls: [
-              "play-large",
-              "play",
-              "current-time",
-              "progress",
-              "duration",
-              "captions",
-              "settings",
-              "fullscreen",
+              'play-large',
+              'play',
+              'current-time',
+              'progress',
+              'duration',
+              'captions',
+              'settings',
+              'fullscreen',
             ],
             autoplay: true,
             captions: {
@@ -76,44 +65,42 @@ const Player = ({ episodeId }) => {
               onChange: (quality) => {
                 hls.levels.forEach((level, index) => {
                   if (level.height === quality) {
-                    hls.currentLevel = index;
+                    hls.currentLevel = index
                   }
-                });
+                })
               },
             },
-            previewThumbnails: poster[0]?.file || "",
-          });
+            previewThumbnails: poster[0]?.file || '',
+          })
 
-          playerRef.current = player; // Store player instance in ref
-        });
-      } else if (
-        videoRef.current.canPlayType("application/vnd.apple.mpegurl")
-      ) {
-        videoRef.current.src = videoSource;
+          playerRef.current = player // Store player instance in ref
+        })
+      } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
+        videoRef.current.src = videoSource
       }
     }
-  };
+  }
   useEffect(() => {
-    initializePlayer();
-  }, [videoSource]);
+    initializePlayer()
+  }, [videoSource])
 
   const changeServer = (newServer, newCategory) => {
     if (selectedServer !== newServer || category !== newCategory) {
-      setSelectedServer(newServer);
-      setCategory(newCategory);
-      initializePlayer();
+      setSelectedServer(newServer)
+      setCategory(newCategory)
+      initializePlayer()
     }
-  };
+  }
   useEffect(() => {
     if (selectedTrack === null && tracks && tracks.length > 0) {
-      setSelectedTrack(tracks.find((track) => track.label === "English"));
+      setSelectedTrack(tracks.find((track) => track.label === 'English'))
     }
-  }, [tracks]);
+  }, [selectedTrack, tracks])
   const changeTrack = (newtrack) => {
     if (newtrack.label !== selectedTrack.label) {
-      setSelectedTrack(newtrack);
+      setSelectedTrack(newtrack)
     }
-  };
+  }
 
   return (
     <>
@@ -147,8 +134,8 @@ const Player = ({ episodeId }) => {
                   key={track.label}
                   className={`px-2 py-1 bg-backGround ${
                     selectedTrack && selectedTrack.label === track.label
-                      ? "bg-primary text-black"
-                      : "bg-backGround text-white"
+                      ? 'bg-primary text-black'
+                      : 'bg-backGround text-white'
                   }`}
                 >
                   {track.label}
@@ -164,11 +151,11 @@ const Player = ({ episodeId }) => {
               <div className="flex gap-2 md:gap-4">
                 {servers?.data?.sub.map((s) => (
                   <button
-                    onClick={() => changeServer(s.serverName, "sub")}
+                    onClick={() => changeServer(s.serverName, 'sub')}
                     className={`${
-                      selectedServer === s.serverName && category === "sub"
-                        ? "bg-primary text-black"
-                        : "bg-lightBg text-white"
+                      selectedServer === s.serverName && category === 'sub'
+                        ? 'bg-primary text-black'
+                        : 'bg-lightBg text-white'
                     } px-2 py-1 rounded-md`}
                     key={s.serverName}
                   >
@@ -184,11 +171,11 @@ const Player = ({ episodeId }) => {
               <div className="flex gap-2 md:gap-4">
                 {servers?.data?.dub.map((s) => (
                   <button
-                    onClick={() => changeServer(s.serverName, "dub")}
+                    onClick={() => changeServer(s.serverName, 'dub')}
                     className={`${
-                      selectedServer === s.serverName && category === "dub"
-                        ? "bg-primary text-black"
-                        : "bg-lightBg text-white"
+                      selectedServer === s.serverName && category === 'dub'
+                        ? 'bg-primary text-black'
+                        : 'bg-lightBg text-white'
                     } px-2 py-1 rounded-md`}
                     key={s.serverName}
                   >
@@ -201,7 +188,7 @@ const Player = ({ episodeId }) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Player;
+export default Player
