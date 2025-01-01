@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
-import React from "react";
-import SoundsInfo from "../components/SoundsInfo";
-import { Link } from "react-router-dom";
-import { FaAngleRight } from "react-icons/fa";
-import Heading from "../components/Heading";
-import MiniPoster from "../components/MiniPoster";
+import { Link } from 'react-router-dom'
+import { FaAngleRight } from 'react-icons/fa'
+import Heading from '../components/Heading'
+import MiniPoster from '../components/MiniPoster'
 
 const DynamicLayout = ({ title, data, endpoint }) => {
   return (
@@ -15,17 +13,14 @@ const DynamicLayout = ({ title, data, endpoint }) => {
           <MiniPoster key={item.id} item={item} />
         ))}
         <div className="more my-3">
-          <Link
-            className="flex hover:text-primary items-center gap-2"
-            to={`/animes/${endpoint}`}
-          >
+          <Link className="flex hover:text-primary items-center gap-2" to={`/animes/${endpoint}`}>
             <span>View More</span>
             <FaAngleRight />
           </Link>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DynamicLayout;
+export default DynamicLayout

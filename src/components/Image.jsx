@@ -10,10 +10,11 @@ const Image = ({ data }) => {
           <div className="z-50 opacity-[.9] absolute bottom-0 left-0">
             <SoundsInfo episodes={data.episodes} />
           </div>
-          <LazyLoadImage
+          <img
             className="absolute h-full w-full inset-0 object-cover object-center"
             src={data.poster}
             alt={data.title}
+            loading="lazy"
           />
         </div>
       </Link>

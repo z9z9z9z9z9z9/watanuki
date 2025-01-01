@@ -1,24 +1,24 @@
-import React from "react";
-import { useSearchParams } from "react-router-dom";
-import { useInfiniteApi } from "../services/useApi";
-import PageNotFound from "./PageNotFound";
-import Loader from "../components/Loader";
-import Heading from "../components/Heading";
-import InfiniteScroll from "react-infinite-scroll-component";
-import Image from "../components/Image";
-import Footer from "../components/Footer";
+import React from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { useInfiniteApi } from '../services/useApi'
+import PageNotFound from './PageNotFound'
+import Loader from '../components/Loader'
+import Heading from '../components/Heading'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import Image from '../components/Image'
+import Footer from '../components/Footer'
 
 const SearchResult = () => {
-  const [searchParams] = useSearchParams();
-  const keyword = searchParams.get("keyword");
-  const { data, isLoading, isError, hasNextPage, fetchNextPage } =
-    useInfiniteApi(`/search?keyword=${keyword}&page=`);
+  const [searchParams] = useSearchParams()
+  const keyword = searchParams.get('keyword')
+  const { data, isLoading, isError, hasNextPage, fetchNextPage } = useInfiniteApi(`/search?keyword=${keyword}&page=`)
 
+  document.title = `search result of ${keyword}`
   if (isError) {
-    return <PageNotFound />;
+    return <PageNotFound />
   }
-  const pages = data?.pages;
-  console.log(data?.pages.length);
+  const pages = data?.pages
+  console.log(data?.pages.length)
 
   return (
     <div className="list-page pt-20">
@@ -47,7 +47,7 @@ const SearchResult = () => {
         <Loader className="h-[100dvh]" />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default SearchResult;
+export default SearchResult

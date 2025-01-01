@@ -7,10 +7,11 @@ const MiniPoster = ({ item }) => {
     <div key={item.id} className="flex border-b border-lightBg pb-3 items-center gap-4">
       <Link className="" to={`/anime/${item.id}`}>
         <div className="poster bg-white rounded-md flex-shrink-0 relative overflow-hidden w-16 pb-[85px]">
-          <LazyLoadImage
+          <img
             className="h-full absolute w-full object-cover object-center"
             src={item.poster}
             alt={item.title}
+            loading="lazy"
           />
         </div>
       </Link>
