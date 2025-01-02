@@ -5,6 +5,7 @@ import 'plyr/dist/plyr.css'
 import Hls from 'hls.js'
 import './player.css'
 import { useApi2 } from '../services/useApi2'
+import config from '../config/config'
 
 const Player = ({ episodeId }) => {
   const videoRef = useRef(null) // Use useRef to store the video DOM node
@@ -26,17 +27,19 @@ const Player = ({ episodeId }) => {
       ? `/sources?server=${selectedServer}&category=${category}&episodeId=${episodeId}`
       : null
   )
+  const { proxyUrl } = config
 
-  const videoSource = episode?.data?.sources[0]?.url
+  const videoSource = episode?.data?.sources[0]?.url || null
+  const proxySource = createProxyUrl(videoSource)
   const tracks = episode?.data?.tracks && episode?.data?.tracks.filter((track) => track.kind !== 'thumbnails')
 
   const poster = episode?.data?.tracks && episode?.data?.tracks.filter((track) => track.kind === 'thumbnails')
 
   const initializePlayer = () => {
-    if (videoRef.current && videoSource) {
+    if (videoRef.current && proxySource) {
       if (Hls.isSupported()) {
         const hls = new Hls()
-        hls.loadSource(videoSource)
+        hls.loadSource(proxySource)
         hls.attachMedia(videoRef.current)
 
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
@@ -70,7 +73,7 @@ const Player = ({ episodeId }) => {
                 })
               },
             },
-            previewThumbnails: poster[0]?.file || '',
+            previewThumbnails: createProxyUrl(poster[0]?.file || ''),
           })
 
           playerRef.current = player // Store player instance in ref
@@ -101,6 +104,18 @@ const Player = ({ episodeId }) => {
       setSelectedTrack(newtrack)
     }
   }
+  function createProxyUrl(url) {
+    const headers = {
+      Referer: 'https://megacloud.tv/',
+    }
+    if (url) {
+      const encodedHeader = JSON.stringify(headers)
+
+      const proxy = `${proxyUrl}?url=${url}&headers=${encodedHeader}`
+
+      return proxy
+    }
+  }
 
   return (
     <>
@@ -116,7 +131,7 @@ const Player = ({ episodeId }) => {
             {selectedTrack && (
               <track
                 key={selectedTrack.label}
-                src={selectedTrack.file}
+                src={createProxyUrl(selectedTrack.file)}
                 kind={selectedTrack.kind}
                 srcLang={selectedTrack.label}
                 label={selectedTrack.label}
