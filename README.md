@@ -18,7 +18,7 @@
 
 ## Demo
 
-Check out a live demo here: [Watanuki Live Demo]([watanuki.vercel.app]) (Add the link to your deployed app)
+Check out a live demo here: [Watanuki Live Demo](https://watanuki.vercel.app) (Add the link to your deployed app)
 
 ---
 
