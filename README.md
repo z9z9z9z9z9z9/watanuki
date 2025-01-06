@@ -18,7 +18,7 @@
 
 ## Demo
 
-Check out a live demo here: [Watanuki Live Demo](watanuki.vercel.app) (Add the link to your deployed app)
+Check out a live demo here: [Watanuki Live Demo]([watanuki.vercel.app]) (Add the link to your deployed app)
 
 ---
 
@@ -27,7 +27,7 @@ Check out a live demo here: [Watanuki Live Demo](watanuki.vercel.app) (Add the l
 - **Frontend**: React
 - **Styling**: Tailwind CSS
 - **State Management**: React Context API / Redux (mention whichever you're using)
-- **API**: Integration with [Anime APIs](https://jikan.moe/) or other anime databases (if applicable)
+- **API**: Integration with [Anime APIs](https://github.com/yahyaMomin/hianime-API) or other anime databases (if applicable)
 
 ---
 
