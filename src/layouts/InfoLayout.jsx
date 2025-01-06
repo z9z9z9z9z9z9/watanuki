@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom'
 import { FaCirclePlay } from 'react-icons/fa6'
 import { FaArrowRight } from 'react-icons/fa'
 import CircleRatting from '../components/CircleRatting'
+import useBigPosterStore from '../store/bigPosterStore'
 
 const InfoLayout = ({ data }) => {
   const [showFull, setShowFull] = useState(false)
 
+  const toggleBigPoster = useBigPosterStore((state) => state.toggleBigPoster)
   // Regular expression to check if the string ends with a number
 
   const colors = ['#d0e6a5', '#ffbade', '#fc887b', '#ccabda', '#abccd8', '#d8b2ab', '#86e3ce']
@@ -21,7 +23,7 @@ const InfoLayout = ({ data }) => {
         <div className="opacity-overlay"></div>
         <div className="content max-w-[1200px] w-full mx-auto flex flex-col items-start md:flex-row gap-2 mb-2 relative px-2">
           <div className="left w-full md:w-60 xl:w-80 flex justify-center">
-            <div className="posterImg px-5 md:w-full">
+            <div className="posterImg px-5 md:w-full " onClick={toggleBigPoster}>
               <img src={data.poster} alt={data.title} className="rounded-md h-full w-full" />
             </div>
           </div>
@@ -43,7 +45,6 @@ const InfoLayout = ({ data }) => {
             <div className="sounds flex items-center gap-2 my-2">
               <SoundsInfo
                 episodes={{
-                  MAL_score: data.MAL_score,
                   rating: data.rating,
                   ...data.episodes,
                 }}
@@ -56,6 +57,16 @@ const InfoLayout = ({ data }) => {
             <div className="cercle h-14 w-14">
               <CircleRatting rating={data.MAL_score} />
             </div>
+            {data.id && (
+              <div className="watch-btn my-4">
+                <Link to={`/watch/${data.id}`}>
+                  <button className=" flex justify-center items-center gap-2 py-1 rounded-3xl text-lg text-black bg-primary w-1/2 ">
+                    <FaCirclePlay />
+                    <span>Watch Now</span>
+                  </button>
+                </Link>
+              </div>
+            )}
             <div className="genres rounded-child flex flex-wrap">
               {data.genres.map((genre, index) => (
                 <Link to={`/animes/genre/${genre.toLowerCase()}`} key={genre}>
@@ -68,16 +79,6 @@ const InfoLayout = ({ data }) => {
                 </Link>
               ))}
             </div>
-            {data.id && (
-              <div className="watch-btn my-4">
-                <Link to={`/watch/${data.id}`}>
-                  <button className=" flex justify-center items-center gap-2 py-1 rounded-3xl text-lg text-black bg-primary w-1/2 ">
-                    <FaCirclePlay />
-                    <span>Watch Now</span>
-                  </button>
-                </Link>
-              </div>
-            )}
 
             {data.synopsis && (
               <div className="overview">

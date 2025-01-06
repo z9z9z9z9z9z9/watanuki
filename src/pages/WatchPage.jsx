@@ -31,7 +31,7 @@ const WatchPage = () => {
   }
 
   return (
-    <div className="bg-lightBg max-w-[1200px] mx-auto pt-10">
+    <div className="bg-backGround max-w-[1200px] mx-auto pt-10">
       {data?.episodes ? (
         <div className="flex flex-col">
           <Player id={id} episodeId={`${id}?ep=${ep}`} />

@@ -27,15 +27,15 @@ const Player = ({ episodeId }) => {
       ? `/sources?server=${selectedServer}&category=${category}&episodeId=${episodeId}`
       : null
   )
-  const { proxyUrl } = config
+  const { proxyUrl, serverUrl2 } = config
 
   const videoSource = episode?.data?.sources[0]?.url || null
   const proxySource = createProxyUrl(videoSource)
   const tracks = episode?.data?.tracks && episode?.data?.tracks.filter((track) => track.kind !== 'thumbnails')
-
   const poster = episode?.data?.tracks && episode?.data?.tracks.filter((track) => track.kind === 'thumbnails')
 
   const initializePlayer = () => {
+    setSelectedTrack(null)
     if (videoRef.current && proxySource) {
       if (Hls.isSupported()) {
         const hls = new Hls()
@@ -61,6 +61,7 @@ const Player = ({ episodeId }) => {
               active: true,
               update: true,
             },
+
             quality: {
               default: availableQualities[0],
               options: availableQualities,
@@ -109,11 +110,14 @@ const Player = ({ episodeId }) => {
       Referer: 'https://megacloud.tv/',
     }
     if (url) {
-      const encodedHeader = JSON.stringify(headers)
-
-      const proxy = `${proxyUrl}?url=${url}&headers=${encodedHeader}`
-
-      return proxy
+      if (url.endsWith('.m3u8')) {
+        const encodedHeader = JSON.stringify(headers)
+        const proxy = `${proxyUrl}?url=${url}&headers=${encodedHeader}`
+        return proxy
+      } else {
+        const proxy = `${serverUrl2}?url=${url}`
+        return proxy
+      }
     }
   }
 
@@ -130,11 +134,11 @@ const Player = ({ episodeId }) => {
           >
             {selectedTrack && (
               <track
-                key={selectedTrack.label}
-                src={createProxyUrl(selectedTrack.file)}
-                kind={selectedTrack.kind}
-                srcLang={selectedTrack.label}
-                label={selectedTrack.label}
+                key={selectedTrack?.label}
+                src={createProxyUrl(selectedTrack?.file)}
+                kind={selectedTrack?.kind}
+                srcLang={selectedTrack?.label}
+                label={selectedTrack?.label}
               />
             )}
           </video>

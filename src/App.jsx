@@ -20,8 +20,8 @@ const App = () => {
     <>
       {!path && <Sidebar />}
 
-      <main className={`${isSidebarOpen ? 'bg-active' : ''}`}>
-        <div onClick={togglesidebar} className={`${isSidebarOpen ? 'active' : ''}`}></div>
+      <main className={`${isSidebarOpen ? 'bg-active' : ''} opacityWrapper`}>
+        <div onClick={togglesidebar} className={`${isSidebarOpen ? 'active' : ''} opacityBg`}></div>
         {!path && <Header />}
         <ScrollToTop />
         <Routes>
