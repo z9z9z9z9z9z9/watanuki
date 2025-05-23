@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 import useTopTenStore from '../store/toptenStore'
 import Footer from '../components/Footer'
 
+import { genres } from '../utils/genres'
 const Home = () => {
   document.title = 'Watch Anime Online, Free Anime Streaming Online on watanuki Anime Website'
   const { data, isLoading, error, isError } = useApi('/home')
@@ -20,8 +21,11 @@ const Home = () => {
   const setTopTen = useTopTenStore((state) => state.setTopTen)
 
   useEffect(() => {
+    setGenres(genres)
+  }, [])
+
+  useEffect(() => {
     if (data?.data) {
-      setGenres(data.data.genres)
       setTopTen(data.data.top10)
     }
   }, [data])

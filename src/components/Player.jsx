@@ -4,7 +4,7 @@ import Plyr from 'plyr'
 import 'plyr/dist/plyr.css'
 import Hls from 'hls.js'
 import './player.css'
-import { useApi2 } from '../services/useApi2'
+import { API_BASE_URL, useApi } from '../services/useApi'
 import config from '../config/config'
 
 const Player = ({ episodeId }) => {
@@ -14,29 +14,31 @@ const Player = ({ episodeId }) => {
   const [category, setCategory] = useState('sub')
   const [selectedTrack, setSelectedTrack] = useState(null)
 
-  const { data: servers } = useApi2(episodeId ? `/servers?episodeId=${episodeId}` : null)
+  const { data: servers } = useApi(episodeId ? `/servers?id=${episodeId}` : null)
 
   useEffect(() => {
     if (servers) {
-      setSelectedServer(servers?.data?.sub[0]?.serverName)
+      console.log(servers)
+      setSelectedServer(servers?.data?.sub[2]?.name)
     }
+    console.log(selectedServer)
   }, [servers, episodeId])
 
-  const { data: episode } = useApi2(
-    selectedServer && category && episodeId
-      ? `/sources?server=${selectedServer}&category=${category}&episodeId=${episodeId}`
-      : null
-  )
-  const { proxyUrl, serverUrl2 } = config
+  const { data: episode } = useApi(selectedServer && category && episodeId ? `/stream?server=${selectedServer}&type=${category}&id=/watch/${episodeId}` : null)
+  const { serverUrl, proxyUrl } = config
 
-  const videoSource = episode?.data?.sources[0]?.url || null
+  const videoSource = episode?.data?.streamingLink.link.file || null
   const proxySource = createProxyUrl(videoSource)
   const tracks = episode?.data?.tracks && episode?.data?.tracks.filter((track) => track.kind !== 'thumbnails')
   const poster = episode?.data?.tracks && episode?.data?.tracks.filter((track) => track.kind === 'thumbnails')
 
+  console.log(videoSource)
+
   const initializePlayer = () => {
     setSelectedTrack(null)
-    if (videoRef.current && proxySource) {
+    console.log(videoSource)
+
+    if (videoRef.current && serverUrl && videoSource) {
       if (Hls.isSupported()) {
         const hls = new Hls()
         hls.loadSource(proxySource)
@@ -46,16 +48,7 @@ const Player = ({ episodeId }) => {
           const availableQualities = hls.levels.map((l) => l.height)
 
           const player = new Plyr(videoRef.current, {
-            controls: [
-              'play-large',
-              'play',
-              'current-time',
-              'progress',
-              'duration',
-              'captions',
-              'settings',
-              'fullscreen',
-            ],
+            controls: ['play-large', 'play', 'current-time', 'progress', 'duration', 'captions', 'settings', 'fullscreen'],
             autoplay: true,
             captions: {
               active: true,
@@ -106,16 +99,33 @@ const Player = ({ episodeId }) => {
     }
   }
   function createProxyUrl(url) {
+    console.log('url : ' + url)
+
+    // const ref = 'https://megacloud.blog/'
     const headers = {
+      Accept: '*/*',
+      'Accept-Encoding': 'gzip, deflate, br, zstd',
+      'Accept-Language': 'en-US,en;q=0.5',
+      origin: 'https://megacloud.tv',
       Referer: 'https://megacloud.tv/',
+      'Sec-Ch-Ua': '"Chromium";v="134", "Not:A-Brand";v="24", "Brave";v="134"',
+      'Sec-Ch-Ua-Mobile': '?0',
+      'Sec-Ch-Ua-Platform': '"Windows"',
+      'Sec-Fetch-Dest': 'empty',
+      'Sec-Fetch-Mode': 'cors',
+      'Sec-Fetch-Site': 'cross-site',
+      'Sec-Gpc': '1',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
     }
+
     if (url) {
       if (url.endsWith('.m3u8')) {
-        const encodedHeader = JSON.stringify(headers)
-        const proxy = `${proxyUrl}?url=${url}&headers=${encodedHeader}`
+        const proxy = `${proxyUrl}/m3u8-proxy?url=${url}&headers=${JSON.stringify(headers)}`
+        console.log('proxy is : ' + proxy)
+
         return proxy
       } else {
-        const proxy = `${serverUrl2}?url=${url}`
+        const proxy = `${serverUrl}?url=${url}`
         return proxy
       }
     }
@@ -132,15 +142,7 @@ const Player = ({ episodeId }) => {
             className="video-js my-video vjs-default-skin h-full w-full"
             controls
           >
-            {selectedTrack && (
-              <track
-                key={selectedTrack?.label}
-                src={createProxyUrl(selectedTrack?.file)}
-                kind={selectedTrack?.kind}
-                srcLang={selectedTrack?.label}
-                label={selectedTrack?.label}
-              />
-            )}
+            {selectedTrack && <track key={selectedTrack?.label} src={createProxyUrl(selectedTrack?.file)} kind={selectedTrack?.kind} srcLang={selectedTrack?.label} label={selectedTrack?.label} />}
           </video>
         </div>
         {tracks && tracks.length > 0 && (
@@ -151,11 +153,7 @@ const Player = ({ episodeId }) => {
                 <button
                   onClick={() => changeTrack(track)}
                   key={track.label}
-                  className={`px-2 py-1 bg-backGround ${
-                    selectedTrack && selectedTrack.label === track.label
-                      ? 'bg-primary text-black'
-                      : 'bg-backGround text-white'
-                  }`}
+                  className={`px-2 py-1 bg-backGround ${selectedTrack && selectedTrack.label === track.label ? 'bg-primary text-black' : 'bg-backGround text-white'}`}
                 >
                   {track.label}
                 </button>
@@ -170,15 +168,11 @@ const Player = ({ episodeId }) => {
               <div className="flex gap-2 md:gap-4">
                 {servers?.data?.sub.map((s) => (
                   <button
-                    onClick={() => changeServer(s.serverName, 'sub')}
-                    className={`${
-                      selectedServer === s.serverName && category === 'sub'
-                        ? 'bg-primary text-black'
-                        : 'bg-lightBg text-white'
-                    } px-2 py-1 rounded-md`}
-                    key={s.serverName}
+                    onClick={() => changeServer(s.name, 'sub')}
+                    className={`${selectedServer === s.name && category === 'sub' ? 'bg-primary text-black' : 'bg-lightBg text-white'} px-2 py-1 rounded-md`}
+                    key={s.name}
                   >
-                    {s.serverName}
+                    {s.name}
                   </button>
                 ))}
               </div>
@@ -190,15 +184,11 @@ const Player = ({ episodeId }) => {
               <div className="flex gap-2 md:gap-4">
                 {servers?.data?.dub.map((s) => (
                   <button
-                    onClick={() => changeServer(s.serverName, 'dub')}
-                    className={`${
-                      selectedServer === s.serverName && category === 'dub'
-                        ? 'bg-primary text-black'
-                        : 'bg-lightBg text-white'
-                    } px-2 py-1 rounded-md`}
-                    key={s.serverName}
+                    onClick={() => changeServer(s.name, 'dub')}
+                    className={`${selectedServer === s.name && category === 'dub' ? 'bg-primary text-black' : 'bg-lightBg text-white'} px-2 py-1 rounded-md`}
+                    key={s.name}
                   >
-                    {s.serverName}
+                    {s.name}
                   </button>
                 ))}
               </div>
