@@ -824,6 +824,13 @@ arraybuffer.prototype.slice@^1.0.3:
     is-array-buffer "^3.0.4"
     is-shared-array-buffer "^1.0.2"
 
+artplayer@^5.2.3:
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/artplayer/-/artplayer-5.2.3.tgz#5c393a370426e1f209886bdef32fa41446388ee0"
+  integrity sha512-WaOZQrpZn/L+GgI2f0TEsoAL3Wb+v16Mu0JmWh7qKFYuvr11WNt3dWhWeIaCfoHy3NtkCWM9jTP+xwwsxdElZQ==
+  dependencies:
+    option-validator "^2.0.6"
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
@@ -1663,10 +1670,10 @@ hasown@^2.0.0, hasown@^2.0.1, hasown@^2.0.2:
   dependencies:
     function-bind "^1.1.2"
 
-hls.js@^1.5.17:
-  version "1.5.17"
-  resolved "https://registry.yarnpkg.com/hls.js/-/hls.js-1.5.17.tgz#8a4a9bae2df4dab23168156f5f7d0f39a71026fd"
-  integrity sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==
+hls.js@^1.6.5:
+  version "1.6.5"
+  resolved "https://registry.yarnpkg.com/hls.js/-/hls.js-1.6.5.tgz#0912177e0663836c0f9469739c8deb3d8e598778"
+  integrity sha512-KMn5n7JBK+olC342740hDPHnGWfE8FiHtGMOdJPfUjRdARTWj9OB+8c13fnsf9sk1VtpuU2fKSgUjHvg4rNbzQ==
 
 ignore@^5.2.0:
   version "5.3.2"
@@ -1966,6 +1973,11 @@ keyv@^4.5.4:
   dependencies:
     json-buffer "3.0.1"
 
+kind-of@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
+  integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
+
 levn@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/levn/-/levn-0.4.1.tgz#ae4562c007473b932a6200d403268dd2fffc6ade"
@@ -2199,6 +2211,13 @@ object.values@^1.1.6, object.values@^1.2.0:
     call-bind "^1.0.7"
     define-properties "^1.2.1"
     es-object-atoms "^1.0.0"
+
+option-validator@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/option-validator/-/option-validator-2.0.6.tgz#a314dae65e26db5f948ef0ff96fc88f18bb76ed6"
+  integrity sha512-tmZDan2LRIRQyhUGvkff68/O0R8UmF+Btmiiz0SmSw2ng3CfPZB9wJlIjHpe/MKUZqyIZkVIXCrwr1tIN+0Dzg==
+  dependencies:
+    kind-of "^6.0.3"
 
 optionator@^0.9.3:
   version "0.9.4"
