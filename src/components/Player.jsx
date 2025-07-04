@@ -1,203 +1,249 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useRef, useState } from 'react'
-import Plyr from 'plyr'
-import 'plyr/dist/plyr.css'
-import Hls from 'hls.js'
-import './player.css'
-import { API_BASE_URL, useApi } from '../services/useApi'
-import config from '../config/config'
+import { useEffect, useRef, useState } from "react";
+import Artplayer from "artplayer";
+import Hls from "hls.js";
+import { useApi } from "../services/useApi";
+import config from "../config/config";
 
 const Player = ({ episodeId }) => {
-  const videoRef = useRef(null) // Use useRef to store the video DOM node
-  const playerRef = useRef(null) // Use useRef to store the player instance
-  const [selectedServer, setSelectedServer] = useState(null)
-  const [category, setCategory] = useState('sub')
-  const [selectedTrack, setSelectedTrack] = useState(null)
+  const playerContainer = useRef(null);
+  // const artInstance = useRef(null);
 
-  const { data: servers } = useApi(episodeId ? `/servers?id=${episodeId}` : null)
+  const [category, setCategory] = useState("sub");
 
-  useEffect(() => {
-    if (servers) {
-      console.log(servers)
-      setSelectedServer(servers?.data?.sub[2]?.name)
+  // const { data: servers } = useApi(
+  //   episodeId ? `/servers?id=${episodeId}` : null
+  // );
+
+  // const { data: episode } = useApi(
+  //   selectedServer && category && episodeId
+  //     ? `/stream?server=${selectedServer}&type=${category}&id=${episodeId}`
+  //     : null
+  // );
+
+  // const videoSource = episode?.data?.link.file;
+  // const tracks = episode?.data?.tracks;
+
+  // useEffect(() => {
+  //   if (!videoSource || !playerContainer.current) return;
+
+  //   // Clean up previous instance
+  //   if (artInstance.current) {
+  //     artInstance.current.destroy(false);
+  //   }
+
+  //   const proxyUrl = createProxyUrl(videoSource);
+
+  //   artInstance.current = new Artplayer({
+  //     container: playerContainer.current,
+  //     url: proxyUrl,
+  //     autoplay: true,
+  //     poster: tracks.find((e) => e.type === "thumbnail"),
+  //     type: "customHls",
+  //     setting: true,
+  //     fullscreen: true,
+  //     fullscreenWeb: true,
+  //     playsInline: true,
+  //     autoSize: true,
+  //     autoMini: true,
+  //     mutex: true,
+  //     theme: "#23ade5",
+
+  //     customType: {
+  //       customHls: (video, url) => {
+  //         if (Hls.isSupported()) {
+  //           const hls = new Hls();
+  //           hls.loadSource(url);
+  //           hls.attachMedia(video);
+  //           artInstance.current.on("destroy", () => hls.destroy());
+  //         } else {
+  //           video.src = url;
+  //         }
+  //       },
+  //     },
+  //     settings: [
+  //       {
+  //         width: 200,
+  //         html: "Subtitle",
+  //         tooltip: "Bilingual",
+  //         icon: '<img width="22" height="22" src="/assets/img/subtitle.svg">',
+  //         selector: [
+  //           {
+  //             html: "Display",
+  //             tooltip: "Show",
+  //             switch: true,
+  //             onSwitch: function (item) {
+  //               item.tooltip = item.switch ? "Hide" : "Show";
+  //               artInstance.current.subtitle.show = !item.switch;
+  //               return !item.switch;
+  //             },
+  //           },
+  //           {
+  //             default: true,
+  //             html: "Bilingual",
+  //             url: "/assets/sample/subtitle.srt",
+  //           },
+  //           {
+  //             html: "Chinese",
+  //             url: "/assets/sample/subtitle.cn.srt",
+  //           },
+  //           {
+  //             html: "Japanese",
+  //             url: "/assets/sample/subtitle.jp.srt",
+  //           },
+  //         ],
+  //         onSelect: function (item) {
+  //           art.subtitle.switch(item.url, {
+  //             name: item.html,
+  //           });
+  //           return item.html;
+  //         },
+  //       },
+  //       {
+  //         html: "Switcher",
+  //         icon: '<img width="22" height="22" src="/assets/img/state.svg">',
+  //         tooltip: "OFF",
+  //         switch: false,
+  //         onSwitch: function (item) {
+  //           item.tooltip = item.switch ? "OFF" : "ON";
+  //           console.info("You clicked on the custom switch", item.switch);
+  //           return !item.switch;
+  //         },
+  //       },
+  //       {
+  //         html: "Slider",
+  //         icon: '<img width="22" height="22" src="/assets/img/state.svg">',
+  //         tooltip: "5x",
+  //         range: [5, 1, 10, 0.1],
+  //         onRange: function (item) {
+  //           return item.range[0] + "x";
+  //         },
+  //       },
+  //       {
+  //         html: "Button",
+  //         icon: '<img width="22" height="22" src="/assets/img/state.svg">',
+  //         tooltip: "tooltip",
+  //         onClick() {
+  //           return "Button clicked";
+  //         },
+  //       },
+  //     ],
+  //   });
+
+  //   return () => {
+  //     if (artInstance.current) {
+  //       artInstance.current.destroy(false);
+  //     }
+  //   };
+  // }, [videoSource]);
+
+  // function createProxyUrl(url) {
+  //   const { serverUrl, proxyUrl } = config;
+
+  //   const headers = {
+  //     origin: "https://megacloud.tv",
+  //     Referer: "https://megacloud.tv/",
+  //     "User-Agent":
+  //       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+  //   };
+
+  //   if (!url) return "";
+  //   if (url.endsWith(".m3u8")) {
+  //     return `${proxyUrl}/m3u8-proxy?url=${url}&headers=${encodeURIComponent(
+  //       JSON.stringify(headers)
+  //     )}`;
+  //   } else {
+  //     return `${serverUrl}?url=${url}`;
+  //   }
+  // }
+
+  // const changeServer = (serverName, type) => {
+  //   if (serverName !== selectedServer || type !== category) {
+  //     setSelectedServer(serverName);
+  //     setCategory(type);
+  //   }
+  // };
+  const changeCategory = (newType) => {
+    if (newType !== category) {
+      setCategory(newType);
     }
-    console.log(selectedServer)
-  }, [servers, episodeId])
-
-  const { data: episode } = useApi(selectedServer && category && episodeId ? `/stream?server=${selectedServer}&type=${category}&id=/watch/${episodeId}` : null)
-  const { serverUrl, proxyUrl } = config
-
-  const videoSource = episode?.data?.streamingLink.link.file || null
-  const proxySource = createProxyUrl(videoSource)
-  const tracks = episode?.data?.tracks && episode?.data?.tracks.filter((track) => track.kind !== 'thumbnails')
-  const poster = episode?.data?.tracks && episode?.data?.tracks.filter((track) => track.kind === 'thumbnails')
-
-  console.log(videoSource)
-
-  const initializePlayer = () => {
-    setSelectedTrack(null)
-    console.log(videoSource)
-
-    if (videoRef.current && serverUrl && videoSource) {
-      if (Hls.isSupported()) {
-        const hls = new Hls()
-        hls.loadSource(proxySource)
-        hls.attachMedia(videoRef.current)
-
-        hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          const availableQualities = hls.levels.map((l) => l.height)
-
-          const player = new Plyr(videoRef.current, {
-            controls: ['play-large', 'play', 'current-time', 'progress', 'duration', 'captions', 'settings', 'fullscreen'],
-            autoplay: true,
-            captions: {
-              active: true,
-              update: true,
-            },
-
-            quality: {
-              default: availableQualities[0],
-              options: availableQualities,
-              forced: true,
-              onChange: (quality) => {
-                hls.levels.forEach((level, index) => {
-                  if (level.height === quality) {
-                    hls.currentLevel = index
-                  }
-                })
-              },
-            },
-            previewThumbnails: createProxyUrl(poster[0]?.file || ''),
-          })
-
-          playerRef.current = player // Store player instance in ref
-        })
-      } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
-        videoRef.current.src = videoSource
-      }
-    }
-  }
-  useEffect(() => {
-    initializePlayer()
-  }, [videoSource])
-
-  const changeServer = (newServer, newCategory) => {
-    if (selectedServer !== newServer || category !== newCategory) {
-      setSelectedServer(newServer)
-      setCategory(newCategory)
-      initializePlayer()
-    }
-  }
-  useEffect(() => {
-    if (selectedTrack === null && tracks && tracks.length > 0) {
-      setSelectedTrack(tracks.find((track) => track.label === 'English'))
-    }
-  }, [selectedTrack, tracks])
-  const changeTrack = (newtrack) => {
-    if (newtrack.label !== selectedTrack.label) {
-      setSelectedTrack(newtrack)
-    }
-  }
-  function createProxyUrl(url) {
-    console.log('url : ' + url)
-
-    // const ref = 'https://megacloud.blog/'
-    const headers = {
-      Accept: '*/*',
-      'Accept-Encoding': 'gzip, deflate, br, zstd',
-      'Accept-Language': 'en-US,en;q=0.5',
-      origin: 'https://megacloud.tv',
-      Referer: 'https://megacloud.tv/',
-      'Sec-Ch-Ua': '"Chromium";v="134", "Not:A-Brand";v="24", "Brave";v="134"',
-      'Sec-Ch-Ua-Mobile': '?0',
-      'Sec-Ch-Ua-Platform': '"Windows"',
-      'Sec-Fetch-Dest': 'empty',
-      'Sec-Fetch-Mode': 'cors',
-      'Sec-Fetch-Site': 'cross-site',
-      'Sec-Gpc': '1',
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-    }
-
-    if (url) {
-      if (url.endsWith('.m3u8')) {
-        const proxy = `${proxyUrl}/m3u8-proxy?url=${url}&headers=${JSON.stringify(headers)}`
-        console.log('proxy is : ' + proxy)
-
-        return proxy
-      } else {
-        const proxy = `${serverUrl}?url=${url}`
-        return proxy
-      }
-    }
-  }
+  };
 
   return (
-    <>
-      <div className="player h-full w-full">
-        <div className="video w-full h-full">
-          <video
-            ref={videoRef} // Use ref for the video DOM node
-            id="my-player"
-            poster={poster?.file}
-            className="video-js my-video vjs-default-skin h-full w-full"
-            controls
-          >
-            {selectedTrack && <track key={selectedTrack?.label} src={createProxyUrl(selectedTrack?.file)} kind={selectedTrack?.kind} srcLang={selectedTrack?.label} label={selectedTrack?.label} />}
-          </video>
-        </div>
-        {tracks && tracks.length > 0 && (
-          <div className="captions">
-            <h1 className="text-sm font-bold text-center mt-2">Tracks</h1>
-            <div className="flex mt-2  flex-wrap gap-2">
-              {tracks.map((track) => (
-                <button
-                  onClick={() => changeTrack(track)}
-                  key={track.label}
-                  className={`px-2 py-1 bg-backGround ${selectedTrack && selectedTrack.label === track.label ? 'bg-primary text-black' : 'bg-backGround text-white'}`}
-                >
-                  {track.label}
-                </button>
-              ))}
-            </div>
+    <div className="w-full">
+      <div
+        ref={playerContainer}
+        className="w-full h-[60vh] rounded overflow-hidden"
+      >
+        <iframe
+          src={`https://megaplay.buzz/stream/s-2/${episodeId
+            .split("ep=")
+            .pop()}/${category}`}
+          width="100%"
+          height="100%"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      {/* Server Switch UI */}
+      {/* <div className="servers mt-3 bg-black py-3 px-4 flex flex-col gap-4">
+        {servers?.data?.sub && (
+          <div className="sub flex items-center gap-3 flex-wrap">
+            <span className="text-sm font-bold text-white">Sub:</span>
+            {servers.data.sub.map((s) => (
+              <button
+                key={s.name}
+                onClick={() => changeServer(s.name, "sub")}
+                className={`px-3 py-1 rounded ${
+                  selectedServer === s.name && category === "sub"
+                    ? "bg-primary text-black"
+                    : "bg-gray-700 text-white"
+                }`}
+              >
+                {s.name}
+              </button>
+            ))}
           </div>
         )}
-        <div className="servers mt-3 bg-black py-3 flex flex-col gap-5">
-          {servers?.data?.sub && (
-            <div className="sub flex justify-around items-center ">
-              <h1 className="text-sm font-bold">Sub : </h1>
-              <div className="flex gap-2 md:gap-4">
-                {servers?.data?.sub.map((s) => (
-                  <button
-                    onClick={() => changeServer(s.name, 'sub')}
-                    className={`${selectedServer === s.name && category === 'sub' ? 'bg-primary text-black' : 'bg-lightBg text-white'} px-2 py-1 rounded-md`}
-                    key={s.name}
-                  >
-                    {s.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-          {servers?.data?.dub && (
-            <div className="dub flex justify-around items-center ">
-              <h1 className="text-sm font-bold">Dub : </h1>
-              <div className="flex gap-2 md:gap-4">
-                {servers?.data?.dub.map((s) => (
-                  <button
-                    onClick={() => changeServer(s.name, 'dub')}
-                    className={`${selectedServer === s.name && category === 'dub' ? 'bg-primary text-black' : 'bg-lightBg text-white'} px-2 py-1 rounded-md`}
-                    key={s.name}
-                  >
-                    {s.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
+        {servers?.data?.dub && (
+          <div className="dub flex items-center gap-3 flex-wrap">
+            <span className="text-sm font-bold text-white">Dub:</span>
+            {servers.data.dub.map((s) => (
+              <button
+                key={s.name}
+                onClick={() => changeServer(s.name, "dub")}
+                className={`px-3 py-1 rounded ${
+                  selectedServer === s.name && category === "dub"
+                    ? "bg-primary text-black"
+                    : "bg-gray-700 text-white"
+                }`}
+              >
+                {s.name}
+              </button>
+            ))}
+          </div>
+        )}
+      </div> */}
+      <div className="category flex gap-5 my-4 bg-black py-4 justify-center">
+        <button
+          onClick={() => changeCategory("sub")}
+          className={`${
+            category === "sub" ? "bg-primary text-black" : "bg-lightBg"
+          } px-3 py-1 rounded-sm `}
+        >
+          SUB
+        </button>
+        <button
+          onClick={() => changeCategory("dub")}
+          className={`${
+            category === "dub" ? "bg-primary text-black" : "bg-lightBg"
+          } px-3 py-1 rounded-sm `}
+        >
+          DUB
+        </button>
       </div>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default Player
+export default Player;
