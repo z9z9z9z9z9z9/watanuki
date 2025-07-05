@@ -14,29 +14,31 @@ const Episodes = ({ episode, index }) => {
   const isCurrent = currentEpisodeId === episode.id.replace("::", "?");
   return (
     <ul
-      className={`px-2 py-2 w-full ${
-        isCurrent ? "bg-primary" : " hover:bg-black"
+      className={`w-full rounded-md p-3 transition-all duration-200 ${
+        isCurrent ? "bg-primary" : "hover:bg-black"
       }`}
-      key={episode.id}
     >
-      <a href={`/watch/${episode.id.replaceAll("::", "?")}`}>
+      <a
+        href={`/watch/${episode.id.replaceAll("::", "?")}`}
+        className="block w-full"
+      >
         <div className="flex gap-3 items-center">
           <li
-            className={`text-lg font-bold  ${
-              isCurrent ? "text-black " : "text-primary"
+            className={`text-base font-bold ${
+              isCurrent ? "text-black" : "text-primary"
             }`}
           >
             {index + 1}
           </li>
           <li
             title={episode.title}
-            className={`${
+            className={`flex-1 ${
               isCurrent ? "text-black" : "text-white"
-            } text-sm line-clamp-1`}
+            } text-sm truncate`}
           >
             {episode.title}
           </li>
-          {episode.isFiller && <div>👻</div>}
+          {episode.isFiller && <span title="Filler">👻</span>}
         </div>
       </a>
     </ul>

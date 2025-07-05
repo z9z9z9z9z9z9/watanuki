@@ -12,7 +12,7 @@ const Footer = () => {
       </div>
       <div className="my-2 h-1 border-b border-b-neutral-700 "></div>
       <div className="az-list flex justify-center items-center">
-        <h1 className="text-primary font-bold text-lg mb-2 mr-3">AZ-LIST </h1>
+        <h1 className="text-primary font-bold mb-2 mr-3">A-Z list </h1>
         <p className="hidden sm:block text-primary font-bold text-lg mb-2">
           Searching anime order by alphabet name A to Z.
         </p>

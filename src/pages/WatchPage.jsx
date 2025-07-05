@@ -44,17 +44,14 @@ const WatchPage = () => {
   }
 
   return (
-    <div className="bg-backGround max-w-[1200px] mx-auto pt-10">
-      <div className="flex flex-col">
+    /* WatchPage.js */
+    <div className="bg-backGround max-w-screen-xl mx-auto px-4 pt-10">
+      <div className="flex flex-col gap-4">
         {ep && id && <Player id={id} episodeId={`${id}?ep=${ep}`} />}
-
-        <div className="episodes mt-2 h-[50vh] md:h-screen overflow-scroll flex flex-col">
-          {episodes &&
-            episodes.map((episode, i) => (
-              <div key={episode.id}>
-                <Episodes episode={episode} index={i} />
-              </div>
-            ))}
+        <div className="episodes grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+          {episodes?.map((episode, i) => (
+            <Episodes key={episode.id} episode={episode} index={i} />
+          ))}
         </div>
       </div>
     </div>

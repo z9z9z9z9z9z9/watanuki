@@ -23,7 +23,7 @@ const Sidebar = () => {
     { name: "Most Popular", link: "/animes/most-popular" },
     { name: "Top Airing", link: "/animes/top-airing" },
     { name: "Latest Completed", link: "/animes/latest-completed" },
-    { name: "A-Z List", link: "/animes/az-list" },
+    { name: "A-Z List", link: "/animes/az-list/a" },
     { name: "Movies", link: "/animes/movie" },
     { name: "OVAs", link: "/animes/ova" },
     { name: "ONAs", link: "/animes/ona" },
@@ -43,12 +43,12 @@ const Sidebar = () => {
         <FaAngleLeft />
         <span>close menu</span>
       </button>
-      <ul>
+      <ul className="py-4">
         {list.map((item) => (
           <li
             key={item.link}
             onClick={sidebarHandler}
-            className=" py-4 pl-2 hover:text-primary  text-base md:text-lg border-b border-[rgba(255,255,255,.05)] w-full"
+            className=" py-4 pl-4 hover:text-primary  text-base md:text-lg border-b border-[rgba(255,255,255,.05)] w-full"
           >
             <Link to={item.link}>{item.name}</Link>
           </li>
