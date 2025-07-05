@@ -170,79 +170,33 @@ const Player = ({ episodeId }) => {
   };
 
   return (
-    <div className="w-full">
-      <div
-        ref={playerContainer}
-        className="w-full h-[60vh] rounded overflow-hidden"
-      >
+    <>
+      <div className="w-full bg-black aspect-video relative mt-10 max-w-screen-xl rounded-md overflow-hidden">
         <iframe
           src={`https://megaplay.buzz/stream/s-2/${episodeId
             .split("ep=")
             .pop()}/${category}`}
           width="100%"
           height="100%"
-          allowfullscreen
+          allowFullScreen
         ></iframe>
       </div>
-
-      {/* Server Switch UI */}
-      {/* <div className="servers mt-3 bg-black py-3 px-4 flex flex-col gap-4">
-        {servers?.data?.sub && (
-          <div className="sub flex items-center gap-3 flex-wrap">
-            <span className="text-sm font-bold text-white">Sub:</span>
-            {servers.data.sub.map((s) => (
-              <button
-                key={s.name}
-                onClick={() => changeServer(s.name, "sub")}
-                className={`px-3 py-1 rounded ${
-                  selectedServer === s.name && category === "sub"
-                    ? "bg-primary text-black"
-                    : "bg-gray-700 text-white"
-                }`}
-              >
-                {s.name}
-              </button>
-            ))}
-          </div>
-        )}
-        {servers?.data?.dub && (
-          <div className="dub flex items-center gap-3 flex-wrap">
-            <span className="text-sm font-bold text-white">Dub:</span>
-            {servers.data.dub.map((s) => (
-              <button
-                key={s.name}
-                onClick={() => changeServer(s.name, "dub")}
-                className={`px-3 py-1 rounded ${
-                  selectedServer === s.name && category === "dub"
-                    ? "bg-primary text-black"
-                    : "bg-gray-700 text-white"
-                }`}
-              >
-                {s.name}
-              </button>
-            ))}
-          </div>
-        )}
-      </div> */}
-      <div className="category flex gap-5 my-4 bg-black py-4 justify-center">
-        <button
-          onClick={() => changeCategory("sub")}
-          className={`${
-            category === "sub" ? "bg-primary text-black" : "bg-lightBg"
-          } px-3 py-1 rounded-sm `}
-        >
-          SUB
-        </button>
-        <button
-          onClick={() => changeCategory("dub")}
-          className={`${
-            category === "dub" ? "bg-primary text-black" : "bg-lightBg"
-          } px-3 py-1 rounded-sm `}
-        >
-          DUB
-        </button>
+      <div className="category flex flex-wrap justify-center gap-3 bg-black p-4">
+        {["sub", "dub"].map((type) => (
+          <button
+            key={type}
+            onClick={() => changeCategory(type)}
+            className={`${
+              category === type
+                ? "bg-primary text-black"
+                : "bg-lightBg  text-white"
+            } px-4 py-2 rounded text-sm font-semibold`}
+          >
+            {type.toUpperCase()}
+          </button>
+        ))}
       </div>
-    </div>
+    </>
   );
 };
 

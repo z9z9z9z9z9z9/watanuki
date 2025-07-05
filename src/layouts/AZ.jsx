@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const AZ = ({ selected }) => {
+  selected = selected === null ? "All" : selected;
   const azList = [
     { title: "All", link: "/animes/az-list" },
     { title: "#", link: "/animes/az-list/other" },
@@ -34,17 +35,19 @@ const AZ = ({ selected }) => {
     { title: "Z", link: "/animes/az-list/Z" },
   ];
   return (
-    <div className="list w-full px-2 flex gap-2 flex-wrap justify-center items-center">
+    <div className="list w-full mb-2 px-2 flex gap-2 flex-wrap justify-center items-center">
       {azList.map((item) => (
         <Link to={item.link} key={item.title}>
-          <h1
-            className={`px-3 py-1 bg-lightBg hover:bg-primary hover:text-black rounded-md font-bold mb-1 ${
-              selected && selected === item.title ? "bg-primary text-black" : ""
+          <button
+            className={`px-2 py-1 bg-lightBg text-[14px] hover:bg-primary hover:text-black rounded-sm font-bold mb-1 ${
+              selected && selected.toUpperCase() === item.title
+                ? "bg-primary text-black"
+                : ""
             }`}
             key={item.title}
           >
             {item.title}
-          </h1>
+          </button>
         </Link>
       ))}
     </div>

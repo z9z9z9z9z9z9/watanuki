@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import SoundsInfo from '../components/SoundsInfo'
-import { Link } from 'react-router-dom'
+import SoundsInfo from "../components/SoundsInfo";
+import { Link } from "react-router-dom";
 
 const Image = ({ data }) => {
   return (
     <div>
       <Link to={`/anime/${data.id}`}>
-        <div className="film-poster md:hover:opacity-[.7] transition-all rounded-sm w-full h-full pb-[140%] mb-2 relative overflow-hidden bg-white block">
+        <div className="film-poster md:hover:opacity-[.7] transition-all rounded-sm w-full h-full pb-[140%] mb-2 relative overflow-hidden bg-[#545454] block">
           <div className="z-50 opacity-[.9] absolute bottom-0 left-0">
             <SoundsInfo episodes={data.episodes} />
           </div>
@@ -19,7 +19,10 @@ const Image = ({ data }) => {
         </div>
       </Link>
       <Link to={`/anime/${data.id}`}>
-        <div title={data.title} className="title line-clamp-1 text-sm md:text-base hover:text-primary">
+        <div
+          title={data.title}
+          className="title line-clamp-1 text-sm md:text-base hover:text-primary"
+        >
           <h1>{data.title}</h1>
         </div>
       </Link>
@@ -31,7 +34,7 @@ const Image = ({ data }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Image
+export default Image;
