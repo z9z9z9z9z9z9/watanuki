@@ -7,6 +7,7 @@ export default {
         primary: "#FADA7A",
         backGround: "#1A1A1D",
         lightBg: "#23252b",
+        card: "#34363b",
         yellow: "#F9ED69",
         purple: "#B1B2FF",
         pink: "#F2BED1",

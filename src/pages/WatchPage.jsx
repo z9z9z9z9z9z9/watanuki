@@ -1,15 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import Player from "../components/Player";
 import Episodes from "../layouts/Episodes";
 import { useApi } from "../services/useApi";
 import PageNotFound from "./PageNotFound";
+import { MdTableRows } from "react-icons/md";
+import { HiMiniViewColumns } from "react-icons/hi2";
 
 const WatchPage = () => {
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
+  const [layout, setLayout] = useState("row");
 
   const ep = searchParams.get("ep");
 
@@ -43,16 +45,54 @@ const WatchPage = () => {
     return <Loader className="h-screen" />;
   }
 
+  const currentEp =
+    episodes && episodes.find((e) => e.id.split("ep=").pop() === ep);
+
+  console.log(currentEp);
+
   return (
     /* WatchPage.js */
-    <div className="bg-backGround max-w-screen-xl mx-auto px-4 pt-10">
-      <div className="flex flex-col gap-4">
-        {ep && id && <Player id={id} episodeId={`${id}?ep=${ep}`} />}
-        <div className="episodes grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-          {episodes?.map((episode, i) => (
-            <Episodes key={episode.id} episode={episode} index={i} />
-          ))}
+    <div className="bg-backGround max-w-screen-xl mx-auto py-2 md:px-2">
+      <div className="flex flex-col gap-2">
+        {ep && id && (
+          <Player id={id} episodeId={`${id}?ep=${ep}`} currentEp={currentEp} />
+        )}
+        <div className="input w-full mt-2 flex items-end justify-end gap-3 text-end">
+          <div className="btns bg-card flex mx-2 rounded-child">
+            <button
+              className={`row item p-2 ${
+                layout === "row" ? "bg-primary text-black" : undefined
+              }`}
+              onClick={() => setLayout("row")}
+            >
+              <MdTableRows size={"20px"} />
+            </button>
+            <button
+              className={`column item p-2 ${
+                layout === "column" ? "bg-primary text-black" : undefined
+              }`}
+              onClick={() => setLayout("column")}
+            >
+              <HiMiniViewColumns size={"20px"} />
+            </button>
+          </div>
         </div>
+        <ul
+          className={`episodes max-h-[50vh] pb-4 overflow-scroll bg-lightBg grid gap-1  md:gap-2 ${
+            layout === "row"
+              ? " grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+              : " grid-cols-5 md:grid-cols-10"
+          }`}
+        >
+          {episodes?.map((episode) => (
+            <Episodes
+              key={episode.id}
+              episode={episode}
+              currentEp={currentEp}
+              layout={layout}
+            />
+          ))}
+        </ul>
       </div>
     </div>
   );

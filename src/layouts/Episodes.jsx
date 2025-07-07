@@ -1,47 +1,65 @@
 /* eslint-disable react/prop-types */
-import { Link, useParams, useSearchParams } from "react-router-dom";
 
-const Episodes = ({ episode, index }) => {
-  const { id } = useParams();
-  const [searchParams] = useSearchParams();
-  const ep = searchParams.get("ep");
-
-  const currentEpisodeId = `${id}?ep=${ep}`;
-
-  console.log(`currentEPISODEID =  ${currentEpisodeId}`);
-  console.log(`episode.id =  ${episode.id}`);
-
-  const isCurrent = currentEpisodeId === episode.id.replace("::", "?");
+const Episodes = ({ episode, currentEp, layout }) => {
+  const isCurrent = episode.id === currentEp.id;
   return (
-    <ul
-      className={`w-full rounded-md p-3 transition-all duration-200 ${
-        isCurrent ? "bg-primary" : "hover:bg-black"
-      }`}
-    >
-      <a
-        href={`/watch/${episode.id.replaceAll("::", "?")}`}
-        className="block w-full"
-      >
-        <div className="flex gap-3 items-center">
-          <li
-            className={`text-base font-bold ${
-              isCurrent ? "text-black" : "text-primary"
-            }`}
+    <>
+      {layout === "row" ? (
+        <li
+          title={episode.title}
+          className={`w-full px-1 py-3 transition-all duration-200 ${
+            isCurrent ? "bg-primary" : " bg-card"
+          } ${episode.isFiller ? "bg-[#ada27373]" : null} ${
+            !isCurrent ? "hover:bg-black" : null
+          }`}
+        >
+          <a
+            href={`/watch/${episode.id.replaceAll("::", "?")}`}
+            className="block w-full"
           >
-            {index + 1}
-          </li>
-          <li
-            title={episode.title}
-            className={`flex-1 ${
-              isCurrent ? "text-black" : "text-white"
-            } text-sm truncate`}
+            <div className="flex gap-3 items-center">
+              <button
+                className={`text-sm ${
+                  isCurrent ? "text-black" : "text-primary"
+                }`}
+              >
+                {episode.episodeNumber}
+              </button>
+              <li
+                className={`flex-1 ${
+                  isCurrent ? "text-black" : "text-white"
+                } text-sm truncate`}
+              >
+                {episode.title}
+              </li>
+              {episode.isFiller && <span title="Filler">👻</span>}
+            </div>
+          </a>
+        </li>
+      ) : (
+        <li
+          title={episode.title}
+          className={` w-full rounded-md p-1 transition-all hover:bg-black duration-200  ${
+            isCurrent ? "bg-primary" : "bg-card"
+          }
+            ${episode.isFiller ? "bg-[#ada27373]" : null} 
+          `}
+        >
+          <a
+            href={`/watch/${episode.id.replaceAll("::", "?")}`}
+            className="block w-full"
           >
-            {episode.title}
-          </li>
-          {episode.isFiller && <span title="Filler">👻</span>}
-        </div>
-      </a>
-    </ul>
+            <p
+              className={` text-sm md:text-base text-center ${
+                isCurrent ? "text-black" : "text-primary"
+              }`}
+            >
+              {episode.episodeNumber}
+            </p>
+          </a>
+        </li>
+      )}
+    </>
   );
 };
 
