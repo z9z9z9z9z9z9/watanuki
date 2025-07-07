@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import Player from "../components/Player";
 import Episodes from "../layouts/Episodes";
@@ -46,9 +46,9 @@ const WatchPage = () => {
   }
 
   const currentEp =
-    episodes && episodes.find((e) => e.id.split("ep=").pop() === ep);
-
-  console.log(currentEp);
+    episodes &&
+    ep !== null &&
+    episodes.find((e) => e.id.split("ep=").pop() === ep);
 
   return (
     /* WatchPage.js */

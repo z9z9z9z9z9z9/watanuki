@@ -1,5 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useRef, useState } from "react";
+import {
+  TbPlayerTrackPrevFilled,
+  TbPlayerTrackNextFilled,
+} from "react-icons/tb";
 
 const Player = ({ episodeId, currentEp }) => {
   const [category, setCategory] = useState("sub");
@@ -22,20 +26,22 @@ const Player = ({ episodeId, currentEp }) => {
           allowFullScreen
         ></iframe>
       </div>
-      <div className="category flex flex-wrap justify-center gap-3 bg-black py-2">
-        {["sub", "dub"].map((type) => (
-          <button
-            key={type}
-            onClick={() => changeCategory(type)}
-            className={`${
-              category === type
-                ? "bg-primary text-black"
-                : "bg-lightBg  text-white"
-            } px-2 py-1 rounded text-sm font-semibold`}
-          >
-            {type.toUpperCase()}
-          </button>
-        ))}
+      <div className="category flex flex-wrap items-center justify-center px-2 md:px-20 gap-3 bg-black py-2">
+        <div className="sound flex gap-3">
+          {["sub", "dub"].map((type) => (
+            <button
+              key={type}
+              onClick={() => changeCategory(type)}
+              className={`${
+                category === type
+                  ? "bg-primary text-black"
+                  : "bg-lightBg  text-white"
+              } px-2 py-1 rounded text-sm font-semibold`}
+            >
+              {type.toUpperCase()}
+            </button>
+          ))}
+        </div>
         <div className="flex flex-col">
           <p className="text-gray-400">
             you are watching Episode {currentEp.episodeNumber}
@@ -44,6 +50,16 @@ const Player = ({ episodeId, currentEp }) => {
             <p className="text-red-400">your are watching filler Episode 👻</p>
           )}
         </div>
+        {/* <div className="btns flex gap-4">
+          {currentEp.episodeNumber > 1 && (
+            <button className="prev">
+              <TbPlayerTrackPrevFilled />
+            </button>
+          )}
+          <button className="next">
+            <TbPlayerTrackNextFilled />
+          </button>
+        </div> */}
       </div>
     </>
   );

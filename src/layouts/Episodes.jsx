@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 
+import { Link } from "react-router-dom";
 const Episodes = ({ episode, currentEp, layout }) => {
   const isCurrent = episode.id === currentEp.id;
   return (
@@ -9,12 +10,12 @@ const Episodes = ({ episode, currentEp, layout }) => {
           title={episode.title}
           className={`w-full px-1 py-3 transition-all duration-200 ${
             isCurrent ? "bg-primary" : " bg-card"
-          } ${episode.isFiller ? "bg-[#ada27373]" : null} ${
+          } ${episode.isFiller && !isCurrent ? "bg-[#beab5f24]" : null} ${
             !isCurrent ? "hover:bg-black" : null
           }`}
         >
-          <a
-            href={`/watch/${episode.id.replaceAll("::", "?")}`}
+          <Link
+            to={`/watch/${episode.id.replaceAll("::", "?")}`}
             className="block w-full"
           >
             <div className="flex gap-3 items-center">
@@ -34,7 +35,7 @@ const Episodes = ({ episode, currentEp, layout }) => {
               </li>
               {episode.isFiller && <span title="Filler">👻</span>}
             </div>
-          </a>
+          </Link>
         </li>
       ) : (
         <li
@@ -45,8 +46,8 @@ const Episodes = ({ episode, currentEp, layout }) => {
             ${episode.isFiller ? "bg-[#ada27373]" : null} 
           `}
         >
-          <a
-            href={`/watch/${episode.id.replaceAll("::", "?")}`}
+          <Link
+            to={`/watch/${episode.id.replaceAll("::", "?")}`}
             className="block w-full"
           >
             <p
@@ -56,7 +57,7 @@ const Episodes = ({ episode, currentEp, layout }) => {
             >
               {episode.episodeNumber}
             </p>
-          </a>
+          </Link>
         </li>
       )}
     </>
