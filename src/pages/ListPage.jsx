@@ -9,6 +9,7 @@ import Heading from "../components/Heading";
 import AZ from "../layouts/AZ";
 import React from "react";
 import Footer from "../components/Footer";
+import { Helmet } from "react-helmet";
 
 const ListPage = () => {
   const validateQueries = [
@@ -37,7 +38,6 @@ const ListPage = () => {
   if (!isValidQuery) {
     return <PageNotFound />;
   }
-  document.title = `${category} animes`;
 
   const endpoint = `/animes/${category}${query ? `/${query}` : ""}?page=`;
   const { data, isError, error, isLoading, hasNextPage, fetchNextPage } =
@@ -50,6 +50,10 @@ const ListPage = () => {
 
   return (
     <div className="list-page pt-14">
+      <Helmet>
+        <title>{category} animes</title>
+        <meta property="og:title" content="explore - watanuki" />
+      </Helmet>
       {category === "az-list" && <AZ selected={query} />}
       {pages && !isLoading ? (
         <InfiniteScroll

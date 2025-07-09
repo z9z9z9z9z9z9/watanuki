@@ -2,11 +2,15 @@ import React from "react";
 import pageNotFound from "../assets/404.png";
 import { Link } from "react-router-dom";
 import { FaAngleLeft } from "react-icons/fa";
+import { Helmet } from "react-helmet";
 
 const PageNotFound = () => {
-  document.title = "404 Error";
   return (
     <div className="h-[100dvh] flex justify-center flex-col items-center">
+      <Helmet>
+        <title>404 PAGE NOT FOUND</title>
+        <meta property="og:title" content="PAGE NOT FOUND - watanuki" />
+      </Helmet>
       <img
         className="max-w-80 mb-2 w-full h-auto"
         src={pageNotFound}

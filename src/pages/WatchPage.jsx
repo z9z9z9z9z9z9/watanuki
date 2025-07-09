@@ -7,6 +7,7 @@ import { useApi } from "../services/useApi";
 import PageNotFound from "./PageNotFound";
 import { MdTableRows } from "react-icons/md";
 import { HiMiniViewColumns } from "react-icons/hi2";
+import { Helmet } from "react-helmet";
 
 const WatchPage = () => {
   const { id } = useParams();
@@ -26,12 +27,6 @@ const WatchPage = () => {
     });
   };
   // Update document title
-  useEffect(() => {
-    if (id) {
-      const titleId = id.split("-").slice(0, -1).join(" ");
-      document.title = `Watch ${titleId} Online, Free Anime Streaming Online on Watanuki Anime Website`;
-    }
-  }, [id]);
 
   // Auto-redirect to first episode if no `ep` param exists
   useEffect(() => {
@@ -69,6 +64,13 @@ const WatchPage = () => {
   return (
     /* WatchPage.js */
     <div className="bg-backGround pt-14 max-w-screen-xl mx-auto py-2 md:px-2">
+      <Helmet>
+        <title>
+          Watch {id.split("-").slice(0, 2).join(" ")} Online, Free Anime
+          Streaming Online on Watanuki Anime Website
+        </title>
+        <meta property="og:title" content="watch - watanuki" />
+      </Helmet>
       <div className="flex flex-col gap-2">
         <div className="path flex mb-2 mx-2 items-center gap-2 text-base ">
           <Link className="" to="/home">
