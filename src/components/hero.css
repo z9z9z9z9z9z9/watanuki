@@ -31,15 +31,15 @@
   background-image: linear-gradient(
     90deg,
     transparent 0,
-    #1a1a1d 10%,
-    #1a1a1d 10%,
+    #1a0e1f 10%,
+    #1a0e1f 10%,
     transparent
   );
   mask-image: linear-gradient(
     90deg,
     transparent 0,
-    #1a1a1d 10%,
-    #1a1a1d 10%,
+    #1a0e1f 10%,
+    #1a0e1f 10%,
     transparent
   );
 }
@@ -92,15 +92,15 @@
   mask-image: linear-gradient(
       to right,
       transparent 0,
-      #1a1a1d 30%,
-      #1a1a1d 70%,
+      #1a0e1f 30%,
+      #1a0e1f 70%,
       transparent
     ),
     linear-gradient(
       to bottom,
       transparent 0,
-      #1a1a1d 30%,
-      #1a1a1d 70%,
+      #1a0e1f 30%,
+      #1a0e1f 70%,
       transparent
     );
   mask-composite: intersect; /* Combines the masks (for non-WebKit browsers) */
@@ -109,15 +109,15 @@
   -webkit-mask-image: linear-gradient(
       to right,
       transparent 0,
-      #1a1a1d 30%,
-      #1a1a1d 70%,
+      #1a0e1f 30%,
+      #1a0e1f 70%,
       transparent
     ),
     linear-gradient(
       to bottom,
       transparent 0,
-      #1a1a1d 30%,
-      #1a1a1d 70%,
+      #1a0e1f 30%,
+      #1a0e1f 70%,
       transparent
     );
   -webkit-mask-size: 100% 100%, 100% 100%;

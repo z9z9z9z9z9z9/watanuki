@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import Player from "../components/Player";
 import Episodes from "../layouts/Episodes";
@@ -18,6 +18,13 @@ const WatchPage = () => {
   const { data, isError } = useApi(`/episodes/${id}`);
   const episodes = data?.data;
 
+  const updateParams = (newParam) => {
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      newParams.set("ep", newParam);
+      return newParams;
+    });
+  };
   // Update document title
   useEffect(() => {
     if (id) {
@@ -29,11 +36,8 @@ const WatchPage = () => {
   // Auto-redirect to first episode if no `ep` param exists
   useEffect(() => {
     if (!ep && Array.isArray(episodes) && episodes.length > 0) {
-      setSearchParams((prev) => {
-        const newParams = new URLSearchParams(prev);
-        newParams.set("ep", episodes[0].id.split("ep=").pop());
-        return newParams;
-      });
+      const ep = episodes[0].id.split("ep=").pop();
+      updateParams(ep);
     }
   }, [ep, episodes, setSearchParams]);
 
@@ -50,12 +54,42 @@ const WatchPage = () => {
     ep !== null &&
     episodes.find((e) => e.id.split("ep=").pop() === ep);
 
+  const changeEpisode = (action) => {
+    if (action === "next") {
+      const nextEp = episodes[currentEp.episodeNumber - 1 + 1];
+      if (!nextEp) return;
+      updateParams(nextEp.id.split("ep=").pop());
+    } else {
+      const prevEp = episodes[currentEp.episodeNumber - 1 - 1];
+      if (!prevEp) return;
+      updateParams(prevEp.id.split("ep=").pop());
+    }
+  };
+
   return (
     /* WatchPage.js */
-    <div className="bg-backGround max-w-screen-xl mx-auto py-2 md:px-2">
+    <div className="bg-backGround pt-14 max-w-screen-xl mx-auto py-2 md:px-2">
       <div className="flex flex-col gap-2">
+        <div className="path flex mb-2 mx-2 items-center gap-2 text-base ">
+          <Link className="" to="/home">
+            <h4 className="hover:text-primary">home</h4>
+          </Link>
+          <span className="h-1 w-1 rounded-full bg-primary"></span>
+          <Link to={`/anime/${id}`}>
+            <h4 className="hover:text-primary">
+              {id.split("-").slice(0, 2).join(" ")}
+            </h4>
+          </Link>
+          <span className="h-1 w-1 rounded-full bg-primary"></span>
+          <h4 className="gray">{`episode ${currentEp.episodeNumber}`}</h4>
+        </div>
         {ep && id && (
-          <Player id={id} episodeId={`${id}?ep=${ep}`} currentEp={currentEp} />
+          <Player
+            id={id}
+            episodeId={`${id}?ep=${ep}`}
+            currentEp={currentEp}
+            changeEpisode={changeEpisode}
+          />
         )}
         <div className="input w-full mt-2 flex items-end justify-end gap-3 text-end">
           <div className="btns bg-card flex mx-2 rounded-child">
@@ -78,7 +112,7 @@ const WatchPage = () => {
           </div>
         </div>
         <ul
-          className={`episodes max-h-[50vh] pb-4 overflow-scroll bg-lightBg grid gap-1  md:gap-2 ${
+          className={`episodes max-h-[50vh] py-4 overflow-scroll bg-lightBg grid gap-1  md:gap-2 ${
             layout === "row"
               ? " grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
               : " grid-cols-5 md:grid-cols-10"

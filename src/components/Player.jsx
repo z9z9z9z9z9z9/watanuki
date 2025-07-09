@@ -5,7 +5,7 @@ import {
   TbPlayerTrackNextFilled,
 } from "react-icons/tb";
 
-const Player = ({ episodeId, currentEp }) => {
+const Player = ({ episodeId, currentEp, changeEpisode }) => {
   const [category, setCategory] = useState("sub");
 
   const changeCategory = (newType) => {
@@ -16,7 +16,7 @@ const Player = ({ episodeId, currentEp }) => {
 
   return (
     <>
-      <div className="w-full bg-black aspect-video relative mt-10 max-w-screen-xl overflow-hidden">
+      <div className="w-full bg-black aspect-video relative  max-w-screen-xl overflow-hidden">
         <iframe
           src={`https://megaplay.buzz/stream/s-2/${episodeId
             .split("ep=")
@@ -26,7 +26,7 @@ const Player = ({ episodeId, currentEp }) => {
           allowFullScreen
         ></iframe>
       </div>
-      <div className="category flex flex-wrap items-center justify-center px-2 md:px-20 gap-3 bg-black py-2">
+      <div className="category flex flex-wrap flex-col sm:flex-row items-center justify-center  sm:justify-between px-2 md:px-20 gap-3 bg-black py-2">
         <div className="sound flex gap-3">
           {["sub", "dub"].map((type) => (
             <button
@@ -50,16 +50,24 @@ const Player = ({ episodeId, currentEp }) => {
             <p className="text-red-400">your are watching filler Episode 👻</p>
           )}
         </div>
-        {/* <div className="btns flex gap-4">
+        <div className="btns bg-primary px-2 py-1 text-black rounded-sm flex gap-4">
           {currentEp.episodeNumber > 1 && (
-            <button className="prev">
+            <button
+              title="prev"
+              className="prev"
+              onClick={() => changeEpisode("prev")}
+            >
               <TbPlayerTrackPrevFilled />
             </button>
           )}
-          <button className="next">
+          <button
+            title="next"
+            className="next"
+            onClick={() => changeEpisode("next")}
+          >
             <TbPlayerTrackNextFilled />
           </button>
-        </div> */}
+        </div>
       </div>
     </>
   );

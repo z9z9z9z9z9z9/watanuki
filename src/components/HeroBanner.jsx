@@ -86,7 +86,7 @@ const HeroBanner = ({ slides }) => {
                   </Link>
                   <Link
                     to={`/anime/${item.id}`}
-                    className="bg-[#28282f69] rounded-3xl  px-4 py-1 flex justify-center items-center gap-2"
+                    className="bg-btnBg rounded-3xl  px-4 py-1 flex justify-center items-center gap-2"
                   >
                     <span>Detail</span>
                     <FaAngleRight />

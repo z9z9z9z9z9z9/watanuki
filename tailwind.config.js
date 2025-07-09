@@ -4,10 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#FADA7A",
-        backGround: "#1A1A1D",
-        lightBg: "#23252b",
-        card: "#34363b",
+        primary: "#CC66DA",
+        backGround: "#1A0E1F",
+        lightBg: "#31193A",
+        card: "#31193A",
+        btnBg: "#43324a",
+        btnBgHover: "#B14BC4",
         yellow: "#F9ED69",
         purple: "#B1B2FF",
         pink: "#F2BED1",

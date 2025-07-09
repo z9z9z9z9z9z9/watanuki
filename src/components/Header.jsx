@@ -62,7 +62,7 @@ const Header = () => {
   };
   return (
     <div className="relative z-[100]">
-      <div className="fixed bg-black w-full  py-2">
+      <div className="fixed bg-card w-full  py-2">
         <div className="flex gap-2 px-5 md:px-10 md:gap-5 justify-between items-center">
           <div className="left flex gap-2 md:gap-5 items-center">
             <div className="menu" onClick={sidebarHandler}>
