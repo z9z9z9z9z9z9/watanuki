@@ -14,6 +14,7 @@ import Footer from "../components/Footer";
 
 import { genres } from "../utils/genres";
 import { Helmet } from "react-helmet";
+import Skeleton from "../components/Skeleton";
 const Home = () => {
   const { data, isLoading, error, isError } = useApi("/home");
 
@@ -48,7 +49,25 @@ const Home = () => {
         <meta property="og:title" content="home - watanuki" />
       </Helmet>
       {isLoading ? (
-        <Loader className="h-[100dvh]" />
+        // <Loader className="h-[100dvh]" />
+        <>
+          <Skeleton className="h-[40vh] pt-10 mb-5 sm:h-[40vh] md:h-[50vh] xl:h-[calc(100vh-300px)]" />
+          <div className="flex gap-2 h-36 sm:h-48 md:h-56 xl:h-64 xl:mx-10 py-3">
+            <Skeleton className="" />
+            <Skeleton className="" />
+            <Skeleton className="" />
+            <Skeleton className="" />
+            <Skeleton className="hidden sm:block" />
+            <Skeleton className=" hidden md:block" />
+            <Skeleton className=" hidden lg:block" />
+          </div>
+          <div className="mx-2 gap-2 flex-wrap grid grid-cols-12">
+            <Skeleton className="col-span-12 md:col-span-6 xl:colspan-3 rounded-md h-[665px]" />
+            <Skeleton className="col-span-12 md:col-span-6 xl:colspan-3 rounded-md h-[665px]" />
+            <Skeleton className="col-span-12 md:col-span-6 xl:colspan-3 rounded-md h-[665px]" />
+            <Skeleton className="col-span-12 md:col-span-6 xl:colspan-3 rounded-md h-[665px]" />
+          </div>
+        </>
       ) : (
         <>
           <HeroBanner slides={data?.data?.spotlight} />
