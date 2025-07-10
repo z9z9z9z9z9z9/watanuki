@@ -8,11 +8,15 @@ const Episodes = ({ episode, currentEp, layout }) => {
       {layout === "row" ? (
         <li
           title={episode.title}
-          className={`w-full px-1 py-3 transition-all text-black duration-200 ${
-            isCurrent ? "bg-primary" : " bg-btnBg"
-          } ${episode.isFiller && !isCurrent ? "bg-[#5b308c]" : null} ${
-            !isCurrent ? "hover:bg-btnBgHover" : null
-          }`}
+          className={`w-full px-2 py-3 transition-all text-black duration-200
+            ${
+              isCurrent
+                ? "bg-primary"
+                : episode.isFiller
+                ? "bg-background"
+                : "bg-btnbg"
+            }
+          `}
         >
           <Link
             to={`/watch/${episode.id.replaceAll("::", "?")}`}
@@ -40,10 +44,14 @@ const Episodes = ({ episode, currentEp, layout }) => {
       ) : (
         <li
           title={episode.title}
-          className={` w-full rounded-md p-1 transition-all hover:bg-btnBgHover duration-200  ${
-            isCurrent ? "bg-primary" : "bg-btnBg"
-          }
-            ${episode.isFiller ? "bg-[#5b308c]" : null} 
+          className={` w-full rounded-md p-1 transition-all hover:bg-btnBgHover duration-200 
+             ${
+               isCurrent
+                 ? "bg-primary"
+                 : episode.isFiller
+                 ? "bg-background"
+                 : "bg-btnbg"
+             }
           `}
         >
           <Link

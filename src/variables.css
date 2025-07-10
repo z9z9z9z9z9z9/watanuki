@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #ffbade;
+  --background: #201f31;
+  --lightbg: #2b2a3c;
+  --card: #2b2a3c;
+  --btnbg: #373646;
+  --yellow: #f9ed69;
+  --purple: #b1b2ff;
+  --pink: #f2bed1;
+}

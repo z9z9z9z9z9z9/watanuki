@@ -39,7 +39,7 @@ const AZ = ({ selected }) => {
       {azList.map((item) => (
         <Link to={item.link} key={item.title}>
           <button
-            className={`px-2 py-1 bg-lightBg text-[14px] hover:bg-primary hover:text-black rounded-sm font-bold mb-1 ${
+            className={`px-2 py-1 bg-lightbg text-[14px] hover:bg-primary hover:text-black rounded-sm font-bold mb-1 ${
               selected && selected.toUpperCase() === item.title
                 ? "bg-primary text-black"
                 : ""

@@ -94,7 +94,7 @@ const WatchPage = () => {
           />
         )}
         <div className="input w-full mt-2 flex items-end justify-end gap-3 text-end">
-          <div className="btns bg-card flex mx-2 rounded-child">
+          <div className="btns bg-btnbg flex mx-2 rounded-child">
             <button
               className={`row item p-2 ${
                 layout === "row" ? "bg-primary text-black" : undefined
@@ -114,7 +114,7 @@ const WatchPage = () => {
           </div>
         </div>
         <ul
-          className={`episodes max-h-[50vh] py-4 overflow-scroll bg-lightBg grid gap-1  md:gap-2 ${
+          className={`episodes max-h-[50vh] py-4 px-2 overflow-scroll bg-lightbg grid gap-1  md:gap-2 ${
             layout === "row"
               ? " grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
               : " grid-cols-5 md:grid-cols-10"

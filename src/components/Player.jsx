@@ -16,7 +16,7 @@ const Player = ({ episodeId, currentEp, changeEpisode }) => {
 
   return (
     <>
-      <div className="w-full bg-black aspect-video relative  max-w-screen-xl overflow-hidden">
+      <div className="w-full bg-background aspect-video relative rounded-sm  max-w-screen-xl overflow-hidden">
         <iframe
           src={`https://megaplay.buzz/stream/s-2/${episodeId
             .split("ep=")
@@ -26,7 +26,7 @@ const Player = ({ episodeId, currentEp, changeEpisode }) => {
           allowFullScreen
         ></iframe>
       </div>
-      <div className="category flex flex-wrap flex-col sm:flex-row items-center justify-center  sm:justify-between px-2 md:px-20 gap-3 bg-black py-2">
+      <div className="category flex flex-wrap flex-col sm:flex-row items-center justify-center  sm:justify-between px-2 md:px-20 gap-3 bg-lightbg py-2">
         <div className="sound flex gap-3">
           {["sub", "dub"].map((type) => (
             <button
@@ -35,7 +35,7 @@ const Player = ({ episodeId, currentEp, changeEpisode }) => {
               className={`${
                 category === type
                   ? "bg-primary text-black"
-                  : "bg-lightBg  text-white"
+                  : "bg-btnbg  text-white"
               } px-2 py-1 rounded text-sm font-semibold`}
             >
               {type.toUpperCase()}
@@ -50,11 +50,11 @@ const Player = ({ episodeId, currentEp, changeEpisode }) => {
             <p className="text-red-400">your are watching filler Episode 👻</p>
           )}
         </div>
-        <div className="btns bg-primary px-2 py-1 text-black rounded-sm flex gap-4">
+        <div className="btns  rounded-sm flex gap-4">
           {currentEp.episodeNumber > 1 && (
             <button
               title="prev"
-              className="prev"
+              className="prev bg-primary px-2 py-1 text-black"
               onClick={() => changeEpisode("prev")}
             >
               <TbPlayerTrackPrevFilled />
@@ -62,7 +62,7 @@ const Player = ({ episodeId, currentEp, changeEpisode }) => {
           )}
           <button
             title="next"
-            className="next"
+            className="next bg-primary px-2 py-1 text-black"
             onClick={() => changeEpisode("next")}
           >
             <TbPlayerTrackNextFilled />

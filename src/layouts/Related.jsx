@@ -18,7 +18,7 @@ const Related = ({ data }) => {
     <>
       <div className="mt-11 mb-5">
         <Heading>Related</Heading>
-        <div className="related bg-lightBg px-2 py-2 mt-2 rounded-md">
+        <div className="related bg-lightbg px-2 py-2 mt-2 rounded-md">
           {displayedData.map((item, index) => (
             <div key={item.id + index} className="related">
               <MiniPoster item={item} />
@@ -26,7 +26,7 @@ const Related = ({ data }) => {
           ))}
           {hasMore && (
             <button
-              className="w-full bg-[#505a5a] text-white py-2 font-bold rounded-md"
+              className="w-full bg-btnbg text-white py-2 font-bold rounded-md"
               onClick={() => setShowAll((prev) => !prev)}
             >
               {showAll ? "show less" : "show more"}
