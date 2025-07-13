@@ -8,9 +8,10 @@ const CircleRatting = ({ rating }) => {
       maxValue={10}
       text={rating}
       styles={buildStyles({
-        pathColor: "#FADA7A",
+        pathColor: "var(--primary)",
         textColor: "white",
         textSize: "22px",
+        trailColor: "black",
       })}
     />
   );

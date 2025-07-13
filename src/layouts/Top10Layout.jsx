@@ -16,7 +16,7 @@ const Top10Layout = () => {
     <div className="mx-2 mt-14">
       <div className="infor flex mb-2 justify-between">
         <Heading className="ml-0">Top 10</Heading>
-        <div className="buttons flex bg-lightBg rounded-md">
+        <div className="buttons flex bg-lightbg rounded-md">
           {tabs.map((tab) => (
             <button
               key={tab.name}
@@ -32,7 +32,7 @@ const Top10Layout = () => {
           ))}
         </div>
       </div>
-      <div className="box bg-lightBg px-2 sm:px-4 py-2">
+      <div className="box bg-lightbg px-2 sm:px-4 py-2">
         {topTen[selectedTab]?.map((item) => (
           <div key={item.id} className="flex items-center gap-2 sm:gap-5">
             <h1

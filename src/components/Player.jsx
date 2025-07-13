@@ -5,7 +5,13 @@ import {
   TbPlayerTrackNextFilled,
 } from "react-icons/tb";
 
-const Player = ({ episodeId, currentEp, changeEpisode }) => {
+const Player = ({
+  episodeId,
+  currentEp,
+  changeEpisode,
+  hasNextEp,
+  hasPrevEp,
+}) => {
   const [category, setCategory] = useState("sub");
 
   const changeCategory = (newType) => {
@@ -27,20 +33,42 @@ const Player = ({ episodeId, currentEp, changeEpisode }) => {
         ></iframe>
       </div>
       <div className="category flex flex-wrap flex-col sm:flex-row items-center justify-center  sm:justify-between px-2 md:px-20 gap-3 bg-lightbg py-2">
-        <div className="sound flex gap-3">
-          {["sub", "dub"].map((type) => (
-            <button
-              key={type}
-              onClick={() => changeCategory(type)}
-              className={`${
-                category === type
-                  ? "bg-primary text-black"
-                  : "bg-btnbg  text-white"
-              } px-2 py-1 rounded text-sm font-semibold`}
-            >
-              {type.toUpperCase()}
-            </button>
-          ))}
+        <div className="flex gap-5">
+          <div className="sound flex gap-3">
+            {["sub", "dub"].map((type) => (
+              <button
+                key={type}
+                onClick={() => changeCategory(type)}
+                className={`${
+                  category === type
+                    ? "bg-primary text-black"
+                    : "bg-btnbg  text-white"
+                } px-2 py-1 rounded text-sm font-semibold`}
+              >
+                {type.toUpperCase()}
+              </button>
+            ))}
+          </div>
+          <div className="btns flex gap-4">
+            {hasPrevEp && (
+              <button
+                title="prev"
+                className="prev bg-primary px-2 py-1 rounded-md text-black"
+                onClick={() => changeEpisode("prev")}
+              >
+                <TbPlayerTrackPrevFilled />
+              </button>
+            )}
+            {hasNextEp && (
+              <button
+                title="next"
+                className="next bg-primary px-2 py-1 rounded-md text-black"
+                onClick={() => changeEpisode("next")}
+              >
+                <TbPlayerTrackNextFilled />
+              </button>
+            )}
+          </div>
         </div>
         <div className="flex flex-col">
           <p className="text-gray-400">
@@ -49,24 +77,6 @@ const Player = ({ episodeId, currentEp, changeEpisode }) => {
           {currentEp.isFiller && (
             <p className="text-red-400">your are watching filler Episode 👻</p>
           )}
-        </div>
-        <div className="btns  rounded-sm flex gap-4">
-          {currentEp.episodeNumber > 1 && (
-            <button
-              title="prev"
-              className="prev bg-primary px-2 py-1 text-black"
-              onClick={() => changeEpisode("prev")}
-            >
-              <TbPlayerTrackPrevFilled />
-            </button>
-          )}
-          <button
-            title="next"
-            className="next bg-primary px-2 py-1 text-black"
-            onClick={() => changeEpisode("next")}
-          >
-            <TbPlayerTrackNextFilled />
-          </button>
         </div>
       </div>
     </>

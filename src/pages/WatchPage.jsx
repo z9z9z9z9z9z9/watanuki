@@ -61,6 +61,9 @@ const WatchPage = () => {
     }
   };
 
+  const hasNextEp = Boolean(episodes[currentEp.episodeNumber - 1 + 1]);
+  const hasPrevEp = Boolean(episodes[currentEp.episodeNumber - 1 - 1]);
+
   return (
     /* WatchPage.js */
     <div className="bg-backGround pt-14 max-w-screen-xl mx-auto py-2 md:px-2">
@@ -91,6 +94,8 @@ const WatchPage = () => {
             episodeId={`${id}?ep=${ep}`}
             currentEp={currentEp}
             changeEpisode={changeEpisode}
+            hasNextEp={hasNextEp}
+            hasPrevEp={hasPrevEp}
           />
         )}
         <div className="input w-full mt-2 flex items-end justify-end gap-3 text-end">
