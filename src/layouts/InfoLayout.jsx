@@ -130,11 +130,11 @@ const InfoLayout = ({ data, showBigPoster }) => {
             <div className="infor flex-col sm:flex-row flex gap-5">
               <div className="flex gap-1 status">
                 <p className="font-extrabold">status : </p>
-                <span className="gray">{data.status}</span>
+                <span className="text-lighttext">{data.status}</span>
               </div>
               <div className="flex gap-1 aired">
                 <p className="font-extrabold">Aired : </p>
-                <div className="gray flex  items-center gap-2">
+                <div className=" text-lighttext flex  items-center gap-2">
                   <span>{data.aired.from}</span>
                   {data.aired.to && (
                     <>

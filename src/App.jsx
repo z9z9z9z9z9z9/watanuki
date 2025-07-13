@@ -10,6 +10,8 @@ import ScrollToTop from "./utils/ScrollToTop";
 import SearchResult from "./pages/SearchResult";
 import WatchPage from "./pages/WatchPage";
 import PageNotFound from "./pages/PageNotFound";
+import PeopleInfoPage from "./pages/PeopleInfoPage";
+import CharacterInfoPage from "./pages/CharacterInfoPage";
 
 const App = () => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
@@ -35,6 +37,8 @@ const App = () => {
           <Route path="/animes/:category/:query?" element={<ListPage />} />
           <Route path="/search" element={<SearchResult />} />
           <Route path="/watch/:id" element={<WatchPage />} />
+          <Route path="/people/:id" element={<PeopleInfoPage />} />
+          <Route path="/character/:id" element={<CharacterInfoPage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </main>

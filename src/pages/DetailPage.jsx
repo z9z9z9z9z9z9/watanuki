@@ -64,11 +64,10 @@ const DetailPage = () => {
       {data && !isLoading ? (
         <div className={`DetailPage relative pt-10 ${bigPoster && "blur-sm"} `}>
           <InfoLayout showBigPoster={showBigPoster} data={data} />
-          <div>
-            <VoiceActorsLayout id={id} />
-          </div>
+
           <div className="row grid items-start gap-3 px-2 grid-cols-12">
             <div className="left col-span-12 xl:col-span-9">
+              <VoiceActorsLayout id={id} />
               {data.moreSeasons.length !== 0 && (
                 <MoreSeasons data={data.moreSeasons} />
               )}
@@ -79,7 +78,7 @@ const DetailPage = () => {
               )}
             </div>
 
-            <div className="right  col-span-12 mt-2 xl:col-span-3">
+            <div className="right col-span-12 xl:col-span-3">
               {data.related.length !== 0 && (
                 <div className="related">
                   <Related data={data.related} />

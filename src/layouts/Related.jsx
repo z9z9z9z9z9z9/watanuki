@@ -16,7 +16,7 @@ const Related = ({ data }) => {
 
   return (
     <>
-      <div className="mt-11 mb-5">
+      <div className="mb-5">
         <Heading>Related</Heading>
         <div className="related bg-lightbg px-2 py-2 mt-2 rounded-md">
           {displayedData.map((item, index) => (
