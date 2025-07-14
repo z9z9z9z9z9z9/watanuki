@@ -23,10 +23,10 @@ const TrendingLayout = ({ data }) => {
         {data &&
           data.map((item) => (
             <SwiperSlide key={item.id}>
-              <div className="item flex flex-col items-center overflow-hidden px-[1.5px] md:px-2">
+              <div className="item flex flex-col items-center overflow-hidden px-1 md:px-2">
                 <Link
                   to={`/anime/${item.id}`}
-                  className="poster w-full h-0 pb-[150%] bg-gray-200 relative overflow-hidden"
+                  className="poster w-full h-0 pb-[150%] bg-lightbg relative overflow-hidden"
                 >
                   <img
                     className="absolute inset-0 w-full h-full object-cover"

@@ -35,7 +35,7 @@ const Navbar = () => {
         <ul
           className={`${
             show ? "flex" : "hidden"
-          } w-11/12 mx-3 absolute flex-col justify-center items-center z-10 bg-backGround  rounded-md py-5 gap-3 md:gap-10`}
+          } w-11/12 mx-3 absolute flex-col justify-center items-center z-10 bg-background  rounded-md py-5 gap-3 md:gap-10`}
         >
           {navLinks.map((item) => (
             <li

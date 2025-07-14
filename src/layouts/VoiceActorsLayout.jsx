@@ -3,11 +3,10 @@ import { useApi } from "../services/useApi";
 import Heading from "../components/Heading";
 import Loader from "../components/Loader";
 import { Link } from "react-router-dom";
+import { FaAngleRight } from "react-icons/fa";
 
 const VoiceActorsLayout = ({ id }) => {
-  const { data, isLoading, isError, error } = useApi(`/characters/${id}?page=`);
-
-  console.log(data);
+  const { data, isLoading, isError, error } = useApi(`/characters/${id}`);
 
   if (isError) return;
   if (!data?.data?.response.length) return;
@@ -16,13 +15,21 @@ const VoiceActorsLayout = ({ id }) => {
   const characters = data && data?.data?.response.slice(0, 6);
 
   return characters ? (
-    <main>
-      <Heading>Characters & Voice Actors</Heading>
+    <main className="mt-5">
+      <div className="header flex justify-between">
+        <Heading>Characters & Voice Actors</Heading>
+        <Link to={`/characters/${id}`}>
+          <h6 className="text-sm cursor-pointer hover:text-primary flex mr-4 items-center gap-1 text-neutral-400">
+            <span>View more</span>
+            <FaAngleRight />
+          </h6>
+        </Link>
+      </div>
       <div className="grid mt-2 grid-cols-12 gap-2">
         {characters.map((item) => (
           <div
             key={item.id}
-            className="wrapper flex p-3 items-center justify-between bg-lightbg col-span-12 md:col-span-6 xl:col-span-4"
+            className="wrapper flex p-3 px-1 items-center justify-between bg-lightbg col-span-12 md:col-span-6 2xl:col-span-4"
           >
             <div className="left gap-2 flex items-center">
               <Link to={`/${item.id.replaceAll(":", "/")}`}>

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import PageNotFound from "./PageNotFound";
 import { useApi } from "../services/useApi";
 import Loader from "../components/Loader";
@@ -67,10 +67,10 @@ const DetailPage = () => {
 
           <div className="row grid items-start gap-3 px-2 grid-cols-12">
             <div className="left col-span-12 xl:col-span-9">
-              <VoiceActorsLayout id={id} />
               {data.moreSeasons.length !== 0 && (
                 <MoreSeasons data={data.moreSeasons} />
               )}
+              <VoiceActorsLayout id={id} />
               {data.recommended && (
                 <div className="recomendation">
                   <Recommended data={data.recommended} />
@@ -80,7 +80,7 @@ const DetailPage = () => {
 
             <div className="right col-span-12 xl:col-span-3">
               {data.related.length !== 0 && (
-                <div className="related">
+                <div className="related mt-5">
                   <Related data={data.related} />
                 </div>
               )}

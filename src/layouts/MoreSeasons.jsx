@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const MoreSeasons = ({ data }) => {
   return (
-    <div className="flex gap-5 flex-wrap">
-      {data.map((item) => (
+    <div className="flex gap-5 mt-5 flex-wrap">
+      {data?.map((item) => (
         <Link
           to={`/anime/${item.id}`}
           key={item.id}
