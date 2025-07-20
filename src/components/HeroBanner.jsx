@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 const HeroBanner = ({ slides }) => {
   return (
     <Swiper
-      speed={300}
+      speed={250}
       grabCursor={true}
       modules={[Navigation, Pagination, Autoplay]}
       slidesPerView={1}
@@ -68,7 +68,7 @@ const HeroBanner = ({ slides }) => {
                     <FaCalendarDay />
                     <span>{item.aired}</span>
                   </div>
-                  <div className="item bg-primary text-sm font-bold px-1 rounded-sm">
+                  <div className="item bg-primary text-black text-sm font-bold px-2 rounded-sm">
                     <span className="">{item.quality}</span>
                   </div>
                   <div className="item">

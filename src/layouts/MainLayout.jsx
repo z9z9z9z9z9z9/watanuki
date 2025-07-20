@@ -19,7 +19,7 @@ const MainLayout = ({ title, data, endpoint }) => {
       <div className="wrapper flex justify-around flex-wrap h-full w-full">
         {data &&
           data.map((item) => (
-            <div key={item.id} className="flw-item">
+            <div key={item.id} className="flw-item bg-lightbg">
               <Image data={item} key={item.id} />
             </div>
           ))}
