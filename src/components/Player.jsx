@@ -13,26 +13,52 @@ const Player = ({
   hasPrevEp,
 }) => {
   const [category, setCategory] = useState("sub");
+  const [server, setServer] = useState("vidWish");
 
   const changeCategory = (newType) => {
     if (newType !== category) {
       setCategory(newType);
     }
   };
+  function changeServer(newServer) {
+    if (newServer !== server) setServer(newServer);
+  }
 
   return (
     <>
       <div className="w-full bg-background aspect-video relative rounded-sm  max-w-screen-xl overflow-hidden">
         <iframe
-          src={`https://megaplay.buzz/stream/s-2/${episodeId
-            .split("ep=")
-            .pop()}/${category}`}
+          src={`https://${
+            server === "vidWish" ? "vidwish.live" : "megaplay.buzz"
+          }/stream/s-2/${episodeId.split("ep=").pop()}/${category}`}
           width="100%"
           height="100%"
           allowFullScreen
         ></iframe>
       </div>
       <div className="category flex flex-wrap flex-col sm:flex-row items-center justify-center  sm:justify-between px-2 md:px-20 gap-3 bg-lightbg py-2">
+        <div className="servers flex gap-4">
+          <button
+            onClick={() => changeServer("vidWish")}
+            className={`${
+              server === "vidWish"
+                ? "bg-primary text-black"
+                : "bg-btnbg  text-white"
+            } px-2 py-1 rounded text-sm font-semibold`}
+          >
+            vidwish
+          </button>
+          <button
+            onClick={() => changeServer("megaPlay")}
+            className={`${
+              server === "megaPlay"
+                ? "bg-primary text-black"
+                : "bg-btnbg  text-white"
+            } px-2 py-1 rounded text-sm font-semibold`}
+          >
+            megaplay
+          </button>
+        </div>
         <div className="flex gap-5">
           <div className="sound flex gap-3">
             {["sub", "dub"].map((type) => (

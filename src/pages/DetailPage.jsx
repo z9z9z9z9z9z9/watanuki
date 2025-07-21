@@ -38,7 +38,7 @@ const DetailPage = () => {
   }
 
   return (
-    <main className={`${bigPoster ? "h-screen  overflow-hidden" : ""}`}>
+    <main className={`${bigPoster ? "h-dvh  overflow-hidden" : ""}`}>
       {bigPoster && (
         <div className="bigposter absolute flex justify-center items-center h-full w-full z-[100] bg-[#222831b4]">
           <div className="poster bg-lightbg rounded-md flex aspect-auto object-cover flex-col items-end relative">

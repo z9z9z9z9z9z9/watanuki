@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const AZ = ({ selected }) => {
+  console.log(selected);
+
   selected = selected === null ? "All" : selected;
   const azList = [
-    { title: "All", link: "/animes/az-list" },
+    { title: "ALL", link: "/animes/az-list" },
     { title: "#", link: "/animes/az-list/other" },
     { title: "0-9", link: "/animes/az-list/0-9" },
     { title: "A", link: "/animes/az-list/A" },

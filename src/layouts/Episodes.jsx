@@ -8,12 +8,12 @@ const Episodes = ({ episode, currentEp, layout }) => {
       {layout === "row" ? (
         <li
           title={episode.title}
-          className={`w-full px-2 py-3 transition-all text-black duration-200
+          className={`w-full px-2 py-3 text-black
             ${
               isCurrent
                 ? "bg-primary"
                 : episode.isFiller
-                ? "bg-background"
+                ? "bg-red-500"
                 : "bg-btnbg"
             }
           `}
@@ -44,12 +44,12 @@ const Episodes = ({ episode, currentEp, layout }) => {
       ) : (
         <li
           title={episode.title}
-          className={` w-full rounded-md p-1 transition-all hover:bg-btnBgHover duration-200 
+          className={` w-full rounded-sm py-1
              ${
                isCurrent
                  ? "bg-primary"
                  : episode.isFiller
-                 ? "bg-background"
+                 ? "bg-red-500"
                  : "bg-btnbg"
              }
           `}
@@ -60,7 +60,7 @@ const Episodes = ({ episode, currentEp, layout }) => {
           >
             <p
               className={` text-sm md:text-base text-center ${
-                isCurrent ? "text-black" : "text-primary"
+                isCurrent ? "text-black" : "text-white"
               }`}
             >
               {episode.episodeNumber}

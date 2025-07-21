@@ -3,9 +3,10 @@ import axios from "axios";
 import config from "../config/config";
 
 export const API_BASE_URL =
-  import.meta.env.VITE_APP_MODE === "production"
-    ? config.serverUrl
-    : config.localUrl;
+  import.meta.env.VITE_APP_MODE &&
+  import.meta.env.VITE_APP_MODE === "development"
+    ? config.localUrl
+    : config.serverUrl;
 
 const fetchData = async (url) => {
   console.log(API_BASE_URL);
