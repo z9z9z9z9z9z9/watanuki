@@ -19,17 +19,17 @@ const CharactersPage = () => {
         {pages && !isLoading ? (
           <>
             <Heading>charcters and voice actors</Heading>
-            <div className="grid mb-4 mx-5 mt-2 grid-cols-12 gap-2">
+            <div className="grid mb-4 mx-1 mt-2 grid-cols-12 gap-2">
               {pages?.map((page, pageIndex) => (
                 <React.Fragment key={pageIndex}>
                   {page.data.response.map((item) => (
                     <div
                       key={item.id}
-                      className="wrapper flex p-3 px-3 rounded-md items-center justify-between bg-lightbg col-span-12 "
+                      className="wrapper flex px-1 py-3 rounded-sm items-center justify-between bg-lightbg col-span-12 "
                     >
                       <div className="left gap-2 flex items-center">
-                        <Link to={`/${item.id.replaceAll(":", "/")}`}>
-                          <div className="poster h-11 w-11 overflow-hidden rounded-[50%]">
+                        <Link to={`/${item.id.replace(":", "/")}`}>
+                          <div className="poster size-9 overflow-hidden rounded-[50%]">
                             <img
                               className="h-full w-full object-cover"
                               src={item.imageUrl}
@@ -55,7 +55,7 @@ const CharactersPage = () => {
                               <Link to={`/${actor.id.replace(":", "/")}`}>
                                 <div
                                   title={actor.name}
-                                  className="poster h-11 w-11 rounded-[50%] overflow-hidden"
+                                  className="poster size-9 rounded-[50%] overflow-hidden"
                                 >
                                   <img
                                     loading="lazy"
@@ -73,12 +73,14 @@ const CharactersPage = () => {
                 </React.Fragment>
               ))}
             </div>
-            <button
-              onClick={fetchNextPage}
-              className="bg-lightbg mx-auto py-3 w-full hover:text-primary"
-            >
-              Load More
-            </button>
+            {hasNextPage && (
+              <button
+                onClick={fetchNextPage}
+                className="bg-lightbg mx-auto py-3 w-full hover:text-primary"
+              >
+                Load More
+              </button>
+            )}
           </>
         ) : (
           <Loader className="h-[100dvh]" />
