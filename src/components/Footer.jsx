@@ -34,13 +34,13 @@ const Footer = () => {
           >
             <FaGithub />
           </a>
-          <a
+          {/* <a
             href="https://t.me/Mst83din"
             target="_blank"
             className="text-gray-500 hover:text-blue-300 text-2xl"
           >
             <FaTelegram />
-          </a>
+          </a> */}
         </div>
       </div>
     </div>

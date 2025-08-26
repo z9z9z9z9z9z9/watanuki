@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import SoundsInfo from "../components/SoundsInfo";
 import { Link } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Image = ({ data }) => {
   return (
@@ -10,11 +12,12 @@ const Image = ({ data }) => {
           <div className="z-50 opacity-[.9] absolute bottom-0 left-0">
             <SoundsInfo episodes={data.episodes} />
           </div>
-          <img
+          <LazyLoadImage
             className="absolute h-full w-full inset-0 object-cover object-center"
+            wrapperClassName="h-full w-full absolute"
+            effect="blur"
             src={data.poster}
             alt={data.title}
-            loading="lazy"
           />
         </div>
       </Link>

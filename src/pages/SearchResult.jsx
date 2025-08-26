@@ -16,7 +16,13 @@ const SearchResult = () => {
     useInfiniteApi(`/search?keyword=${keyword}&page=`);
 
   if (isError) {
-    return <PageNotFound />;
+    return (
+      <div className="flex justify-center items-center h-dvh">
+        <h1 className="text-red-300">
+          search result not found with keyword - {keyword}
+        </h1>
+      </div>
+    );
   }
   const pages = data?.pages;
   console.log(data?.pages.length);
